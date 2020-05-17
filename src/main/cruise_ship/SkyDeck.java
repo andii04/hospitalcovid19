@@ -1,4 +1,4 @@
 package cruise_ship;
 
-public class SkyDeck {
+public class SkyDeck extends Deck {
 }

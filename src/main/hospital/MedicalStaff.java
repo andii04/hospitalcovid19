@@ -1,6 +1,8 @@
 package hospital;
 
-public class MedicalStaff {
+import shared.Human;
+
+public class MedicalStaff extends Human {
     private String id;
     private boolean hasProtection;
 

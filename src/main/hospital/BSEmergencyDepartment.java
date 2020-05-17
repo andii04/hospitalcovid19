@@ -1,6 +1,6 @@
 package hospital;
 
-public class BSEmergencyDepartment {
+public class BSEmergencyDepartment extends EmergencyDepartment{
     public void welcome(EmergencyVehicle vehicle){
 
     }

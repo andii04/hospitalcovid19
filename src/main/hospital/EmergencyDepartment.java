@@ -2,7 +2,7 @@ package hospital;
 
 import java.util.LinkedList;
 
-public class EmergencyDepartment {
+public class EmergencyDepartment extends Department {
     private HospitalPatient currentHospitalPatient;
     private LinkedList<HospitalBed> emptyHospitalBedList;
 

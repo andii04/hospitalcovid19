@@ -1,4 +1,6 @@
 package cruise_ship;
 
-public class Passenger {
+import shared.Human;
+
+public class Passenger extends Human {
 }

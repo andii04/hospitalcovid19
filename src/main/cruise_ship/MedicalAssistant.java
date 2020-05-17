@@ -1,6 +1,8 @@
 package cruise_ship;
 
-public class MedicalAssistant {
+import shared.Human;
+
+public class MedicalAssistant extends Human {
     private int id;
 
     public void takeIntoQuarantine(Passenger passenger){

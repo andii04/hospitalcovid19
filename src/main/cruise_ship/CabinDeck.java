@@ -1,4 +1,4 @@
 package cruise_ship;
 
-public class CabinDeck {
+public class CabinDeck extends Deck {
 }
