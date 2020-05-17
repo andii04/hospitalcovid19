@@ -1,4 +1,4 @@
 package shared;
 
-public class LungCell {
+public class LungCell extends Cell {
 }

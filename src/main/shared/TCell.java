@@ -1,4 +1,4 @@
 package shared;
 
-public class TCell {
+public class TCell extends Cell {
 }

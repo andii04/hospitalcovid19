@@ -1,4 +1,4 @@
 package shared;
 
-public class InfectedCell {
+public class InfectedCell extends Cell {
 }
