@@ -33,4 +33,8 @@ public class CruiseShip {
     public void startSimulation(){
 
     }
+
+    private class Builder{
+
+    }
 }
