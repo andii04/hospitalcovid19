@@ -2,7 +2,8 @@ package cruise_ship;
 
 import com.google.common.eventbus.EventBus;
 
-public class CruiseShip {
+public class Builder {
+    //komische scheisse dieses Buildern pattern
     private String name = "Symphony of the Seas";
     private EventBus eventBus;
 
@@ -22,15 +23,16 @@ public class CruiseShip {
         this.eventBus = eventBus;
     }
 
-    public void boarding(){
+    public Builder boarding(){
 
     }
 
-    public void notifyHospital(String message){
+    public Builder notifyHospital(String message){
 
     }
 
-    public void startSimulation(){
+    public Builder startSimulation(){
 
     }
+
 }

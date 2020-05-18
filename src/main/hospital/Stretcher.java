@@ -14,7 +14,7 @@ public class Stretcher implements IStretcher{
 
     @Override
     public void up() {
-        
+
     }
 
     @Override

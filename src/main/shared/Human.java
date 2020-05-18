@@ -33,4 +33,9 @@ public class Human {
     public void viralInfectionProcess(){
 
     }
+
+    // inner class
+    private class Builder {
+
+    }
 }
