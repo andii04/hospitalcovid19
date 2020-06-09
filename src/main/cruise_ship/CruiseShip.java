@@ -22,8 +22,6 @@ public class CruiseShip {
         this.humanList = humanList;
         createCruiseShip();
         boarding();
-
-
     }
     public void createCruiseShip(){
         deck[1] = new CabinDeck(DeckID.I);
@@ -47,8 +45,10 @@ public class CruiseShip {
                 System.out.println(column[3]);
                 if(column[3] == "2"){
                     humanList.get(count).getTicket().setCabinID(column[2]);
+                    humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
                     count++;
                     humanList.get(count).getTicket().setCabinID(column[2]);
+                    humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
                     //TODO
                 }
             }
