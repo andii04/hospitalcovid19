@@ -15,10 +15,15 @@ import java.util.List;
 
 public class Application {
 
+    static CruiseShip cruiseShip;
+    static Hospital hospital;
+
+
+
     public static void main(String... args) {
         List<Human> humanList = new ArrayList<Human>();
         createHumans(humanList);
-        CruiseShip cruiseShip = new CruiseShip.Builder()
+        cruiseShip = new CruiseShip.Builder()
                 .setName("Symphony of the Seas")
                 .setEventBus(new EventBus())
                 .setHumanList(humanList)
@@ -98,6 +103,9 @@ public class Application {
         return true;
     }
 
+    public static void simulationStart(){
+
+    }
 
     public static void createHospital(){
         ArrayList<Department> departments = new ArrayList<>();
@@ -137,6 +145,9 @@ public class Application {
         Department Radiology = new Department(stationRadiology);
         departments.add(Radiology);
 
-
+        hospital = new Hospital.Builder()
+                .setName("Hospital")
+                .setDepartmentsList(departments)
+                .build();
     }
 }

@@ -2,7 +2,7 @@ package hospital;
 
 public class EmergencyVehicle {
     private String registeredKeySignature;
-    private boolean isClosed;
+    private boolean isClosed = true;
     private long serialNumber;
     private boolean isFlashingLightOn;
     private String[][][] ambientAir = new String[50][50][50];
