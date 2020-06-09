@@ -45,7 +45,7 @@ public class Hospital {
         }
 
         public Hospital build() {
-            return new Hospital(name, departments);
+            return new Hospital(name, (ArrayList<Department>) departments);
         }
     }
 }
