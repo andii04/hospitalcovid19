@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
@@ -14,15 +15,15 @@ public class Application {
 
     public static boolean createHumans(){
         BufferedReader in = null;
-        String[]vorname = null;
-        String[]nachname = null;
-        String[]birthdate = null;
+        List<String> vorname = new ArrayList<String>();
+        List<String> nachname = new ArrayList<String>();
+        String[] birthdate = null;
         String[] nationality = null;
         String[] isSmoking = null;
         String[] hasAsthma = null;
         String[] hasHIV = null;
         String[] hasInfection = null;
-        List<Human> humanList = null;
+        List<Human> humanList = new ArrayList<Human>();
 
         String line = "";
 
@@ -32,8 +33,8 @@ public class Application {
             int count = 0;
             while ((zeile = in.readLine()) != null) {
                 String[]name = zeile.split(" ");
-                vorname[count] = name[0];
-                nachname[count] = name[1];
+                vorname.add(name[0]);
+                nachname.add(name[1]);
                 count++;
             }
             in = new BufferedReader(new FileReader("data/birthdate.csv"));
@@ -65,10 +66,10 @@ public class Application {
             e.printStackTrace();
         }
 
-        for( int i = 0; i < vorname.length; i++){
+        for( int i = 0; i < birthdate.length; i++){
             Human human = new Human.Builder()
-                    .setFirstName(vorname[i])
-                    .setLastName(nachname[i])
+                    .setFirstName(vorname.get(i))
+                    .setLastName(nachname.get(i))
                     .setBirthDate(birthdate[i])
                     .setNationality(null)
                     .setSmoking(Boolean.parseBoolean(isSmoking[i]))
