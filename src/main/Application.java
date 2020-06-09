@@ -1,7 +1,5 @@
-import cruise_ship.CabinDeck;
-import cruise_ship.Deck;
-import cruise_ship.DeckID;
-import cruise_ship.SkyDeck;
+import com.google.common.eventbus.EventBus;
+import cruise_ship.*;
 import hospital.Hospital;
 import shared.Human;
 import shared.Nationality;
@@ -13,23 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application {
+
     public static void main(String... args) {
-        createCruiseShip();
-        createHumans();
-    }
-    public static void createCruiseShip(){
-        Deck[] deck = new Deck[9];
-        deck[1] = new CabinDeck(DeckID.I);
-        deck[2] = new CabinDeck(DeckID.II);
-        deck[3] = new CabinDeck(DeckID.III);
-        deck[4] = new CabinDeck(DeckID.IV);
-        deck[5] = new CabinDeck(DeckID.V);
-        deck[6] = new CabinDeck(DeckID.VI);
-        deck[7] = new CabinDeck(DeckID.VII);
-        deck[8] = new SkyDeck(DeckID.VIII);
+        List<Human> humanList = new ArrayList<Human>();
+        createHumans(humanList);
+        CruiseShip cruiseShip = new CruiseShip.Builder()
+                .setName("Symphony of the Seas")
+                .setEventBus(new EventBus())
+                .setHumanList(humanList)
+                .build();
     }
 
-    public static boolean createHumans(){
+    public static boolean createHumans(List<Human> humanList){
         BufferedReader in = null;
         List<String> firstname = new ArrayList<String>();
         List<String> lastname = new ArrayList<String>();
@@ -39,7 +32,6 @@ public class Application {
         String[] hasAsthma = null;
         String[] hasHIV = null;
         String[] hasInfection = null;
-        List<Human> humanList = new ArrayList<Human>();
 
         String line = "";
 
@@ -99,11 +91,7 @@ public class Application {
                     .build();
             humanList.add(human);
         }
-        for (Human ob: humanList) {
-            if(ob.isInfectedCOVID19()){
-                System.out.println(ob.getLastName());
-            }
-        }
+
         return true;
     }
 }

@@ -1,5 +1,10 @@
 package shared;
 
+import cruise_ship.Ticket;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Human {
     private String firstName;
     private String lastName;
@@ -13,6 +18,9 @@ public class Human {
     private boolean hasTaste;
     private boolean hasMouthProtection;
     private Clothing clothing;
+    private Ticket ticket;
+    private Lung lungRight;
+    private Lung lungLeft;
 
     public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
         this.firstName = firstName;
@@ -28,11 +36,17 @@ public class Human {
         this.hasMouthProtection = hasMouthProtection;
         this.clothing = clothing;
 
-        Lung lungRight = new Lung();
-        Lung lungLeft = new Lung();
+        ticket = new Ticket();
+
+        lungRight = new Lung();
+        lungLeft = new Lung();
     }
 
     public Human(){
+    }
+
+    public Ticket getTicket() {
+        return ticket;
     }
 
     public void dress (Clothing clothing){
@@ -116,9 +130,6 @@ public class Human {
         private boolean hasMouthProtection;
         private Clothing clothing;
 
-        public Builder(){
-
-        }
 
         public Builder setFirstName(String firstName) {
             this.firstName = firstName;
@@ -179,6 +190,7 @@ public class Human {
             this.clothing = clothing;
             return this;
         }
+
 
         public Human build() {
             return new Human(firstName, lastName, birthDate, nationality, isSmoking, hasAsthma, hasHIV, isInfectedCOVID19, hasFever, hasTaste, hasMouthProtection, clothing);
