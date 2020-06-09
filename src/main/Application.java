@@ -1,6 +1,9 @@
 import com.google.common.eventbus.EventBus;
 import cruise_ship.*;
+import hospital.Department;
 import hospital.Hospital;
+import hospital.Room;
+import hospital.Station;
 import shared.Human;
 import shared.Nationality;
 
@@ -93,5 +96,47 @@ public class Application {
         }
 
         return true;
+    }
+
+
+    public static void createHospital(){
+        ArrayList<Department> departments = new ArrayList<>();
+        ArrayList<Station> stationsCriticalCare = new ArrayList<>();
+
+        for(int j = 41;j<=45; j++){
+            //create rooms
+            ArrayList<Room> roomList= new ArrayList<>();
+            for(int i =1;i<=20;i++){
+                roomList.add(new Room(i));
+            }
+            stationsCriticalCare.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
+        }
+        Department criticalCare = new Department(stationsCriticalCare);
+        departments.add(criticalCare);
+
+        ArrayList<Station> stationsPulmonology = new ArrayList<>();
+        for(int j = 41;j<=45; j++){
+            //create rooms
+            ArrayList<Room> roomList= new ArrayList<>();
+            for(int i =1;i<=30;i++){
+                //abcdef is different @todo
+                roomList.add(new Room(i));
+            }
+            stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
+        }
+        Department Pulmonology = new Department(stationsPulmonology);
+        departments.add(Pulmonology);
+
+        //Radiology
+        ArrayList<Station> stationRadiology = new ArrayList<>();
+        ArrayList<Room> roomList = new ArrayList<>();
+        for(int i =1;i<=2;i++){
+            roomList.add(new Room(i));
+        }
+        stationRadiology.add(new Station("A", roomList));
+        Department Radiology = new Department(stationRadiology);
+        departments.add(Radiology);
+
+
     }
 }
