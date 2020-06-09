@@ -66,52 +66,68 @@ public class Human {
         private boolean hasMouthProtection;
         private Clothing clothing;
 
-        public String getFirstName() {
-            return firstName;
+        public Builder(){
+
         }
 
-        public String getLastName() {
-            return lastName;
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
         }
 
-        public String getBirthDate() {
-            return birthDate;
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
         }
 
-        public Nationality getNationality() {
-            return nationality;
+        public Builder setBirthDate(String birthDate) {
+            this.birthDate = birthDate;
+            return this;
         }
 
-        public boolean isSmoking() {
-            return isSmoking;
+        public Builder setNationality(Nationality nationality) {
+            this.nationality = nationality;
+            return this;
         }
 
-        public boolean isHasAsthma() {
-            return hasAsthma;
+        public Builder setSmoking(boolean smoking) {
+            isSmoking = smoking;
+            return this;
         }
 
-        public boolean isHasHIV() {
-            return hasHIV;
+        public Builder setHasAsthma(boolean hasAsthma) {
+            this.hasAsthma = hasAsthma;
+            return this;
         }
 
-        public boolean isInfectedCOVID19() {
-            return isInfectedCOVID19;
+        public Builder setHasHIV(boolean hasHIV) {
+            this.hasHIV = hasHIV;
+            return this;
         }
 
-        public boolean isHasFever() {
-            return hasFever;
+        public Builder setInfectedCOVID19(boolean infectedCOVID19) {
+            isInfectedCOVID19 = infectedCOVID19;
+            return this;
         }
 
-        public boolean isHasTaste() {
-            return hasTaste;
+        public Builder setHasFever(boolean hasFever) {
+            this.hasFever = hasFever;
+            return this;
         }
 
-        public boolean isHasMouthProtection() {
-            return hasMouthProtection;
+        public Builder setHasTaste(boolean hasTaste) {
+            this.hasTaste = hasTaste;
+            return this;
         }
 
-        public Clothing getClothing() {
-            return clothing;
+        public Builder setHasMouthProtection(boolean hasMouthProtection) {
+            this.hasMouthProtection = hasMouthProtection;
+            return this;
+        }
+
+        public Builder setClothing(Clothing clothing) {
+            this.clothing = clothing;
+            return this;
         }
 
         public Human build() {
