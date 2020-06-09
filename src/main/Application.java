@@ -16,7 +16,6 @@ public class Application {
     public static void main(String... args) {
         createCruiseShip();
         createHumans();
-
     }
     public static void createCruiseShip(){
         Deck[] deck = new Deck[9];
