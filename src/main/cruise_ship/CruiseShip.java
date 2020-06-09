@@ -9,6 +9,7 @@ public class CruiseShip {
     public CruiseShip(String name, EventBus eventBus) {
         this.name = name;
         this.eventBus = eventBus;
+
     }
 
     public String getName() {

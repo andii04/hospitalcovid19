@@ -7,4 +7,8 @@ public class Cabin {
     public void releaseEmergencyCall(){
 
     }
+    public Cabin(CabinLocation location, String id){
+        this.location = location;
+        this.id = id;
+    }
 }

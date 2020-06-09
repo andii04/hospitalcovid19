@@ -27,8 +27,33 @@ public class Human {
         this.hasTaste = hasTaste;
         this.hasMouthProtection = hasMouthProtection;
         this.clothing = clothing;
+
+        Lung lungRight = new Lung();
+        Lung lungLeft = new Lung();
     }
 
+    public Human(){
+    }
+
+    public void dress (Clothing clothing){
+
+    }
+
+    public void undress(){
+
+    }
+
+    public void breathe(String air){
+
+    }
+
+    public String dryCough(){
+        return "placeholder";
+    }
+
+    public void viralInfectionProcess(){
+
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -75,30 +100,6 @@ public class Human {
 
     public Clothing getClothing() {
         return clothing;
-    }
-
-    public Human(){
-
-    }
-
-    public void dress (Clothing clothing){
-
-    }
-
-    public void undress(){
-
-    }
-
-    public void breathe(String air){
-
-    }
-
-    public String dryCough(){
-        return "placeholder";
-    }
-
-    public void viralInfectionProcess(){
-
     }
 
     public static class Builder {

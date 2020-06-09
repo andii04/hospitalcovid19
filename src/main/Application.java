@@ -1,8 +1,12 @@
+import cruise_ship.CabinDeck;
+import cruise_ship.Deck;
+import cruise_ship.DeckID;
+import cruise_ship.SkyDeck;
+import hospital.Hospital;
 import shared.Human;
 import shared.Nationality;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,14 +14,26 @@ import java.util.List;
 
 public class Application {
     public static void main(String... args) {
+        createCruiseShip();
         createHumans();
 
+    }
+    public static void createCruiseShip(){
+        Deck[] deck = new Deck[9];
+        deck[1] = new CabinDeck(DeckID.I);
+        deck[2] = new CabinDeck(DeckID.II);
+        deck[3] = new CabinDeck(DeckID.III);
+        deck[4] = new CabinDeck(DeckID.IV);
+        deck[5] = new CabinDeck(DeckID.V);
+        deck[6] = new CabinDeck(DeckID.VI);
+        deck[7] = new CabinDeck(DeckID.VII);
+        deck[8] = new SkyDeck(DeckID.VIII);
     }
 
     public static boolean createHumans(){
         BufferedReader in = null;
-        List<String> vorname = new ArrayList<String>();
-        List<String> nachname = new ArrayList<String>();
+        List<String> firstname = new ArrayList<String>();
+        List<String> lastname = new ArrayList<String>();
         String[] birthdate = null;
         String[] nationality = null;
         String[] isSmoking = null;
@@ -34,8 +50,8 @@ public class Application {
             int count = 0;
             while ((zeile = in.readLine()) != null) {
                 String[]name = zeile.split(" ");
-                vorname.add(name[0]);
-                nachname.add(name[1]);
+                firstname.add(name[0]);
+                lastname.add(name[1]);
                 count++;
             }
             in = new BufferedReader(new FileReader("data/birthdate.csv"));
@@ -69,8 +85,8 @@ public class Application {
 
         for( int i = 0; i < birthdate.length; i++){
             Human human = new Human.Builder()
-                    .setFirstName(vorname.get(i))
-                    .setLastName(nachname.get(i))
+                    .setFirstName(firstname.get(i))
+                    .setLastName(lastname.get(i))
                     .setBirthDate(birthdate[i])
                     .setNationality(Nationality.valueOf(nationality[i]))
                     .setSmoking(Boolean.parseBoolean(isSmoking[i]))
@@ -84,9 +100,11 @@ public class Application {
                     .build();
             humanList.add(human);
         }
-        System.out.println(humanList.get(10).getBirthDate());
+        for (Human ob: humanList) {
+            if(ob.isInfectedCOVID19()){
+                System.out.println(ob.getLastName());
+            }
+        }
         return true;
-
-
     }
 }
