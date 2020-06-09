@@ -32,20 +32,20 @@ public class Hospital {
     public static class Builder{
 
         private String name;
-        List<Department> departments = new ArrayList<Department>();
+        ArrayList<Department> departments = new ArrayList<Department>();
 
         public Hospital.Builder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public Hospital.Builder setDepartmentsList(List<Department> departments){
+        public Hospital.Builder setDepartmentsList(ArrayList<Department> departments){
             this.departments =departments;
             return this;
         }
 
         public Hospital build() {
-            return new Hospital(name, (ArrayList<Department>) departments);
+            return new Hospital(name, departments);
         }
     }
 }
