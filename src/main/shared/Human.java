@@ -28,6 +28,55 @@ public class Human {
         this.hasMouthProtection = hasMouthProtection;
         this.clothing = clothing;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public Nationality getNationality() {
+        return nationality;
+    }
+
+    public boolean isSmoking() {
+        return isSmoking;
+    }
+
+    public boolean isHasAsthma() {
+        return hasAsthma;
+    }
+
+    public boolean isHasHIV() {
+        return hasHIV;
+    }
+
+    public boolean isInfectedCOVID19() {
+        return isInfectedCOVID19;
+    }
+
+    public boolean isHasFever() {
+        return hasFever;
+    }
+
+    public boolean isHasTaste() {
+        return hasTaste;
+    }
+
+    public boolean isHasMouthProtection() {
+        return hasMouthProtection;
+    }
+
+    public Clothing getClothing() {
+        return clothing;
+    }
+
     public Human(){
 
     }

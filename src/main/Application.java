@@ -1,4 +1,5 @@
 import shared.Human;
+import shared.Nationality;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -71,7 +72,7 @@ public class Application {
                     .setFirstName(vorname.get(i))
                     .setLastName(nachname.get(i))
                     .setBirthDate(birthdate[i])
-                    .setNationality(null)
+                    .setNationality(Nationality.valueOf(nationality[i]))
                     .setSmoking(Boolean.parseBoolean(isSmoking[i]))
                     .setHasAsthma(Boolean.parseBoolean(hasAsthma[i]))
                     .setHasHIV(Boolean.parseBoolean(hasHIV[i]))
@@ -83,6 +84,9 @@ public class Application {
                     .build();
             humanList.add(human);
         }
+        System.out.println(humanList.get(10).getBirthDate());
         return true;
+
+
     }
 }
