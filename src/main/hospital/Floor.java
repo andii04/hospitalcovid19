@@ -1,8 +1,13 @@
 package hospital;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Floor {
     private int id;
-    public Floor(int id){
+    private ArrayList<Department> departments;
+    public Floor(int id, ArrayList<Department> departments){
         this.id = id;
+        this.departments = departments;
     }
 }

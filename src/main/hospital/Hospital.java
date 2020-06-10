@@ -10,15 +10,11 @@ public class Hospital {
     CarPark carPark;
     Stack<Floor> floors;
 
-    public Hospital(String name, ArrayList<Department> departments){
+    public Hospital(String name, Stack<Floor> floors){
         this.name = name;
-        this.departments = departments;
+        this.floors = floors;
         carPark = new CarPark();
-        floors = new Stack<>();
-        for(int i = 0;i<7;i++){
-            floors.add(new Floor(i));
         }
-    }
 
 
     //own Methods
@@ -31,20 +27,20 @@ public class Hospital {
     public static class Builder{
 
         private String name;
-        ArrayList<Department> departments = new ArrayList<Department>();
+        Stack<Floor> floors;
 
         public Hospital.Builder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public Hospital.Builder setDepartmentsList(ArrayList<Department> departments){
-            this.departments =departments;
+        public Hospital.Builder setFloors(Stack<Floor> floors){
+            this.floors =floors;
             return this;
         }
 
         public Hospital build() {
-            return new Hospital(name, departments);
+            return new Hospital(name, floors);
         }
     }
 }

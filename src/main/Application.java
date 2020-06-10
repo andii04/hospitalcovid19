@@ -1,9 +1,6 @@
 import com.google.common.eventbus.EventBus;
 import cruise_ship.*;
-import hospital.Department;
-import hospital.Hospital;
-import hospital.Room;
-import hospital.Station;
+import hospital.*;
 import shared.Human;
 import shared.Nationality;
 
@@ -12,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class Application {
 
@@ -108,46 +106,125 @@ public class Application {
     }
 
     public static void createHospital(){
-        ArrayList<Department> departments = new ArrayList<>();
-        ArrayList<Station> stationsCriticalCare = new ArrayList<>();
+        hospital = new Hospital.Builder()
+                .setName("Hospital")
+                .setFloors(createFloors())
+                .build();
+    }
 
+    private static Stack<Floor> createFloors(){
+        Stack<Floor> floors = new Stack<Floor>();
+        ArrayList<Room> roomList;
+
+        //0
+        ArrayList<Department> departmentsFloor0 = new ArrayList<>();
+        departmentsFloor0.add(new BSEmergencyDepartment());
+        departmentsFloor0.add(new EmergencyDepartment());
+        floors.push(new Floor(0, departmentsFloor0));
+
+        //1
+        ArrayList<Station> stationsCriticalCare = new ArrayList<>();
         for(int j = 41;j<=45; j++){
             //create rooms
-            ArrayList<Room> roomList= new ArrayList<>();
+            roomList= new ArrayList<>();
             for(int i =1;i<=20;i++){
-                roomList.add(new Room(i, 0));
+                roomList.add(new Room(i,3,3));
             }
             stationsCriticalCare.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
         Department criticalCare = new Department(stationsCriticalCare);
-        departments.add(criticalCare);
+        floors.push(new Floor(1,new ArrayList<Department>(){{add(criticalCare);}}));
 
+        //2
         ArrayList<Station> stationsPulmonology = new ArrayList<>();
         for(int j = 41;j<=45; j++){
-            //create rooms
-            ArrayList<Room> roomList= new ArrayList<>();
+            roomList= new ArrayList<>();
             for(int i =1;i<=30;i++){
-                //abcdef is different @todo
-                roomList.add(new Room(i, 0));
+                if(j ==41){
+                    roomList.add(new Room(i, 2,2));
+                }
+                else if(j==42){
+                    roomList.add(new Room(i, 4,4));
+                }
+                else {
+                    roomList.add(new Room(i, 6,6));
+                }
             }
             stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department Pulmonology = new Department(stationsPulmonology);
-        departments.add(Pulmonology);
+        Department pulmology = new Department(stationsPulmonology);
+        floors.push(new Floor(2,new ArrayList<Department>(){{add(pulmology);}}));
 
-        //Radiology
+        //Radiology 3
         ArrayList<Station> stationRadiology = new ArrayList<>();
-        ArrayList<Room> roomList = new ArrayList<>();
-        for(int i =1;i<=2;i++){
-            roomList.add(new Room(i, 0));
-        }
-        stationRadiology.add(new Station("A", roomList));
-        Department Radiology = new Department(stationRadiology);
-        departments.add(Radiology);
+        roomList= new ArrayList<>();
+        roomList.add(new Room(1,1,1));
+        roomList.add(new Room(2,1,1));
+        stationRadiology.add(new Station("A",roomList));
+        Department radiology = new Department(stationRadiology);
+        floors.push(new Floor(3,new ArrayList<Department>(){{add(radiology);}}));
 
-        hospital = new Hospital.Builder()
-                .setName("Hospital")
-                .setDepartmentsList(departments)
-                .build();
+        //4
+        ArrayList<Station> stationsCardiology = new ArrayList<>();
+        for(int j = 41;j<=43; j++){
+            roomList= new ArrayList<>();
+            if (j==41){
+                for(int i =1;i<=5;i++){
+                    roomList.add(new Room(i, 1,1));
+                }
+            }
+            else {
+                for(int i =1;i<=10;i++){
+                    if (j==42){
+                        roomList.add(new Room(i, 2,2));
+                    }
+                    else if(j==43){
+                        roomList.add(new Room(i, 3,3));
+                    }
+                }
+            }
+            stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
+        }
+        Department cardiology = new Department(stationsCardiology);
+        floors.push(new Floor(4,new ArrayList<Department>(){{add(cardiology);}}));
+
+
+        ArrayList<Station> stationsSurgery = new ArrayList<>();
+        for(int j = 41;j<=42; j++){
+            roomList= new ArrayList<>();
+            for(int i =1;i<=3;i++){
+                if(j ==41){
+                    roomList.add(new Room(i, 1,0));
+                }
+                else if(j==42){
+                    roomList.add(new Room(i, 2,0));
+                }
+            }
+            stationsSurgery.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
+        }
+        Department surgery = new Department(stationsSurgery);
+        floors.push(new Floor(5,new ArrayList<Department>(){{add(surgery);}}));
+
+        //5 oncology
+        ArrayList<Station> stationsOncology = new ArrayList<>();
+        for(int j = 41;j<=43; j++){
+            roomList= new ArrayList<>();
+            for(int i =1;i<=5;i++){
+                if(j ==41){
+                    roomList.add(new Room(i, 1,0));
+                }
+                else if(j==42){
+                    roomList.add(new Room(i, 2,2));
+                }
+                else if(j==41){
+                    roomList.add(new Room(i, 3,3));
+                }
+            }
+            stationsOncology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
+        }
+        Department oncology = new Department(stationsOncology);
+        floors.push(new Floor(6,new ArrayList<Department>(){{add(oncology);}}));
+
+        return floors;
     }
 }
