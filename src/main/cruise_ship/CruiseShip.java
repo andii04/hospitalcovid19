@@ -18,10 +18,11 @@ public class CruiseShip {
     List<Cabin> cabinList = new ArrayList<>();
 
 
-    public CruiseShip(String name, EventBus eventBus, List<Human> humanList) {
+    public CruiseShip(String name, EventBus eventBus1, List<Human> humanList) {
         this.name = name;
-        this.eventBus = eventBus;
         this.humanList = humanList;
+        EventBus eventBus = new EventBus();
+
         createCruiseShip();
         boarding();
         startSimulation();
@@ -90,34 +91,77 @@ public class CruiseShip {
     }
 
     public void startSimulation(){
-        int seats = 250;
-        int restaurants = 5;
-        int phasenInRestaurant = humanList.size() / (seats*restaurants) + 1;
-        int sumRestaurantPhase = restaurants*phasenInRestaurant;
-        ArrayList<Human>[] restaurantPerPhase = new ArrayList[sumRestaurantPhase];
-        for (int i = 0; i < sumRestaurantPhase; i++) {
-            restaurantPerPhase[i] = new ArrayList<Human>();
-        }
-        System.out.println(humanList.get(1000).getTicket().getCabinID());
+        System.out.println("Simulation in Cruise Ship starts");
+        for(int day = 0; day < 1; day++){
+            //System.out.println("Tag "+ day+1 + " startet");
+            int seats = 250;
+            int restaurants = 5;
+            int phasenInRestaurant = humanList.size() / (seats*restaurants) + 1;
+            int sumRestaurantPhase = restaurants*phasenInRestaurant;
+            ArrayList<Human>[] restaurantPerPhase = new ArrayList[sumRestaurantPhase];
+            for (int i = 0; i < sumRestaurantPhase; i++) {
+                restaurantPerPhase[i] = new ArrayList<Human>();
+            }
 
-        Random rand = new Random();
+            Random rand = new Random();
 
-        for (Cabin actCabin: cabinList) {
-            boolean freeRestaurantFound = false;
+            for (Cabin actCabin: cabinList) {
+                boolean freeRestaurantFound = false;
 
-            while (freeRestaurantFound == false){
-                int randNumb = rand.nextInt(sumRestaurantPhase);
-                if(restaurantPerPhase[randNumb].size()<seats){
-                    for (Human h: actCabin.getPassengers()) {
-                        restaurantPerPhase[randNumb].add(h);
+                while (freeRestaurantFound == false){
+                    int randNumb = rand.nextInt(sumRestaurantPhase);
+                    if(restaurantPerPhase[randNumb].size()<seats){
+                        for (Human h: actCabin.getPassengers()) {
+                            restaurantPerPhase[randNumb].add(h);
+
+                        }
+                        freeRestaurantFound=true;
                     }
-                    freeRestaurantFound=true;
                 }
             }
+            for(int j = 0; j<restaurantPerPhase.length; j++){
+                int fiftyPercent = restaurantPerPhase[j].size()/2;
+                List<Human> selectetHumanForGroup = new ArrayList<>();
+                for (int i = 0; i < fiftyPercent; i++){
+                    boolean alreadypresent = true;
+                    int randNum =0;
+                    while (alreadypresent == true){
+                        alreadypresent= false;
+                        randNum = rand.nextInt(restaurantPerPhase[j].size());
+                        for (Human hum: selectetHumanForGroup) {
+                            if(hum==restaurantPerPhase[j].get(randNum)){
+                                alreadypresent=true;
+                                break;
+                            }
+                        }
+                    }
+
+                    selectetHumanForGroup.add(restaurantPerPhase[j].get(randNum));
+                }
+
+                if (selectetHumanForGroup.size()%2 != 0) {
+                    selectetHumanForGroup.remove(rand.nextInt(selectetHumanForGroup.size()));
+                }
+
+                for(int group = 0; group < selectetHumanForGroup.size() ; group= group+2){
+                    if(selectetHumanForGroup.get(group).isInfectedCOVID19()){
+                        System.out.println("Infectet");
+                        if (Math.random() * 100 < 30) {
+                            System.out.println("Hustet");
+                        }
+                    }
+                    if(selectetHumanForGroup.get(group+1).isInfectedCOVID19()){
+                        System.out.println("Infectet");
+                        if (Math.random() * 100 < 30) {
+                            System.out.println("Hustet");
+                        }
+                    }
+                }
+
+                //System.out.println(restaurantPerPhase[j].size());
+                //System.out.println(selectetHumanForGroup.size());
+            }
         }
-
-
-
     }
 
     public static class Builder{

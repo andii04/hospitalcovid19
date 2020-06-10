@@ -28,6 +28,10 @@ public class Application {
                 .build();
 
 
+        lambdaAnalysis();
+    }
+
+    private static void lambdaAnalysis() {
     }
 
     public static boolean createHumans(List<Human> humanList){
