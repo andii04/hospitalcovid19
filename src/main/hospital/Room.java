@@ -2,13 +2,25 @@ package hospital;
 
 public class Room {
     private int id;
+
+    public HospitalBed getHospitalBed(int i) {
+        return hospitalBedSpace[i];
+    }
+    public int getNumberOfBeds(){
+        return hospitalBedSpace.length;
+    }
+
     private HospitalBed[] hospitalBedSpace;
 
-    public Room(int id, int anzahl, int belegt){
+    public Room(int id, int anzahlPlaetze, int anzahlBetten){
         this.id = id;
-        hospitalBedSpace = new HospitalBed[anzahl];
-        for (int i = 0;i<=belegt;i++){
+        hospitalBedSpace = new HospitalBed[anzahlPlaetze];
+        for (int i = 0;i<=anzahlBetten;i++){
             hospitalBedSpace[i] = new HospitalBed();
         }
+    }
+
+    public Integer getRoomID() {
+        return  id;
     }
 }

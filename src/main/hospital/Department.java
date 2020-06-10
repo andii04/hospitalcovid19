@@ -14,4 +14,14 @@ public class Department {
     public Department(){
 
     }
+    public Station getStation(int i){
+        return stations.get(i);
+    }
+    public int getNumberOfStations(){
+        return  stations.size();
+    }
+
+    public DepartmentsName getName() {
+    return  name;
+    }
 }

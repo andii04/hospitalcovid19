@@ -6,6 +6,16 @@ public class EmergencyDepartment extends Department {
     private HospitalPatient currentHospitalPatient;
     private LinkedList<HospitalBed> emptyHospitalBedList;
 
+    //Mergency Department has Access to the carPark, and free rooms
+    CarPark carPark;
+    Hospital hospital;
+
+    public void setCarPark(CarPark carPark){
+        this.carPark = carPark;
+    }
+
+
+
     public void welcome (EmergencyVehicle vehicle){
 
     }

@@ -1,8 +1,7 @@
 import com.google.common.eventbus.EventBus;
 import cruise_ship.*;
 import hospital.*;
-import shared.Human;
-import shared.Nationality;
+import shared.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -115,6 +114,7 @@ public class Application {
         hospital = new Hospital.Builder()
                 .setName("Hospital")
                 .setFloors(createFloors())
+                .setCarPark(new CarPark(3,7,25))
                 .build();
     }
 

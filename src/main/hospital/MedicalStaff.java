@@ -1,5 +1,6 @@
 package hospital;
 
+import cruise_ship.Passenger;
 import shared.Human;
 
 public class MedicalStaff extends Human {
@@ -23,5 +24,9 @@ public class MedicalStaff extends Human {
             System.out.println("disinfect SafetyEmergencyVehicle now form MedicalStaff");
             remoteControlRobot.startRobotForNormalEmergencyVehicle((EmergencyVehicle) vehicle);
         }
+    }
+
+    public void goWithPassengerToBed(HospitalBed bedForPassenger, Stretcher stretcher) {
+        stretcher.transfer(bedForPassenger);
     }
 }

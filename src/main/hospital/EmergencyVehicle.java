@@ -7,6 +7,20 @@ public class EmergencyVehicle  implements IVistable{
     private boolean isClosed = true;
     private long serialNumber;
     private boolean isFlashingLightOn;
+    private String location;
+
+    public Stretcher getStretcher() {
+        return stretcher;
+    }
+
+
+    private Stretcher stretcher;
+
+    public EmergencyVehicle(long serialNumber){
+        this.serialNumber = serialNumber;
+        location = "CarPark";
+        stretcher = new Stretcher();
+    }
 
     public MedicalStaff getMedicalStaffs(int id) {
         return medicalStaffs.get(id);
@@ -17,6 +31,12 @@ public class EmergencyVehicle  implements IVistable{
     }
     public void removeMedicalStaffs(int id){
         medicalStaffs.remove(id);
+    }
+    public int getNumberOfMedicalStaffs(){
+        return medicalStaffs.size();
+    }
+    public ArrayList<MedicalStaff> getAllMedicalStaffs(){
+        return medicalStaffs;
     }
 
     private ArrayList<MedicalStaff> medicalStaffs;
@@ -45,6 +65,7 @@ public class EmergencyVehicle  implements IVistable{
         }
     }
     public void move(String location){
+        this.location = location;
 
     }
     public void accept(IVisitorRobot visitor){
