@@ -22,6 +22,7 @@ public class CruiseShip {
         this.humanList = humanList;
         createCruiseShip();
         boarding();
+        startSimulation();
     }
     public void createCruiseShip(){
         deck[1] = new CabinDeck(DeckID.I);
@@ -42,15 +43,17 @@ public class CruiseShip {
             int count = 0;
             while ((zeile = in.readLine()) != null) {
                 String[] column =  zeile.split(";");
-                System.out.println(column[3]);
+                //System.out.println(column[3]);
                 if(column[3] == "2"){
                     humanList.get(count).getTicket().setCabinID(column[2]);
                     humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
                     count++;
-                    humanList.get(count).getTicket().setCabinID(column[2]);
-                    humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
                     //TODO
                 }
+                humanList.get(count).getTicket().setCabinID(column[2]);
+                humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
+                count++;
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -62,6 +65,10 @@ public class CruiseShip {
     }
 
     public void startSimulation(){
+        System.out.println(humanList.get(10).getTicket().getCabinID());
+        for (int actDay = 0 ; actDay <14 ; actDay++){
+
+        }
 
     }
 

@@ -13,4 +13,12 @@ public class Ticket {
     public void setCabinID(String cabinID) {
         this.cabinID = cabinID;
     }
+
+    public DeckID getDeckID() {
+        return deckID;
+    }
+
+    public String getCabinID() {
+        return cabinID;
+    }
 }

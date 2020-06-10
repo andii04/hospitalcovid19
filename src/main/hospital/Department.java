@@ -9,4 +9,8 @@ public class Department {
     public Department(ArrayList<Station> stations) {
         this.stations = stations;
     }
+
+    public Department(){
+
+    }
 }

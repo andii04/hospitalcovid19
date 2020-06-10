@@ -115,7 +115,7 @@ public class Application {
             //create rooms
             ArrayList<Room> roomList= new ArrayList<>();
             for(int i =1;i<=20;i++){
-                roomList.add(new Room(i));
+                roomList.add(new Room(i, 0));
             }
             stationsCriticalCare.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
@@ -128,7 +128,7 @@ public class Application {
             ArrayList<Room> roomList= new ArrayList<>();
             for(int i =1;i<=30;i++){
                 //abcdef is different @todo
-                roomList.add(new Room(i));
+                roomList.add(new Room(i, 0));
             }
             stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
@@ -139,7 +139,7 @@ public class Application {
         ArrayList<Station> stationRadiology = new ArrayList<>();
         ArrayList<Room> roomList = new ArrayList<>();
         for(int i =1;i<=2;i++){
-            roomList.add(new Room(i));
+            roomList.add(new Room(i, 0));
         }
         stationRadiology.add(new Station("A", roomList));
         Department Radiology = new Department(stationRadiology);
