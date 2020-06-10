@@ -26,6 +26,8 @@ public class Application {
                 .setEventBus(new EventBus())
                 .setHumanList(humanList)
                 .build();
+
+
     }
 
     public static boolean createHumans(List<Human> humanList){
@@ -81,7 +83,7 @@ public class Application {
         }
 
         for( int i = 0; i < birthdate.length; i++){
-            Human human = new Human.Builder()
+            Human passenger = new Passenger.Builder()
                     .setFirstName(firstname.get(i))
                     .setLastName(lastname.get(i))
                     .setBirthDate(birthdate[i])
@@ -95,7 +97,7 @@ public class Application {
                     .setHasMouthProtection(false)
                     .setClothing(null)
                     .build();
-            humanList.add(human);
+            humanList.add(passenger);
         }
 
         return true;

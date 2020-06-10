@@ -21,6 +21,7 @@ public class Human {
     private Ticket ticket;
     private Lung lungRight;
     private Lung lungLeft;
+    private ImmuneSystem immuneSystem;
 
     public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
         this.firstName = firstName;
@@ -40,6 +41,16 @@ public class Human {
 
         lungRight = new Lung();
         lungLeft = new Lung();
+        immuneSystem = new ImmuneSystem();
+
+    }
+
+    public Lung getLungRight() {
+        return lungRight;
+    }
+
+    public Lung getLungLeft() {
+        return lungLeft;
     }
 
     public Human(){

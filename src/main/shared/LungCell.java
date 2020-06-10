@@ -28,4 +28,8 @@ public class LungCell extends Cell {
         charpool[2] = 'a';
         initialiseLungCell();
     }
+
+    public char[][][] getLungCell() {
+        return lungCell;
+    }
 }

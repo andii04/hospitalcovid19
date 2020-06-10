@@ -8,12 +8,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CruiseShip {
     private String name;
     private EventBus eventBus;
     private Deck[] deck = new Deck[9];
-    List<Human> humanList = new ArrayList<Human>();
+    List<Human> humanList = new ArrayList<>();
+    List<Cabin> cabinList = new ArrayList<>();
 
 
     public CruiseShip(String name, EventBus eventBus, List<Human> humanList) {
@@ -23,6 +25,9 @@ public class CruiseShip {
         createCruiseShip();
         boarding();
         startSimulation();
+        CabinDeck cabinDeck = (CabinDeck) deck[7];
+        //System.out.println(cabinDeck.getCabins()[449].getPassengers().get(0).getLungLeft().getStructure()[0][0][0].getLungCell()[0][0][0]);
+        //System.out.println(cabinList.size());
     }
     public void createCruiseShip(){
         deck[1] = new CabinDeck(DeckID.I);
@@ -40,23 +45,43 @@ public class CruiseShip {
         String zeile = null;
         try {
             in = new BufferedReader(new FileReader("data/cruise_ship_passenger_assignment.txt"));
-            int count = 0;
+            int countHuman = 0;
             while ((zeile = in.readLine()) != null) {
                 String[] column =  zeile.split(";");
-                //System.out.println(column[3]);
-                if(column[3] == "2"){
-                    humanList.get(count).getTicket().setCabinID(column[2]);
-                    humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
-                    count++;
-                    //TODO
+                if(Integer.parseInt(column[3]) == 2){
+                    setPassengerToRoom(column, countHuman, false);
+                    countHuman++;
                 }
-                humanList.get(count).getTicket().setCabinID(column[2]);
-                humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
-                count++;
+                setPassengerToRoom(column, countHuman, true);
 
+                countHuman++;
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setPassengerToRoom(String[] column, int count, boolean firstPerson){
+        humanList.get(count).getTicket().setCabinID(column[2]);
+        humanList.get(count).getTicket().setDeckID(DeckID.valueOf(column[0]));
+        CabinDeck cabinDeck = (CabinDeck) deck[DeckID.valueOf(column[0]).getIndex()];
+
+        String cabinInfo[] = column[2].split("-");
+        int cabinID =0;
+        switch (column[1]){
+            case "OuterLeft":
+                cabinID = Integer.parseInt(cabinInfo[2]);
+                break;
+            case "InnerCenter":
+                cabinID = Integer.parseInt(cabinInfo[2])+150;
+                break;
+            case "OuterRight":
+                cabinID = Integer.parseInt(cabinInfo[2])+300;
+                break;
+        }
+        cabinDeck.addPassenger(cabinID, humanList.get(count));
+        if(firstPerson){
+            cabinList.add(cabinDeck.getCabins()[cabinID-1]);
         }
     }
 
@@ -65,10 +90,33 @@ public class CruiseShip {
     }
 
     public void startSimulation(){
-        System.out.println(humanList.get(10).getTicket().getCabinID());
-        for (int actDay = 0 ; actDay <14 ; actDay++){
-
+        int seats = 250;
+        int restaurants = 5;
+        int phasenInRestaurant = humanList.size() / (seats*restaurants) + 1;
+        int sumRestaurantPhase = restaurants*phasenInRestaurant;
+        ArrayList<Human>[] restaurantPerPhase = new ArrayList[sumRestaurantPhase];
+        for (int i = 0; i < sumRestaurantPhase; i++) {
+            restaurantPerPhase[i] = new ArrayList<Human>();
         }
+        System.out.println(humanList.get(1000).getTicket().getCabinID());
+
+        Random rand = new Random();
+
+        for (Cabin actCabin: cabinList) {
+            boolean freeRestaurantFound = false;
+
+            while (freeRestaurantFound == false){
+                int randNumb = rand.nextInt(sumRestaurantPhase);
+                if(restaurantPerPhase[randNumb].size()<seats){
+                    for (Human h: actCabin.getPassengers()) {
+                        restaurantPerPhase[randNumb].add(h);
+                    }
+                    freeRestaurantFound=true;
+                }
+            }
+        }
+
+
 
     }
 
