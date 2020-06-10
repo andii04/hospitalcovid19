@@ -132,7 +132,7 @@ public class Application {
             }
             stationsCriticalCare.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department criticalCare = new Department(stationsCriticalCare);
+        Department criticalCare = new Department(DepartmentsName.Critical_Care, stationsCriticalCare);
         floors.push(new Floor(1,new ArrayList<Department>(){{add(criticalCare);}}));
 
         //2
@@ -152,7 +152,7 @@ public class Application {
             }
             stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department pulmology = new Department(stationsPulmonology);
+        Department pulmology = new Department(DepartmentsName.Pulmonology, stationsPulmonology);
         floors.push(new Floor(2,new ArrayList<Department>(){{add(pulmology);}}));
 
         //Radiology 3
@@ -161,7 +161,7 @@ public class Application {
         roomList.add(new Room(1,1,1));
         roomList.add(new Room(2,1,1));
         stationRadiology.add(new Station("A",roomList));
-        Department radiology = new Department(stationRadiology);
+        Department radiology = new Department(DepartmentsName.Radiology, stationRadiology);
         floors.push(new Floor(3,new ArrayList<Department>(){{add(radiology);}}));
 
         //4
@@ -185,7 +185,7 @@ public class Application {
             }
             stationsPulmonology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department cardiology = new Department(stationsCardiology);
+        Department cardiology = new Department(DepartmentsName.Cardiology, stationsCardiology);
         floors.push(new Floor(4,new ArrayList<Department>(){{add(cardiology);}}));
 
 
@@ -202,7 +202,7 @@ public class Application {
             }
             stationsSurgery.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department surgery = new Department(stationsSurgery);
+        Department surgery = new Department(DepartmentsName.General_Surgery, stationsSurgery);
         floors.push(new Floor(5,new ArrayList<Department>(){{add(surgery);}}));
 
         //5 oncology
@@ -222,7 +222,7 @@ public class Application {
             }
             stationsOncology.add(new Station(String.valueOf(j), roomList)); //or Character.toString((j)
         }
-        Department oncology = new Department(stationsOncology);
+        Department oncology = new Department(DepartmentsName.Oncology, stationsOncology);
         floors.push(new Floor(6,new ArrayList<Department>(){{add(oncology);}}));
 
         return floors;

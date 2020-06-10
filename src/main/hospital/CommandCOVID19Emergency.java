@@ -1,8 +1,8 @@
 package hospital;
 
-public class COVID19EmergencyCommand implements ICommand{
+public class CommandCOVID19Emergency implements ICommand{
     Hospital hospital;
     public void execute(){
-        //hospita.
+        
     };
 }

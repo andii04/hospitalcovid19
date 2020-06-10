@@ -7,11 +7,17 @@ public class EmergencyVehicle {
     private boolean isFlashingLightOn;
     private String[][][] ambientAir = new String[50][50][50];
 
-    public void open(Key key){
-
+    public void open(String keySignature){
+        if(keySignature == registeredKeySignature){
+            isClosed = false;
+            System.out.println("Vehicle opened");
+        }
     }
-    public void close(Key key){
-
+    public void close(String keySignature){
+        if(keySignature == registeredKeySignature){
+            isClosed = true;
+            System.out.println("Vehicle closed");
+        }
     }
     public void move(String location){
 
