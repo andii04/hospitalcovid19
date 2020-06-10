@@ -13,4 +13,15 @@ public class MedicalStaff extends Human {
         System.out.println("Medical Staff ID "+ id +" desinfect");
         hasProtection = false;
     }
+
+    public void disinfectVehicle(Object vehicle, RemoteControlRobot remoteControlRobot){
+        if(vehicle instanceof BioSafetyEmergencyVehicle){
+            System.out.println("disinfect BioSafetyEmergencyVehicle now form MedicalStaff");
+            remoteControlRobot.startRobotForBSEmergencyVehicle((BioSafetyEmergencyVehicle) vehicle);
+        }
+        else {
+            System.out.println("disinfect SafetyEmergencyVehicle now form MedicalStaff");
+            remoteControlRobot.startRobotForNormalEmergencyVehicle((EmergencyVehicle) vehicle);
+        }
+    }
 }
