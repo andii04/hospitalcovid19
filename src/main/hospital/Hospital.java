@@ -24,6 +24,13 @@ public class Hospital {
         command.execute();
     }
 
+    public Floor getFloor(int floorID){
+        return floors.get(floorID);
+    }
+    public Department getDepartment(int floorID, int departmentOnFloor){
+        return floors.get(floorID).getDepartments(departmentOnFloor);
+    }
+
     public static class Builder{
 
         private String name;

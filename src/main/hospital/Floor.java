@@ -10,4 +10,7 @@ public class Floor {
         this.id = id;
         this.departments = departments;
     }
+    public Department getDepartments(int departmentOnFloor){
+        return departments.get(departmentOnFloor);
+    }
 }

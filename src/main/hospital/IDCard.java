@@ -3,7 +3,8 @@ package hospital;
 import shared.Configuration;
 
 public class IDCard {
-    private IEnryptionStrategy strategyAlgorithm;
+    IEnryptionStrategy strategyAlgorithm;
+    String encryptionKey = "dh$bw20!20";
     public IDCard(Configuration chosenAlgo){
         if(chosenAlgo == Configuration.AES){
             strategyAlgorithm = new AESAlgorithm();
@@ -12,5 +13,5 @@ public class IDCard {
             strategyAlgorithm = new DESAlgorithm();
         }
     }
-    private String magneticStripe;
+    String magneticStripe;
 }

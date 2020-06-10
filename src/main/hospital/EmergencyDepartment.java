@@ -24,7 +24,7 @@ public class EmergencyDepartment extends Department {
 
     //own
     public void choseAssistant(){
-        //
+
     }
 
 }

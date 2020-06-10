@@ -5,7 +5,17 @@ public class EmergencyVehicle {
     private boolean isClosed = true;
     private long serialNumber;
     private boolean isFlashingLightOn;
+
+    public String[][][] getAmbientAir() {
+        return ambientAir;
+    }
+
+    public void setAmbientAir(String[][][] ambientAir) {
+        this.ambientAir = ambientAir;
+    }
+
     private String[][][] ambientAir = new String[50][50][50];
+
 
     public void open(String keySignature){
         if(keySignature == registeredKeySignature){
@@ -21,5 +31,8 @@ public class EmergencyVehicle {
     }
     public void move(String location){
 
+    }
+    public void accept(IVisitorRobot visitor){
+        visitor.visit(this);
     }
 }
