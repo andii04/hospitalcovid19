@@ -6,4 +6,5 @@ public class Deck {
     public Deck (DeckID id){
         this.id = id;
     }
+
 }
