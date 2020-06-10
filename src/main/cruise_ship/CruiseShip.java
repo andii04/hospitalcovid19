@@ -148,12 +148,14 @@ public class CruiseShip {
                         System.out.println("Infectet");
                         if (Math.random() * 100 < 30) {
                             System.out.println("Hustet");
+                            selectetHumanForGroup.get(group+1).breathe(selectetHumanForGroup.get(group).dryCough());
                         }
                     }
                     if(selectetHumanForGroup.get(group+1).isInfectedCOVID19()){
                         System.out.println("Infectet");
                         if (Math.random() * 100 < 30) {
                             System.out.println("Hustet");
+                            selectetHumanForGroup.get(group).breathe(selectetHumanForGroup.get(group+1).dryCough());
                         }
                     }
                 }

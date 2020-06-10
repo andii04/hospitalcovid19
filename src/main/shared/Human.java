@@ -4,6 +4,7 @@ import cruise_ship.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Human {
     private String firstName;
@@ -19,8 +20,7 @@ public class Human {
     private boolean hasMouthProtection;
     private Clothing clothing;
     private Ticket ticket;
-    private Lung lungRight;
-    private Lung lungLeft;
+    private List<Lung> lungs = new ArrayList<>();
     private ImmuneSystem immuneSystem;
 
     public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
@@ -37,20 +37,17 @@ public class Human {
         this.hasMouthProtection = hasMouthProtection;
         this.clothing = clothing;
 
+
         ticket = new Ticket();
-
-        lungRight = new Lung();
-        lungLeft = new Lung();
-        immuneSystem = new ImmuneSystem();
+        lungs.add(new Lung());
+        lungs.add(new Lung());
+        immuneSystem = new ImmuneSystem(this);
 
     }
 
-    public Lung getLungRight() {
-        return lungRight;
-    }
 
-    public Lung getLungLeft() {
-        return lungLeft;
+    public List<Lung> getLungs() {
+        return lungs;
     }
 
     public Human(){
@@ -69,11 +66,16 @@ public class Human {
     }
 
     public void breathe(String air){
+        Random random = new Random();
+        char[] airParticle = air.toCharArray();
 
+        for (char p : airParticle) {
+            lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(25),random.nextInt(10),random.nextInt(2));
+        }
     }
 
     public String dryCough(){
-        return "placeholder";
+        return "vvvvvvvvvv";
     }
 
     public void viralInfectionProcess(){
