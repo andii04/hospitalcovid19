@@ -1,14 +1,18 @@
 package hospital;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Stack;
 
 public class Hospital {
-    ArrayList<Department> departments;
     CarPark carPark;
     Stack<Floor> floors;
     private String name;
+    private int countHospitalGuest =0;
+
+    public int getNewHospitalPatientID(){
+        countHospitalGuest++;
+        return countHospitalGuest;
+    }
 
     public Hospital(String name, Stack<Floor> floors, CarPark carPark) {
         this.name = name;
@@ -25,13 +29,6 @@ public class Hospital {
         ((BSEmergencyDepartment)getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
     }
 
-
-    //own Methods
-
-
-    public void inGoingEmergency(ICommand command) {
-        command.execute();
-    }
 
     public Floor getFloor(int floorID) {
         return floors.get(floorID);

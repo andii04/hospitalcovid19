@@ -31,7 +31,8 @@ public class AESAlgorithm implements IEnryptionStrategy {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
+            String encrypted = Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes(StandardCharsets.UTF_8)));
+            return encrypted;
         } catch (Exception e) {
             System.out.println("Error while encrypting: " + e.toString());
         }
@@ -43,7 +44,8 @@ public class AESAlgorithm implements IEnryptionStrategy {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+            String decrypted =  new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+            return  decrypted;
         } catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }

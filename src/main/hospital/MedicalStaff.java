@@ -23,7 +23,7 @@ public class MedicalStaff extends Human {
     }
 
     public void disinfect() {
-        System.out.println("MedicalStaff: Medical Staff ID " + id + " desinfect");
+        System.out.println("MedicalStaff: Medical Staff ID " + id + " disinfect");
         hasProtection = false;
     }
 
@@ -43,12 +43,11 @@ public class MedicalStaff extends Human {
 
 
     public void openBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
-        vehicle.open(idCard, "pin");
-        //@todo
+        vehicle.open(idCard,myPinforCard);
     }
 
     public void closeBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
-        vehicle.close(idCard, "pin");
+        vehicle.close(idCard, myPinforCard);
     }
 
     public void openEmergencyVehicle(Key key) {

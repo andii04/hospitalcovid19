@@ -14,7 +14,7 @@ public class HospitalBed {
         return human;
     }
     public void setPatient(Human human){
-        human = human;
+        this.human = human;
     }
 }
 

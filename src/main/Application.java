@@ -33,21 +33,22 @@ public class Application {
 
 */
         hospitlSimulation();
+        lambdaAnalysis();
 
     }
 
     private static void lambdaAnalysis() {
         //what the hack
-        /*
+    /*
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .forEach(station -> station.getRooms().stream()
-                .forEach(room -> Arrays.stream(room.getHospitalBeds())
-                .forEach(hospitalBed -> hospitalBed.getHuman())));
+                        .forEach(room -> Arrays.stream(room.getHospitalBeds())
+                                .forEach(hospitalBed -> hospitalBed.getHuman())));
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .forEach(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())
                                 .filter(hospitalBed -> hospitalBed.isEmpty()==false).count()));
-
+        /*
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .map(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())

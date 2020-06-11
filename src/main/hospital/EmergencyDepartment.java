@@ -46,6 +46,7 @@ public class EmergencyDepartment extends Department {
         Stretcher stretcher = unload(vehicle);
         chosenMedicalStaffForTransfer.goWithPassengerToBed(stretcher, emptyHospitalBedList.get(emptyHospitalBedList.size()-1));
         currentHospitalPatient = (HospitalPatient) emptyHospitalBedList.get(emptyHospitalBedList.size()-1).getHuman();
+        currentHospitalPatient.setId(hospital.getNewHospitalPatientID());
         register(currentHospitalPatient);
     }
 
@@ -57,10 +58,10 @@ public class EmergencyDepartment extends Department {
         newCase.printCase();
         //@todo datenschutz
         move(emptyHospitalBedList.get(emptyHospitalBedList.size()-1), newCase);
-   }
+    }
 
     public void move(HospitalBed hospitalBed, Case thecase) {
-       System.out.println("EmergencyDepartment: Patient will now be moved to his room");
+       System.out.println("EmergencyDepartment: Patient with ID will now be moved to his room");
        hospital.getFloor(thecase.getFloorID()).getDepartments(0)
                .getStation(Station.getStationNumberFromNameID(thecase.getStationID()))
                .getRoom(thecase.getRoomID()).setHospitalBed(thecase.getBedIDinRoom(),hospitalBed);

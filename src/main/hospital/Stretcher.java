@@ -11,7 +11,7 @@ public class Stretcher implements IStretcher {
     }
 
     public void transfer(HospitalBed hospitalBed) {
-        hospitalBed.setPatient( human );
+        hospitalBed.setPatient(human);
         human = null;
     }
 
