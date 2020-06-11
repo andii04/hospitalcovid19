@@ -1,6 +1,7 @@
 package hospital;
 
-public class Case implements ICase{
+public class CaseReadOnly implements ICase{
+
     private int bedIDinRoom;
     private int floorID;
     private String department;
@@ -8,47 +9,36 @@ public class Case implements ICase{
     private int roomID;
     private String lastUpdate;
 
-    public Case(int floorID, String department, String stationID, int roomID, int bedIDinRoom, String lastUpdate) {
-        this.floorID = floorID;
-        this.department = department;
-        this.stationID = stationID;
-        this.roomID = roomID;
-        this.bedIDinRoom = bedIDinRoom;
-        this.lastUpdate = lastUpdate;
-    }
-
-    public void printCase() {
-        //@todo rint data of case
-    }
+    //Setter leer lassen ->
 
     @Override
     public void setBedIDinRoom(int bedIDinRoom) {
-        this.bedIDinRoom = bedIDinRoom;
+
     }
 
     @Override
     public void setFloorID(int floorID) {
-        this.floorID = floorID;
+
     }
 
     @Override
     public void setDepartment(String department) {
-        this.department = department;
+
     }
 
     @Override
     public void setStationID(String stationID) {
-        this.stationID = stationID;
+
     }
 
     @Override
     public void setRoomID(int roomID) {
-        this.roomID = roomID;
+
     }
 
     @Override
     public void setLastUpdate(String lastUpdate) {
-        this.lastUpdate = lastUpdate;
+
     }
 
     @Override
@@ -79,5 +69,14 @@ public class Case implements ICase{
     @Override
     public String getLastUpdate() {
         return lastUpdate;
+    }
+
+    public CaseReadOnly(int bedIDinRoom, int floorID, String department, String stationID, int roomID, String lastUpdate) {
+        this.bedIDinRoom = bedIDinRoom;
+        this.floorID = floorID;
+        this.department = department;
+        this.stationID = stationID;
+        this.roomID = roomID;
+        this.lastUpdate = lastUpdate;
     }
 }
