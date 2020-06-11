@@ -22,7 +22,7 @@ public class Application {
 
     public static void main(String... args) {
 
-        /*
+
         List<Human> humanList = new ArrayList<Human>();
         createHumans(humanList);
         cruiseShip = new CruiseShip.Builder()
@@ -31,24 +31,23 @@ public class Application {
                 .setHumanList(humanList)
                 .build();
 
-*/
+
         hospitlSimulation();
-        lambdaAnalysis();
 
     }
 
     private static void lambdaAnalysis() {
         //what the hack
-    /*
+        /*
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .forEach(station -> station.getRooms().stream()
-                        .forEach(room -> Arrays.stream(room.getHospitalBeds())
-                                .forEach(hospitalBed -> hospitalBed.getHuman())));
+                .forEach(room -> Arrays.stream(room.getHospitalBeds())
+                .forEach(hospitalBed -> hospitalBed.getHuman())));
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .forEach(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())
                                 .filter(hospitalBed -> hospitalBed.isEmpty()==false).count()));
-        /*
+
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .map(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())
@@ -127,7 +126,7 @@ public class Application {
                     .setHasHIV(Boolean.parseBoolean(hasHIV[i]))
                     .setInfectedCOVID19(Boolean.parseBoolean(hasInfection[i]))
                     .setHasFever(false)
-                    .setHasTaste(false)
+                    .setHasTaste(true)
                     .setHasMouthProtection(false)
                     .setClothing(null)
                     .build();

@@ -19,27 +19,38 @@ public class CruiseShip {
     private int count= 0;
 
 
-    public CruiseShip(String name, EventBus eventBus1, List<Human> humanList) {
+    public CruiseShip(String name, EventBus eventBus, List<Human> humanList) {
         this.name = name;
         this.humanList = humanList;
-        EventBus eventBus = new EventBus();
+        this.eventBus = eventBus;
 
         createCruiseShip();
         boarding();
+
+        eventBus();
         startSimulation();
-        CabinDeck cabinDeck = (CabinDeck) deck[7];
-        //System.out.println(cabinDeck.getCabins()[449].getPassengers().get(0).getLungLeft().getStructure()[0][0][0].getLungCell()[0][0][0]);
-        //System.out.println(cabinList.size());
+        SkyDeck skyDeck = (SkyDeck) deck[8];
+        System.out.println(skyDeck.getMedicalService().getQuarantine().getPassengers().size());
+
+
+
     }
+
+    public void eventBus(){
+        SkyDeck skyDeck = (SkyDeck) deck[8];
+        eventBus.register(skyDeck.getMedicalService());
+        //eventBus.post("Hello");
+    }
+
     public void createCruiseShip(){
-        deck[1] = new CabinDeck(DeckID.I);
-        deck[2] = new CabinDeck(DeckID.II);
-        deck[3] = new CabinDeck(DeckID.III);
-        deck[4] = new CabinDeck(DeckID.IV);
-        deck[5] = new CabinDeck(DeckID.V);
-        deck[6] = new CabinDeck(DeckID.VI);
-        deck[7] = new CabinDeck(DeckID.VII);
-        deck[8] = new SkyDeck(DeckID.VIII);
+        deck[1] = new CabinDeck(DeckID.I, this);
+        deck[2] = new CabinDeck(DeckID.II, this);
+        deck[3] = new CabinDeck(DeckID.III, this);
+        deck[4] = new CabinDeck(DeckID.IV, this);
+        deck[5] = new CabinDeck(DeckID.V, this);
+        deck[6] = new CabinDeck(DeckID.VI, this);
+        deck[7] = new CabinDeck(DeckID.VII, this);
+        deck[8] = new SkyDeck(DeckID.VIII, this);
     }
 
     public void boarding(){
@@ -324,13 +335,28 @@ public class CruiseShip {
             System.out.println("All infected Person on Day " + day);
             for (Human h:humanList) {
                 h.visitImmuneSysteme();
-                if(h.isInfectedCOVID19()){
-                    System.out.println("Passenger: "+h.getLastName());
-                    count++;
+            }
+
+            for (int i = 0; i< cabinList.size(); i++) {
+                for (int h= 0;  h<cabinList.get(i).getPassengers().size(); h++) {
+                    if(cabinList.get(i).getPassengers().get(h).isHasFever()){
+                        cabinList.get(i).releaseEmergencyCall(i, h);
+                    }
                 }
+            }
+
+        }
+        for (Human h:humanList) {
+            if(h.isInfectedCOVID19()){
+                count++;
             }
         }
         System.out.println("Infizierte nach 14 Tagen: "+ count);
+
+    }
+
+    public EventBus getEventBus() {
+        return eventBus;
     }
 
     public static class Builder{

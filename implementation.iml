@@ -11,12 +11,20 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="api_guardian" level="project" />
-    <orderEntry type="library" name="guava" level="project" />
     <orderEntry type="library" name="junit_api" level="project" />
     <orderEntry type="library" name="junit_platform_commons" level="project" />
     <orderEntry type="library" name="junit_platform_engine" level="project" />
     <orderEntry type="library" name="junit_platform_launcher" level="project" />
     <orderEntry type="library" name="junit_platform_runner" level="project" />
     <orderEntry type="library" name="opentest4j" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/guava-23.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

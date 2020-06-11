@@ -1,9 +1,12 @@
 package cruise_ship;
 
 public class SkyDeck extends Deck {
+    private MedicalServices medicalService;
+    private CruiseShip cruiseShip;
 
-    public SkyDeck(DeckID id){
+    public SkyDeck(DeckID id, CruiseShip cruiseShip){
         super(id);
+        this.cruiseShip = cruiseShip;
         SkyDeckLocation[] skyDeckLocations = new SkyDeckLocation[12];
         skyDeckLocations[0] = new SkyDeckLocation(SkyDeskLocationType.FitnessArea, 50);
         skyDeckLocations[1] = new SkyDeckLocation(SkyDeskLocationType.FitnessArea, 50);
@@ -17,6 +20,10 @@ public class SkyDeck extends Deck {
         skyDeckLocations[9] = new SkyDeckLocation(SkyDeskLocationType.Cinema, 225);
         skyDeckLocations[10] = new SkyDeckLocation(SkyDeskLocationType.ShoppingMall, 1000);
         skyDeckLocations[11] = new SkyDeckLocation(SkyDeskLocationType.ShoppingMall, 1000);
-        MedicalServices medicalService = new MedicalServices();
+        medicalService = new MedicalServices(cruiseShip);
+    }
+
+    public MedicalServices getMedicalService() {
+        return medicalService;
     }
 }

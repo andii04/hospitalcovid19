@@ -28,6 +28,7 @@ public class Human{
     private List<Lung> lungs = new ArrayList<>();
     private ImmuneSystem immuneSystem;
     Visitor visit = new Visitor();
+    private int incubationPeriod = 0;
 
     public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
         this.firstName = firstName;
@@ -52,10 +53,21 @@ public class Human{
 
     }
 
+    public void setHasMouthProtection(boolean hasMouthProtection) {
+        this.hasMouthProtection = hasMouthProtection;
+    }
+
     public void visitImmuneSysteme(){
         visit.active(this);
         if(visit.check(this)){
             isInfectedCOVID19 = true;
+        }
+        if(isInfectedCOVID19){
+            incubationPeriod++;
+        }
+        if(incubationPeriod>6){
+            hasFever=true;
+            hasTaste = false;
         }
     }
 
