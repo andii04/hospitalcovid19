@@ -7,12 +7,7 @@ public class Hospital {
     CarPark carPark;
     Stack<Floor> floors;
     private String name;
-    private int countHospitalGuest =0;
-
-    public int getNewHospitalPatientID(){
-        countHospitalGuest++;
-        return countHospitalGuest;
-    }
+    private int countHospitalGuest = 0;
 
     public Hospital(String name, Stack<Floor> floors, CarPark carPark) {
         this.name = name;
@@ -26,9 +21,13 @@ public class Hospital {
         ((EmergencyDepartment) floors.get(0).getDepartments(1)).setHospital(this);
         LinkedList<HospitalBed> oneFreeBed = new LinkedList<>();
         oneFreeBed.add(getFreeBed());
-        ((BSEmergencyDepartment)getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
+        ((BSEmergencyDepartment) getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
     }
 
+    public int getNewHospitalPatientID() {
+        countHospitalGuest++;
+        return countHospitalGuest;
+    }
 
     public Floor getFloor(int floorID) {
         return floors.get(floorID);
@@ -47,14 +46,14 @@ public class Hospital {
             for (int j = 0; j <= floors.get(i).getDepartments(0).getNumberOfStations(); j++) {
                 for (int k = 0; k <= floors.get(i).getDepartments(0).getStation(j).getNumberOfRooms(); k++) {
                     for (int l = 0; l <= floors.get(i).getDepartments(0).getStation(j).getRoom(k).getNumberOfBeds(); l++) {
-                        if (floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l) !=null &&
+                        if (floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l) != null &&
                                 floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l).isEmpty()) {
-                            System.out.println("Hospital: Found free bed in Department "+ Floor.getNameDepartmentFloor(i) +
-                                    " / Station "+floors.get(i).getDepartments(j).getName()+
-                                    " / Room " + k+1 +
+                            System.out.println("Hospital: Found free bed in Department " + Floor.getNameDepartmentFloor(i) +
+                                    " / Station " + floors.get(i).getDepartments(j).getName() +
+                                    " / Room " + k + 1 +
                                     " /Bed " + l);
                             HospitalBed freeBed = floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l);
-                            floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).setHospitalBed(l,null);
+                            floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).setHospitalBed(l, null);
                             System.out.println("Hospital: Bed moved to Emergency department");
                             return freeBed;
                         }
@@ -77,9 +76,9 @@ public class Hospital {
                             roomInfo[2] = floors.get(i).getDepartments(0).stations.get(j).getName();
                             roomInfo[3] = floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getRoomID().toString();
                             roomInfo[4] = Integer.toString(l);
-                            System.out.println("Hospital: Found free place in Department "+ Floor.getNameDepartmentFloor(i) +
-                                    " / Station "+floors.get(i).getDepartments(j).getName()+
-                                    " / Room " + k+1 +
+                            System.out.println("Hospital: Found free place in Department " + Floor.getNameDepartmentFloor(i) +
+                                    " / Station " + floors.get(i).getDepartments(j).getName() +
+                                    " / Room " + k + 1 +
                                     " / PlaceID " + l);
                             return roomInfo;
                         }

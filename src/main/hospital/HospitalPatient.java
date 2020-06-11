@@ -1,9 +1,15 @@
 package hospital;
 
-import cruise_ship.Ticket;
-import shared.*;
+import shared.Human;
 
 public class HospitalPatient extends Human {
+    private int id;
+
+    public HospitalPatient(Human human) {
+        super(human.getFirstName(), human.getLastName(), human.getBirthDate(), human.getNationality(), human.isSmoking(), human.isHasAsthma(),
+                human.isHasHIV(), human.isInfectedCOVID19(), human.isHasFever(), human.isHasTaste(), human.isHasMouthProtection(), human.getClothing());
+    }
+
     public int getId() {
         return id;
     }
@@ -11,6 +17,4 @@ public class HospitalPatient extends Human {
     public void setId(int id) {
         this.id = id;
     }
-
-    private int id;
 }

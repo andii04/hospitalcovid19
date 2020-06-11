@@ -11,6 +11,22 @@ public class Station {
         this.rooms = rooms;
     }
 
+    public static int getStationNumberFromNameID(String s) {
+        switch (s) {
+            case "A":
+                return 0;
+            case "B":
+                return 1;
+            case "C":
+                return 2;
+            case "D":
+                return 3;
+            case "E":
+                return 4;
+        }
+        return -1;
+    }
+
     public Room getRoom(int i) {
         return rooms.get(i);
     }
@@ -25,21 +41,5 @@ public class Station {
 
     public ArrayList<Room> getRooms() {
         return rooms;
-    }
-
-    public static int getStationNumberFromNameID(String s){
-        switch (s){
-            case "A":
-                return 0;
-            case "B":
-                return 1;
-            case"C":
-                return 2;
-            case "D":
-                return 3;
-            case "E":
-                return 4;
-        }
-        return -1;
     }
 }

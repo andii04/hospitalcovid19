@@ -1,28 +1,28 @@
 package hospital;
 
 public interface ICase {
+    int getBedIDinRoom();
+
     //getter und setter for ReadOnlyInterface
     void setBedIDinRoom(int bedIDinRoom);
 
-    void setFloorID(int floorID);
-
-    void setDepartment(String department);
-
-    void setStationID(String stationID);
-
-    void setRoomID(int roomID);
-
-    void setLastUpdate(String lastUpdate);
-
-    int getBedIDinRoom();
-
     int getFloorID();
+
+    void setFloorID(int floorID);
 
     String getDepartment();
 
+    void setDepartment(String department);
+
     String getStationID();
+
+    void setStationID(String stationID);
 
     int getRoomID();
 
+    void setRoomID(int roomID);
+
     String getLastUpdate();
+
+    void setLastUpdate(String lastUpdate);
 }

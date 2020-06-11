@@ -28,7 +28,7 @@ public class Room {
         return id;
     }
 
-    public void setHospitalBed(int i, HospitalBed hospitalBed){
+    public void setHospitalBed(int i, HospitalBed hospitalBed) {
         hospitalBedSpace[i] = hospitalBed;
     }
 }

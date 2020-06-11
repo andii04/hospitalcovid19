@@ -1,6 +1,6 @@
 package hospital;
 
-public class Case implements ICase{
+public class Case implements ICase {
     private int bedIDinRoom;
     private int floorID;
     private String department;
@@ -22,38 +22,13 @@ public class Case implements ICase{
     }
 
     @Override
-    public void setBedIDinRoom(int bedIDinRoom) {
-        this.bedIDinRoom = bedIDinRoom;
-    }
-
-    @Override
-    public void setFloorID(int floorID) {
-        this.floorID = floorID;
-    }
-
-    @Override
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    @Override
-    public void setStationID(String stationID) {
-        this.stationID = stationID;
-    }
-
-    @Override
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
-    @Override
-    public void setLastUpdate(String lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-
-    @Override
     public int getBedIDinRoom() {
         return bedIDinRoom;
+    }
+
+    @Override
+    public void setBedIDinRoom(int bedIDinRoom) {
+        this.bedIDinRoom = bedIDinRoom;
     }
 
     @Override
@@ -62,8 +37,18 @@ public class Case implements ICase{
     }
 
     @Override
+    public void setFloorID(int floorID) {
+        this.floorID = floorID;
+    }
+
+    @Override
     public String getDepartment() {
         return department;
+    }
+
+    @Override
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Override
@@ -72,12 +57,27 @@ public class Case implements ICase{
     }
 
     @Override
+    public void setStationID(String stationID) {
+        this.stationID = stationID;
+    }
+
+    @Override
     public int getRoomID() {
         return roomID;
     }
 
     @Override
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+
+    @Override
     public String getLastUpdate() {
         return lastUpdate;
+    }
+
+    @Override
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }

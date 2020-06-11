@@ -18,7 +18,7 @@ public class CarPark {
             String signature = KeyStore.randomString(5);
             keyStore.createKey(10000 + i, signature);
             BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle = new BioSafetyEmergencyVehicle(20000 + i, signature);
-            for (MedicalStaff medicalStaff: onCallStaffList) {
+            for (MedicalStaff medicalStaff : onCallStaffList) {
                 bioSafetyEmergencyVehicle.registerIDCard(medicalStaff.showIDCard());
 
             }

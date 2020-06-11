@@ -13,7 +13,8 @@ public class HospitalBed {
     public Human getHuman() {
         return human;
     }
-    public void setPatient(Human human){
+
+    public void setPatient(Human human) {
         this.human = human;
     }
 }

@@ -43,7 +43,7 @@ public class MedicalStaff extends Human {
 
 
     public void openBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
-        vehicle.open(idCard,myPinforCard);
+        vehicle.open(idCard, myPinforCard);
     }
 
     public void closeBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {

@@ -2,7 +2,6 @@ package hospital;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -44,8 +43,8 @@ public class AESAlgorithm implements IEnryptionStrategy {
             setKey(secret);
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            String decrypted =  new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
-            return  decrypted;
+            String decrypted = new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+            return decrypted;
         } catch (Exception e) {
             System.out.println("Error while decrypting: " + e.toString());
         }

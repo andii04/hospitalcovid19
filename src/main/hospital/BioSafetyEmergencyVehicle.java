@@ -16,8 +16,7 @@ public class BioSafetyEmergencyVehicle extends EmergencyVehicle implements IVist
         if (idCardReader.verify(idCard, pin) && registeredIDCardList.contains(idCard)) {
             System.out.println("BioSafetyVehicle: Door opened");
             isClosed = false;
-        }
-        else{
+        } else {
             System.out.println("BioSafetyVehicle: Doors not opened. Wrong idcard or pin");
         }
 
@@ -27,12 +26,12 @@ public class BioSafetyEmergencyVehicle extends EmergencyVehicle implements IVist
         if (idCardReader.verify(idCard, pin) && registeredIDCardList.contains(idCard)) {
             System.out.println("BioSafetyVehicle: Door closed");
             isClosed = true;
-        }
-        else{
+        } else {
             System.out.println("BioSafetyVehicle: Doors not closed. Wrong idcard or pin");
         }
     }
-    void registerIDCard(IDCard idCard){
+
+    void registerIDCard(IDCard idCard) {
         registeredIDCardList.add(idCard);
     }
 }
