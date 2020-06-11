@@ -15,13 +15,20 @@ public class MedicalServices {
 
     @Subscribe
     public void listen(String event) {
-        Human medicalAssistant = new MedicalAssistant();
-        int cabinID = Integer.parseInt(event.split("-")[1]);
-        int passengerinCell = Integer.parseInt(event.split("-")[2]);
+        String[] test = event.split("-");
+        if(test[0].equals("Emergency")){
+            System.out.println(event);
+            Human medicalAssistant = new MedicalAssistant();
+            int cabinID = Integer.parseInt(event.split("-")[1]);
+            int passengerinCell = Integer.parseInt(event.split("-")[2]);
 
-        cruiseShip.cabinList.get(cabinID).getPassengers().get(passengerinCell).setHasMouthProtection(true);
-        quarantine.addPassenger(cruiseShip.cabinList.get(cabinID).getPassengers().get(passengerinCell));
-        cruiseShip.cabinList.get(cabinID).getPassengers().remove(passengerinCell);
+            cruiseShip.cabinList.get(cabinID).getPassengers().get(passengerinCell).setHasMouthProtection(true);
+
+            quarantine.addPassenger(cruiseShip.cabinList.get(cabinID).getPassengers().get(passengerinCell));
+            cruiseShip.cabinList.get(cabinID).getPassengers().remove(passengerinCell);
+            releaseEmergencyCall("QuarantineOccupied");
+        }
+
 
     }
 
@@ -30,7 +37,7 @@ public class MedicalServices {
     }
 
     private void releaseEmergencyCall(String message){
-
+        cruiseShip.getEventBus().post(message);
     }
 
 

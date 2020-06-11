@@ -25,14 +25,13 @@ public class Application {
 
         List<Human> humanList = new ArrayList<Human>();
         createHumans(humanList);
+        hospitlSimulation();
         cruiseShip = new CruiseShip.Builder()
                 .setName("Symphony of the Seas")
                 .setEventBus(new EventBus())
                 .setHumanList(humanList)
+                .setHospital(hospital)
                 .build();
-
-
-        hospitlSimulation();
 
     }
 
@@ -113,9 +112,9 @@ public class Application {
         }
 
 
+        System.out.println("Create Humans");
         for( int i = 0; i < birthdate.length; i++){
             int mensch = i+1;
-            System.out.println("Erstellt Mensch Nr." + mensch);
             Human passenger = new Passenger.Builder()
                     .setFirstName(firstname.get(i))
                     .setLastName(lastname.get(i))

@@ -7,15 +7,15 @@ import java.util.List;
 
 public class Quarantine {
     private CruiseShip cruiseShip;
-    private List<Human> passengers = new ArrayList<>();
+    private Human human;
     public Quarantine(CruiseShip cruiseShip){
         this.cruiseShip = cruiseShip;
     }
     public void addPassenger(Human passenger) {
-        this.passengers.add(passenger);
+        this.human = human;
     }
 
-    public List<Human> getPassengers() {
-        return passengers;
+    public Human getHuman() {
+        return human;
     }
 }

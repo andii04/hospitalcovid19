@@ -1,6 +1,9 @@
 package cruise_ship;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
+import hospital.CommandCOVID19Emergency;
+import hospital.Hospital;
 import shared.Human;
 
 import java.io.BufferedReader;
@@ -17,12 +20,14 @@ public class CruiseShip {
     List<Human> humanList = new ArrayList<>();
     List<Cabin> cabinList = new ArrayList<>();
     private int count= 0;
+    private Hospital hospital;
 
 
-    public CruiseShip(String name, EventBus eventBus, List<Human> humanList) {
+    public CruiseShip(String name, EventBus eventBus, List<Human> humanList, Hospital hospital) {
         this.name = name;
         this.humanList = humanList;
         this.eventBus = eventBus;
+        this.hospital = hospital;
 
         createCruiseShip();
         boarding();
@@ -30,7 +35,7 @@ public class CruiseShip {
         eventBus();
         startSimulation();
         SkyDeck skyDeck = (SkyDeck) deck[8];
-        System.out.println(skyDeck.getMedicalService().getQuarantine().getPassengers().size());
+        System.out.println(skyDeck.getMedicalService().getQuarantine().getHuman());
 
 
 
@@ -39,6 +44,7 @@ public class CruiseShip {
     public void eventBus(){
         SkyDeck skyDeck = (SkyDeck) deck[8];
         eventBus.register(skyDeck.getMedicalService());
+        eventBus.register(this);
         //eventBus.post("Hello");
     }
 
@@ -98,7 +104,13 @@ public class CruiseShip {
         }
     }
 
-    public void notifyHospital(String message){
+    @Subscribe
+    public void notifyHospital(String event){
+        System.out.println("freq");
+        if(event=="QuarantineOccupied"){
+            CommandCOVID19Emergency commandCOVID19Emergency = new CommandCOVID19Emergency(hospital, this);
+            commandCOVID19Emergency.execute();
+        }
 
     }
 
@@ -364,9 +376,15 @@ public class CruiseShip {
         private String name;
         private EventBus eventBus;
         List<Human> humanList = new ArrayList<Human>();
+        private Hospital hospital;
 
         public Builder setName(String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder setHospital(Hospital hospital){
+            this.hospital = hospital;
             return this;
         }
 
@@ -380,7 +398,7 @@ public class CruiseShip {
         }
 
         public CruiseShip build() {
-            return new CruiseShip(name, eventBus, humanList);
+            return new CruiseShip(name, eventBus, humanList, hospital);
         }
     }
 }
