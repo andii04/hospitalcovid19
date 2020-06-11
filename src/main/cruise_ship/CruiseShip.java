@@ -16,6 +16,7 @@ public class CruiseShip {
     private Deck[] deck = new Deck[9];
     List<Human> humanList = new ArrayList<>();
     List<Cabin> cabinList = new ArrayList<>();
+    private int count= 0;
 
 
     public CruiseShip(String name, EventBus eventBus1, List<Human> humanList) {
@@ -93,7 +94,11 @@ public class CruiseShip {
     public void startSimulation(){
         System.out.println("Simulation in Cruise Ship starts");
         for(int day = 1; day <= 14; day++){
-            System.out.println("Tag "+ day + " startet");
+            System.out.println();
+            System.out.println("Day "+ day + " starts:");
+
+            //Restaurant
+            System.out.println("Phase I Restaurant starts:");
             int seats = 250;
             int restaurants = 5;
             int phasenInRestaurant = humanList.size() / (seats*restaurants) + 1;
@@ -147,14 +152,14 @@ public class CruiseShip {
                     if(selectetHumanForGroup.get(group).isInfectedCOVID19()){
                         //System.out.println("Infectet");
                         if (Math.random() * 100 < 30) {
-                            //System.out.println("Hustet");
+                            System.out.println("Infected Person Cought and infected a other Person");
                             selectetHumanForGroup.get(group+1).breathe(selectetHumanForGroup.get(group).dryCough());
                         }
                     }
                     if(selectetHumanForGroup.get(group+1).isInfectedCOVID19()){
                         //System.out.println("Infectet");
                         if (Math.random() * 100 < 90) {
-                            //System.out.println("Hustet");
+                            System.out.println("Infected Person Cought and infected a other Person");
                             selectetHumanForGroup.get(group).breathe(selectetHumanForGroup.get(group+1).dryCough());
                         }
                     }
@@ -163,14 +168,169 @@ public class CruiseShip {
                 //System.out.println(restaurantPerPhase[j].size());
                 //System.out.println(selectetHumanForGroup.size());
             }
+
+            //Phase 2
+            System.out.println();
+            System.out.println("Phase II FitnessArea / Cinema / ShoppingMall starts:");
+            List<Cabin> cabinsToAssign = new ArrayList<>();
+            cabinsToAssign.addAll(cabinList);
+
+            //FitnessArea
+
+
+            int numberOfFitnessAreas = 3;
+            ArrayList<Human>[] passengerInFitnessArea = new ArrayList[numberOfFitnessAreas];
+            for (int i = 0; i < numberOfFitnessAreas; i++) {
+                passengerInFitnessArea[i] = new ArrayList<Human>();
+            }
+            for(int j = 0; j<passengerInFitnessArea.length; j++){
+                int capacityFitnessArea = 150;
+                boolean fill = true;
+                while (fill == true){
+                    int randomCabin = rand.nextInt(cabinsToAssign.size());
+                    for (Human h: cabinsToAssign.get(randomCabin).getPassengers()) {
+                        capacityFitnessArea--;
+                        if(capacityFitnessArea <=1){
+                            fill = false;
+                        }
+                        passengerInFitnessArea[j].add(h);
+
+                    }
+                    cabinsToAssign.remove(randomCabin);
+                }
+                List<Human> passengerGroup = new ArrayList<>();
+                for (int i = 0; i<20; i++){
+                    int randPassenger = rand.nextInt(passengerInFitnessArea[j].size());
+                    passengerGroup.add(passengerInFitnessArea[j].get(randPassenger));
+                    passengerInFitnessArea[j].remove(randPassenger);
+                }
+                for(int group = 0; group < passengerGroup.size() ; group= group+4) {
+                    if(passengerGroup.get(group).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 50) {
+                            System.out.println("Infected Person Cought and infected four other Persons in FitnessArea");
+                            passengerGroup.get(group+1).breathe(passengerGroup.get(group).dryCough());
+                            passengerGroup.get(group+2).breathe(passengerGroup.get(group).dryCough());
+                            passengerGroup.get(group+3).breathe(passengerGroup.get(group).dryCough());
+                        }
+                    }
+                    if(passengerGroup.get(group+1).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 50) {
+                            System.out.println("Infected Person Cought and infected four other Persons in FitnessArea");
+                            passengerGroup.get(group).breathe(passengerGroup.get(group+1).dryCough());
+                            passengerGroup.get(group+2).breathe(passengerGroup.get(group+1).dryCough());
+                            passengerGroup.get(group+3).breathe(passengerGroup.get(group+1).dryCough());
+                        }
+                    }
+                    if(passengerGroup.get(group+2).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 50) {
+                            System.out.println("Infected Person Cought and infected four other Persons in FitnessArea");
+                            passengerGroup.get(group).breathe(passengerGroup.get(group+2).dryCough());
+                            passengerGroup.get(group+1).breathe(passengerGroup.get(group+2).dryCough());
+                            passengerGroup.get(group+3).breathe(passengerGroup.get(group+2).dryCough());
+                        }
+                    }
+                    if(passengerGroup.get(group+3).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 50) {
+                            System.out.println("Infected Person Cought and infected four other Persons in FitnessArea");
+                            passengerGroup.get(group).breathe(passengerGroup.get(group+3).dryCough());
+                            passengerGroup.get(group+1).breathe(passengerGroup.get(group+3).dryCough());
+                            passengerGroup.get(group+2).breathe(passengerGroup.get(group+3).dryCough());
+                        }
+                    }
+                }
+            }
+
+
+            //Cinema
+
+            int numberOfCinemas = 2;
+            ArrayList<Human>[] passengerInCinema = new ArrayList[numberOfCinemas];
+            for (int i = 0; i < numberOfCinemas; i++) {
+                passengerInCinema[i] = new ArrayList<Human>();
+            }
+            for(int j = 0; j<passengerInCinema.length; j++){
+                int capacityCinema = 225;
+                boolean fill = true;
+                while (fill == true){
+                    int randomCabin = rand.nextInt(cabinsToAssign.size());
+                    for (Human h: cabinsToAssign.get(randomCabin).getPassengers()) {
+                        capacityCinema--;
+                        if(capacityCinema <=1){
+                            fill = false;
+                        }
+                        passengerInCinema[j].add(h);
+
+                    }
+                    cabinsToAssign.remove(randomCabin);
+                }
+                for (int i = 0; i<passengerInCinema[j].size();i++) {
+                    if (passengerInCinema[j].get(i).isInfectedCOVID19()) {
+                        if (Math.random() * 100 < 50) {
+                            System.out.println("Infected Person Cought and infected two other Persons in Cinema");
+                            if (i != 0) {
+                                passengerInCinema[j].get(i - 1).breathe(passengerInCinema[j].get(i).dryCough());
+                            }
+                            if (i != passengerInCinema[j].size() - 1) {
+                                passengerInCinema[j].get(i + 1).breathe(passengerInCinema[j].get(i).dryCough());
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            //ShoppingMall
+
+            int numberOfShoppingMalls = 2;
+            ArrayList<Human>[] passengerInMall = new ArrayList[numberOfShoppingMalls];
+            for (int i = 0; i < numberOfShoppingMalls; i++) {
+                passengerInMall[i] = new ArrayList<Human>();
+            }
+            for(int j = 0; j<passengerInMall.length; j++){
+                int capacityMall = 1000;
+                boolean fill = true;
+                while (fill == true){
+                    int randomCabin = rand.nextInt(cabinsToAssign.size());
+                    for (Human h: cabinsToAssign.get(randomCabin).getPassengers()) {
+                        capacityMall--;
+                        if(capacityMall <=1){
+                            fill = false;
+                        }
+                        passengerInMall[j].add(h);
+
+                    }
+                    cabinsToAssign.remove(randomCabin);
+                }
+                for(int i = 0; i<250; i++){
+                    int randomPassager1 = rand.nextInt(passengerInMall[j].size());
+                    int randomPassager2 = rand.nextInt(passengerInMall[j].size());
+                    if(passengerInMall[j].get(randomPassager1).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 30) {
+                            System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
+                            passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager1).dryCough());
+                        }
+                    }
+                    if(passengerInMall[j].get(randomPassager2).isInfectedCOVID19()){
+                        if (Math.random() * 100 < 30) {
+                            System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
+                            passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager2).dryCough());
+                        }
+                    }
+                }
+
+            }
+
+            System.out.println();
             System.out.println("All infected Person on Day " + day);
             for (Human h:humanList) {
                 h.visitImmuneSysteme();
                 if(h.isInfectedCOVID19()){
                     System.out.println("Passenger: "+h.getLastName());
+                    count++;
                 }
             }
         }
+        System.out.println("Infizierte nach 14 Tagen: "+ count);
     }
 
     public static class Builder{
