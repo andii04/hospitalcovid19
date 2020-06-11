@@ -21,4 +21,8 @@ public class Station {
     public String getName() {
         return id;
     }
+
+    public ArrayList<Room> getRooms() {
+        return rooms;
+    }
 }

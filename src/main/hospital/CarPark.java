@@ -1,22 +1,29 @@
 package hospital;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class CarPark {
     private ArrayList<MedicalStaff> onCallStaffList = new ArrayList<>();
     private ArrayList<EmergencyVehicle> emergencyVehicles = new ArrayList<>();
 
+    KeyStore keyStore;
+
     public CarPark(int numberOfBSVehicles, int numberOfEmergencyVehicle, int numberOfMedicalStaff){
+        for(int i =0;i<numberOfMedicalStaff;i++){
+            onCallStaffList.add(new MedicalStaff("MedicalStaff-" + Character.getNumericValue(i)));
+        }
         for(int i = 0;i<numberOfBSVehicles;i++) {
-            BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle = new BioSafetyEmergencyVehicle(20000+i);
+            String signature = KeyStore.randomString(5);
+            keyStore.createKey(10000+i, signature);
+            BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle = new BioSafetyEmergencyVehicle(20000+i, signature);
             emergencyVehicles.add(bioSafetyEmergencyVehicle);
         }
         for(int i = 0;i<numberOfEmergencyVehicle;i++) {
-            EmergencyVehicle emergencyVehicle= new EmergencyVehicle(10000+i);
+            String signature = KeyStore.randomString(5);
+            keyStore.createKey(10000+i, signature);
+            EmergencyVehicle emergencyVehicle= new EmergencyVehicle(10000+i, signature);
             emergencyVehicles.add(emergencyVehicle);
-        }
-        for(int i =0;i<numberOfMedicalStaff;i++){
-            onCallStaffList.add(new MedicalStaff("MedicalStaff-" + Character.getNumericValue(i)));
         }
     }
     public void park(EmergencyVehicle emergencyVehicle){
@@ -28,8 +35,20 @@ public class CarPark {
         emergencyVehicles.add(emergencyVehicle);
 
     }
+    public ArrayList<MedicalStaff> getCrewforBSEmergencyVehicle(int number){
+        ArrayList<MedicalStaff> chosenPersons= new ArrayList<>();
+        Random r = new Random();
+        for(int i=0;i<number;i++){
+            MedicalStaff chosenPerson = onCallStaffList.get(r.nextInt(onCallStaffList.size()));
+            onCallStaffList.remove(chosenPerson);
+            chosenPerson.takeProtectionOn();
+            chosenPersons.add(chosenPerson);
+        }
+        return  chosenPersons;
+    }
     public void leave(EmergencyVehicle emergencyVehicle){
         emergencyVehicles.remove(emergencyVehicle);
+        emergencyVehicle.isFlashingLightOn();
     }
 
 

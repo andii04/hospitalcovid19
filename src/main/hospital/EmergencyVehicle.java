@@ -4,8 +4,17 @@ import java.util.ArrayList;
 
 public class EmergencyVehicle  implements IVistable{
     private String registeredKeySignature;
-    private boolean isClosed = true;
+    boolean isClosed = true;
     private long serialNumber;
+
+    public boolean isFlashingLightOn() {
+        return isFlashingLightOn;
+    }
+
+    public void setFlashingLightOn() {
+        isFlashingLightOn = true;
+    }
+
     private boolean isFlashingLightOn;
     private String location;
 
@@ -16,10 +25,11 @@ public class EmergencyVehicle  implements IVistable{
 
     private Stretcher stretcher;
 
-    public EmergencyVehicle(long serialNumber){
+    public EmergencyVehicle(long serialNumber, String signature){
         this.serialNumber = serialNumber;
         location = "CarPark";
         stretcher = new Stretcher();
+        registeredKeySignature = signature;
     }
 
     public MedicalStaff getMedicalStaffs(int id) {
@@ -70,5 +80,9 @@ public class EmergencyVehicle  implements IVistable{
     }
     public void accept(IVisitorRobot visitor){
         visitor.visit(this);
+    }
+
+    public void setFlashingLightOff() {
+        isFlashingLightOn =false;
     }
 }

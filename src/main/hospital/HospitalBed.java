@@ -15,4 +15,9 @@ public class HospitalBed {
     public String[] getRoomInfo(){
         return  roomInfo;
     }
+
+    public HospitalPatient getHuman() {
+        return humanInBed;
+    }
 }
+

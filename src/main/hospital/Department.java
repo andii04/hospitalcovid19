@@ -24,4 +24,8 @@ public class Department {
     public DepartmentsName getName() {
     return  name;
     }
+
+    public ArrayList<Station> getStations() {
+        return stations;
+    }
 }

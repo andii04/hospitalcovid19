@@ -21,6 +21,7 @@ public class BSEmergencyDepartment extends EmergencyDepartment{
         //@todo stretcher leeren
 
 
+
         vehicle.move("CarPark");
         //chose one of 3 persons
         chosenMedicalStaff = vehicle.getMedicalStaffs(r.nextInt(3));
@@ -33,9 +34,11 @@ public class BSEmergencyDepartment extends EmergencyDepartment{
             vehicle.getMedicalStaffs(i).disinfect();
         }
 
+        vehicle.setFlashingLightOff();
         carPark.park(vehicle);
 
         String[] roomInfo = bedForPassenger.getRoomInfo();
         Case newCase = new Case(Integer.parseInt(roomInfo[0]),roomInfo[1], roomInfo[2], Integer.parseInt(roomInfo[3]),new SimpleDateFormat().toString());
     }
+
 }

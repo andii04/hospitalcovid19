@@ -1,6 +1,9 @@
 package hospital;
 
 public class Room {
+    public HospitalBed[] getHospitalBeds(){
+        return hospitalBedSpace;
+    }
     private int id;
 
     public HospitalBed getHospitalBed(int i) {

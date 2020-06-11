@@ -7,8 +7,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Application {
 
@@ -31,6 +34,11 @@ public class Application {
     }
 
     private static void lambdaAnalysis() {
+        //what the hack
+        hospital.getFloor(1).getDepartments(0).getStations().stream()
+                .forEach(station -> station.getRooms().stream()
+                .forEach(room -> Arrays.stream(room.getHospitalBeds())
+                .forEach(hospitalBed -> hospitalBed.getHuman())));
     }
 
     public static boolean createHumans(List<Human> humanList){
@@ -125,7 +133,9 @@ public class Application {
         //0
         ArrayList<Department> departmentsFloor0 = new ArrayList<>();
         departmentsFloor0.add(new BSEmergencyDepartment());
-        departmentsFloor0.add(new EmergencyDepartment());
+        EmergencyDepartment emergencyDepartment = new EmergencyDepartment();
+        //hmm
+        departmentsFloor0.add(emergencyDepartment);
         floors.push(new Floor(0, departmentsFloor0));
 
         //1
