@@ -19,11 +19,12 @@ public class DisinfectionRobot implements IVisitorRobot {
     }
 
     private String[][][] cleanAir(String[][][] ambientAir) {
-        for (String[][] strings : ambientAir) {
-            for (String[] strings2 : strings) {
-                for (String string1 : strings2) {
-                    if (string1 == "v") {
-                        string1 = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
+        for (int i = 0; i < ambientAir.length; i++){
+            for (int a = 0; a < ambientAir[i].length; a++){
+                for (int b = 0; b < ambientAir[i][a].length; b++){ {
+                    if (ambientAir[i][a][b] == "v") {
+                        ambientAir[i][a][b] = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
+                    }
                     }
                 }
             }

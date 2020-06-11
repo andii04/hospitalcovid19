@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CarPark {
-    KeyStore keyStore;
+    private KeyStore keyStore;
     private ArrayList<MedicalStaff> onCallStaffList = new ArrayList<>();
     private ArrayList<EmergencyVehicle> emergencyVehicles = new ArrayList<>();
 

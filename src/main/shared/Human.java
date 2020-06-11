@@ -18,6 +18,11 @@ public class Human{
     private boolean hasFever;
     private boolean hasTaste;
     private boolean hasMouthProtection;
+
+    public void setClothing(Clothing clothing) {
+        this.clothing = clothing;
+    }
+
     private Clothing clothing;
     private Ticket ticket;
     private List<Lung> lungs = new ArrayList<>();

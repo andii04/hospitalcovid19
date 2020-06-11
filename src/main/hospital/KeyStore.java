@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class KeyStore {
-
+//Here are keys for the normal vehicles are safed. A employee of the hospital can get the key to a certain vehicle with the serial number
     private Map<Integer, Key> keys = new HashMap<>();
 
     static String randomString(int len) {

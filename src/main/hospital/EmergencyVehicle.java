@@ -1,6 +1,7 @@
 package hospital;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class EmergencyVehicle implements IVistable {
     boolean isClosed = true;
@@ -10,7 +11,9 @@ public class EmergencyVehicle implements IVistable {
     private String location;
     private Stretcher stretcher;
     private ArrayList<MedicalStaff> medicalStaffs;
+    private Random r = new Random();
     private String[][][] ambientAir = new String[50][50][50];
+    String[] cleanAIRPool = new String[]{"A", "I", "R"};
 
     public EmergencyVehicle(long serialNumber, String signature) {
         medicalStaffs = new ArrayList<>();
@@ -18,6 +21,20 @@ public class EmergencyVehicle implements IVistable {
         location = "CarPark";
         stretcher = new Stretcher();
         registeredKeySignature = signature;
+        initializeAmbientAir();
+    }
+
+    private void initializeAmbientAir() {
+        String[][][] ambientAir =getAmbientAir();
+        for (int i = 0; i < ambientAir.length; i++){
+            for (int a = 0; a < ambientAir[i].length; a++){
+                for (int b = 0; b < ambientAir[i][a].length; b++){ {
+                        ambientAir[i][a][b] = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
+                    }
+                }
+            }
+        }
+        setAmbientAir(ambientAir);
     }
 
     public long getSerialNumber() {

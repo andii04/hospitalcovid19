@@ -1,7 +1,9 @@
 package hospital;
 
+import shared.Clothing;
 import shared.Configuration;
 import shared.Human;
+import shared.ProtectiveSuit;
 
 import java.util.Random;
 
@@ -11,11 +13,17 @@ public class MedicalStaff extends Human {
     private String myPinforCard;
     private IDCard idCard;
 
+    private Clothing myNormalClothes;
+    private ProtectiveSuit myProtectiveSuit;
+
     public MedicalStaff(String id) {
         this.id = id;
         Random r = new Random();
         myPinforCard = Integer.toString(r.nextInt((99999 - 10000 + 1) + 10000));
         this.idCard = new IDCard(Configuration.AES, myPinforCard);
+        myNormalClothes = new Clothing();
+        myProtectiveSuit = new ProtectiveSuit();
+        setClothing(myNormalClothes);
     }
 
     public IDCard showIDCard() {
@@ -24,6 +32,12 @@ public class MedicalStaff extends Human {
 
     public void disinfect() {
         System.out.println("MedicalStaff: Medical Staff ID " + id + " disinfect");
+        takeProtectionOff();
+    }
+
+    private void takeProtectionOff(){
+        setClothing(myNormalClothes);
+        System.out.println("MedicalStaff: Medical Staff ID " + id + " protection off");
         hasProtection = false;
     }
 
@@ -38,6 +52,8 @@ public class MedicalStaff extends Human {
     }
 
     public void takeProtectionOn() {
+        setClothing(myProtectiveSuit);
+        System.out.println("MedicalStaff: Medical Staff ID " + id + " protection on");
         hasProtection = true;
     }
 
