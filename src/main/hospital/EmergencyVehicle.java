@@ -2,10 +2,26 @@ package hospital;
 
 import java.util.ArrayList;
 
-public class EmergencyVehicle  implements IVistable{
-    private String registeredKeySignature;
+public class EmergencyVehicle implements IVistable {
     boolean isClosed = true;
+    private String registeredKeySignature;
     private long serialNumber;
+    private boolean isFlashingLightOn;
+    private String location;
+    private Stretcher stretcher;
+    private ArrayList<MedicalStaff> medicalStaffs;
+    private String[][][] ambientAir = new String[50][50][50];
+
+    public EmergencyVehicle(long serialNumber, String signature) {
+        this.serialNumber = serialNumber;
+        location = "CarPark";
+        stretcher = new Stretcher();
+        registeredKeySignature = signature;
+    }
+
+    public long getSerialNumber() {
+        return serialNumber;
+    }
 
     public boolean isFlashingLightOn() {
         return isFlashingLightOn;
@@ -15,21 +31,8 @@ public class EmergencyVehicle  implements IVistable{
         isFlashingLightOn = true;
     }
 
-    private boolean isFlashingLightOn;
-    private String location;
-
     public Stretcher getStretcher() {
         return stretcher;
-    }
-
-
-    private Stretcher stretcher;
-
-    public EmergencyVehicle(long serialNumber, String signature){
-        this.serialNumber = serialNumber;
-        location = "CarPark";
-        stretcher = new Stretcher();
-        registeredKeySignature = signature;
     }
 
     public MedicalStaff getMedicalStaffs(int id) {
@@ -39,17 +42,18 @@ public class EmergencyVehicle  implements IVistable{
     public void addMedicalStaffs(MedicalStaff medicalStaff) {
         medicalStaffs.add(medicalStaff);
     }
-    public void removeMedicalStaffs(int id){
+
+    public void removeMedicalStaffs(int id) {
         medicalStaffs.remove(id);
     }
-    public int getNumberOfMedicalStaffs(){
+
+    public int getNumberOfMedicalStaffs() {
         return medicalStaffs.size();
     }
-    public ArrayList<MedicalStaff> getAllMedicalStaffs(){
+
+    public ArrayList<MedicalStaff> getAllMedicalStaffs() {
         return medicalStaffs;
     }
-
-    private ArrayList<MedicalStaff> medicalStaffs;
 
     public String[][][] getAmbientAir() {
         return ambientAir;
@@ -59,30 +63,30 @@ public class EmergencyVehicle  implements IVistable{
         this.ambientAir = ambientAir;
     }
 
-    private String[][][] ambientAir = new String[50][50][50];
-
-
-    public void open(String keySignature){
-        if(keySignature == registeredKeySignature){
+    public void open(String keySignature) {
+        if (keySignature == registeredKeySignature) {
             isClosed = false;
             System.out.println("Vehicle opened");
         }
     }
-    public void close(String keySignature){
-        if(keySignature == registeredKeySignature){
+
+    public void close(String keySignature) {
+        if (keySignature == registeredKeySignature) {
             isClosed = true;
             System.out.println("Vehicle closed");
         }
     }
-    public void move(String location){
+
+    public void move(String location) {
         this.location = location;
 
     }
-    public void accept(IVisitorRobot visitor){
+
+    public void accept(IVisitorRobot visitor) {
         visitor.visit(this);
     }
 
     public void setFlashingLightOff() {
-        isFlashingLightOn =false;
+        isFlashingLightOn = false;
     }
 }

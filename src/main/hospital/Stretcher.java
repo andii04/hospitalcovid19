@@ -2,14 +2,15 @@ package hospital;
 
 import shared.Human;
 
-public class Stretcher implements IStretcher{
+public class Stretcher implements IStretcher {
     private boolean isDown;
     private Human human;
 
-    public void position(Human human){
+    public void position(Human human) {
 
     }
-    public void transfer(HospitalBed hospitalBed){
+
+    public void transfer(HospitalBed hospitalBed) {
         hospitalBed.humanInBed = (HospitalPatient) human;
     }
 

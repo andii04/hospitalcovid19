@@ -3,26 +3,28 @@ package hospital;
 import java.util.ArrayList;
 
 public class Department {
+    ArrayList<Station> stations;
     private DepartmentsName name;
 
-    ArrayList<Station> stations;
     public Department(DepartmentsName name, ArrayList<Station> stations) {
         this.stations = stations;
         this.name = name;
     }
 
-    public Department(){
+    public Department() {
 
     }
-    public Station getStation(int i){
+
+    public Station getStation(int i) {
         return stations.get(i);
     }
-    public int getNumberOfStations(){
-        return  stations.size();
+
+    public int getNumberOfStations() {
+        return stations.size();
     }
 
     public DepartmentsName getName() {
-    return  name;
+        return name;
     }
 
     public ArrayList<Station> getStations() {

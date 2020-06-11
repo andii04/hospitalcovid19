@@ -3,18 +3,19 @@ package hospital;
 import java.util.ArrayList;
 
 public class Station {
+    ArrayList<Room> rooms = new ArrayList<>();
     private String id;
 
-    ArrayList<Room> rooms = new ArrayList<>();
     public Station(String id, ArrayList<Room> rooms) {
         this.id = id;
         this.rooms = rooms;
     }
 
-    public Room getRoom(int i ){
+    public Room getRoom(int i) {
         return rooms.get(i);
     }
-    public int getNumberOfRooms(){
+
+    public int getNumberOfRooms() {
         return rooms.size();
     }
 

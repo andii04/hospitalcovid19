@@ -7,34 +7,31 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class EmergencyDepartment extends Department {
-    private HospitalPatient currentHospitalPatient;
-    private LinkedList<HospitalBed> emptyHospitalBedList;
-
-
     //Mergency Department has Access to the carPark, and free rooms
     CarPark carPark;
     Hospital hospital;
+    private HospitalPatient currentHospitalPatient;
+    private LinkedList<HospitalBed> emptyHospitalBedList;
 
-    public void setCarPark(CarPark carPark){
+    public void setCarPark(CarPark carPark) {
         this.carPark = carPark;
     }
 
 
-
-    public void welcome (EmergencyVehicle vehicle){
-
-    }
-
-
-    private void register(HospitalPatient hospitalPatient){
+    public void welcome(EmergencyVehicle vehicle) {
 
     }
 
-    public void move(HospitalBed hospitalBed,Case thecase){
+
+    private void register(HospitalPatient hospitalPatient) {
 
     }
 
-    private Stretcher unload(EmergencyVehicle vehicle){
+    public void move(HospitalBed hospitalBed, Case thecase) {
+
+    }
+
+    private Stretcher unload(EmergencyVehicle vehicle) {
         return vehicle.getStretcher();
     }
 
@@ -46,7 +43,7 @@ public class EmergencyDepartment extends Department {
         Random r = new Random();
         MedicalStaff doorOpener = crew.get(r.nextInt(crew.size()));
         doorOpener.openBioSafetyVehicle(vehicle);
-        for(int i=0;i<3;i++){
+        for (int i = 0; i < 3; i++) {
             vehicle.addMedicalStaffs(crew.get(i));
         }
         carPark.leave(vehicle);

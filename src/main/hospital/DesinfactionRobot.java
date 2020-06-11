@@ -3,6 +3,9 @@ package hospital;
 import java.util.Random;
 
 public class DesinfactionRobot implements IVisitorRobot {
+    Random r = new Random();
+    String[] cleanAIRPool = new String[]{"A", "I", "R"};
+
     @Override
     public void visit(EmergencyVehicle emergencyVehicle) {
         System.out.println("Desinfcation with Chloroxid");
@@ -15,12 +18,11 @@ public class DesinfactionRobot implements IVisitorRobot {
         bioSafetyEmergencyVehicle.setAmbientAir(cleanAir(bioSafetyEmergencyVehicle.getAmbientAir()));
     }
 
-    Random r = new Random();
     private String[][][] cleanAir(String[][][] ambientAir) {
         for (String[][] strings : ambientAir) {
             for (String[] strings2 : strings) {
                 for (String string1 : strings2) {
-                    if (string1 =="v"){
+                    if (string1 == "v") {
                         string1 = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
                     }
                 }
@@ -28,7 +30,4 @@ public class DesinfactionRobot implements IVisitorRobot {
         }
         return ambientAir;
     }
-
-
-    String[] cleanAIRPool = new String[]{"A","I","R"};
 }

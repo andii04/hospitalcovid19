@@ -13,15 +13,18 @@ public class BioSafetyEmergencyVehicle extends EmergencyVehicle {
     }
 
     public void open(IDCard idCard, String pin) {
-        if (idCardReader.verify(idCard, pin)&&registeredIDCardList.contains(idCard)) {
+        if (idCardReader.verify(idCard, pin) && registeredIDCardList.contains(idCard)) {
             isClosed = false;
         }
 
     }
 
     public void close(IDCard idCard, String pin) {
-        if (idCardReader.verify(idCard, pin)&&registeredIDCardList.contains(idCard)) {
+        if (idCardReader.verify(idCard, pin) && registeredIDCardList.contains(idCard)) {
             isClosed = true;
         }
+    }
+    void registerIDCard(IDCard idCard){
+        registeredIDCardList.add(idCard);
     }
 }

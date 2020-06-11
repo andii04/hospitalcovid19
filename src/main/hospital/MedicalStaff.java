@@ -3,33 +3,42 @@ package hospital;
 import shared.Configuration;
 import shared.Human;
 
+import java.util.Random;
+
 public class MedicalStaff extends Human {
     private String id;
     private boolean hasProtection = false;
+    private String myPinforCard;
     private IDCard idCard;
 
-    public MedicalStaff(String id){
+    public MedicalStaff(String id) {
         this.id = id;
-        this.idCard = new IDCard(Configuration.AES);
+        Random r = new Random();
+        myPinforCard = Integer.toString(r.nextInt((99999 - 10000 + 1) + 10000));
+        this.idCard = new IDCard(Configuration.AES, myPinforCard);
     }
-    public void disinfect(){
-        System.out.println("Medical Staff ID "+ id +" desinfect");
+
+    public IDCard showIDCard() {
+        return idCard;
+    }
+
+    public void disinfect() {
+        System.out.println("Medical Staff ID " + id + " desinfect");
         hasProtection = false;
     }
 
-    public void disinfectVehicle(Object vehicle, RemoteControlRobot remoteControlRobot){
-        if(vehicle instanceof BioSafetyEmergencyVehicle){
+    public void disinfectVehicle(Object vehicle, RemoteControlRobot remoteControlRobot) {
+        if (vehicle instanceof BioSafetyEmergencyVehicle) {
             System.out.println("disinfect BioSafetyEmergencyVehicle now form MedicalStaff");
             remoteControlRobot.startRobotForBSEmergencyVehicle((BioSafetyEmergencyVehicle) vehicle);
-        }
-        else {
+        } else {
             System.out.println("disinfect SafetyEmergencyVehicle now form MedicalStaff");
             remoteControlRobot.startRobotForNormalEmergencyVehicle((EmergencyVehicle) vehicle);
         }
     }
 
-    public void takeProtectionOn(){
-        hasProtection= true;
+    public void takeProtectionOn() {
+        hasProtection = true;
     }
 
     public void goWithPassengerToBed(HospitalBed bedForPassenger, Stretcher stretcher) {
@@ -37,13 +46,14 @@ public class MedicalStaff extends Human {
     }
 
     public void openBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
-        vehicle.open(idCard,"pin");
+        vehicle.open(idCard, "pin");
         //@todo
     }
 
     public void closeBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
-        vehicle.close(idCard,"pin");
+        vehicle.close(idCard, "pin");
     }
+
     public void openEmergencyVehicle(Key key) {
         key.buttonOpenVehicle();
     }
