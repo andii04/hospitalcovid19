@@ -34,11 +34,14 @@ public class CarPark {
 
     public void park(EmergencyVehicle emergencyVehicle) {
         ArrayList<MedicalStaff> medicalStaffsVehicle = emergencyVehicle.getAllMedicalStaffs();
-        for (int i = 0; i < medicalStaffsVehicle.size(); i++) {
-            onCallStaffList.add(medicalStaffsVehicle.get(i));
-            emergencyVehicles.remove(i);
+        for (MedicalStaff medicalStaff:medicalStaffsVehicle) {
+            onCallStaffList.add(medicalStaff);
+        }
+        for(int i =medicalStaffsVehicle.size()-1;i>=0; i--){
+            emergencyVehicle.removeMedicalStaffs(i);
         }
         emergencyVehicles.add(emergencyVehicle);
+
 
     }
 
@@ -46,6 +49,7 @@ public class CarPark {
         ArrayList<MedicalStaff> chosenPersons = new ArrayList<>();
         Random r = new Random();
         for (int i = 0; i < number; i++) {
+            System.out.println("SIZE IS" + onCallStaffList.size());
             MedicalStaff chosenPerson = onCallStaffList.get(r.nextInt(onCallStaffList.size()));
             onCallStaffList.remove(chosenPerson);
             chosenPerson.takeProtectionOn();

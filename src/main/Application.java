@@ -25,13 +25,14 @@ public class Application {
 
         List<Human> humanList = new ArrayList<Human>();
         createHumans(humanList);
-        hospitlSimulation();
+        createHospital();
         cruiseShip = new CruiseShip.Builder()
                 .setName("Symphony of the Seas")
                 .setEventBus(new EventBus())
                 .setHumanList(humanList)
                 .setHospital(hospital)
                 .build();
+        System.out.println("Simulation finished");
 
     }
 
@@ -141,9 +142,6 @@ public class Application {
 
     public static void hospitlSimulation(){
         createHospital();
-        CommandCOVID19Emergency command = new CommandCOVID19Emergency(hospital, cruiseShip);
-        command.execute();
-        //((BSEmergencyDepartment)(hospital.getFloor(0).getDepartments(0))).welcome();
     }
 
     public static void createHospital(){

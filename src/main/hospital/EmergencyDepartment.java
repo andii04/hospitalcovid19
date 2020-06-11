@@ -29,6 +29,9 @@ public class EmergencyDepartment extends Department {
     public void setEmptyHospitalBedList(LinkedList<HospitalBed> emptyHospitalBedList) {
         this.emptyHospitalBedList = emptyHospitalBedList;
     }
+    public void addBed(HospitalBed hospitalBed){
+        emptyHospitalBedList.add(hospitalBed);
+    }
 
     public void setCarPark(CarPark carPark) {
         this.carPark = carPark;
@@ -58,15 +61,15 @@ public class EmergencyDepartment extends Department {
         newCase.printCase();
         //@todo datenschutz
         move(emptyHospitalBedList.get(emptyHospitalBedList.size() - 1), newCase);
+        addBed(hospital.getBedByStation(spaceInfo[1],spaceInfo[2]));
     }
 
     public void move(HospitalBed hospitalBed, Case thecase) {
-        System.out.println("EmergencyDepartment: Patient with ID " + currentHospitalPatient.getId() + " will now be moved to his room");
+        System.out.println("EmergencyDepartment: Patient with ID " + currentHospitalPatient.getId() + " will now be moved to his room now");
         hospital.getFloor(thecase.getFloorID()).getDepartments(0)
                 .getStation(Station.getStationNumberFromNameID(thecase.getStationID()))
-                .getRoom(thecase.getRoomID()).setHospitalBed(thecase.getBedIDinRoom(), hospitalBed);
+                .getRoom(thecase.getRoomID()-1).setHospitalBed(thecase.getBedIDinRoom()-1, hospitalBed);
         emptyHospitalBedList.remove(hospitalBed);
-        emptyHospitalBedList.add(hospital.getFreeBed());
     }
 
     private Stretcher unload(EmergencyVehicle vehicle) {
@@ -88,8 +91,8 @@ public class EmergencyDepartment extends Department {
         carPark.leave(vehicle);
         vehicle.move("CruiseShip");
 
+        cruiseShip.vehicleArrive(vehicle);
         //@todo just for testing
-        vehicle.getStretcher().position(new Human());
-        ((BSEmergencyDepartment) hospital.getFloor(0).getDepartments(0)).welcome(vehicle);
+        //((BSEmergencyDepartment) hospital.getFloor(0).getDepartments(0)).welcome(vehicle);
     }
 }

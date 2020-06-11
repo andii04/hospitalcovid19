@@ -24,11 +24,10 @@ public class BSEmergencyDepartment extends EmergencyDepartment {
 
         MedicalStaff chosenMedicalStaffforLock = vehicle.getMedicalStaffs(r.nextInt(3));
         chosenMedicalStaffforLock.closeBioSafetyVehicle(vehicle);
-        carPark.park(vehicle);
-
         for (int i = 0; i < 3; i++) {
             vehicle.getMedicalStaffs(i).disinfect();
         }
+        carPark.park(vehicle);
     }
 
 }

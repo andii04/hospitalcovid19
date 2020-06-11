@@ -53,6 +53,14 @@ public class EmergencyVehicle implements IVistable {
     public Stretcher getStretcher() {
         return stretcher;
     }
+    public Stretcher getStretcherOut() {
+        Stretcher stretcherOut = stretcher;
+        this.stretcher = null;
+        return stretcherOut;
+    }
+    public void getStretcherIn(Stretcher stretcher) {
+        this.stretcher =stretcher;
+    }
 
     public MedicalStaff getMedicalStaffs(int id) {
         return medicalStaffs.get(id);

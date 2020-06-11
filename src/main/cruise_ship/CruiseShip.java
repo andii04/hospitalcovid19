@@ -2,8 +2,7 @@ package cruise_ship;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
-import hospital.CommandCOVID19Emergency;
-import hospital.Hospital;
+import hospital.*;
 import shared.Human;
 
 import java.io.BufferedReader;
@@ -106,7 +105,7 @@ public class CruiseShip {
 
     @Subscribe
     public void notifyHospital(String event){
-        System.out.println("freq");
+        System.out.println("CruiseShip: Calling Hospital");
         if(event=="QuarantineOccupied"){
             CommandCOVID19Emergency commandCOVID19Emergency = new CommandCOVID19Emergency(hospital, this);
             commandCOVID19Emergency.execute();
@@ -369,6 +368,25 @@ public class CruiseShip {
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    public void vehicleArrive(BioSafetyEmergencyVehicle vehicle) {
+        Random r = new Random();
+        int randomInt =  r.nextInt(vehicle.getNumberOfMedicalStaffs());
+        MedicalStaff chosenPersonFromVehicle =vehicle.getMedicalStaffs(randomInt);
+        Stretcher stretcher = vehicle.getStretcherOut();
+        chosenPersonFromVehicle.operateStretcherDown(stretcher);
+        //dein medical muss den holen und an meinen hier drunter übergeben
+        Human quarantineHuman = ((SkyDeck) deck[8]).getMedicalService().getQuarantine().getHuman();
+        chosenPersonFromVehicle.helpPassengerOnStretcher(stretcher, quarantineHuman);
+        ((SkyDeck) deck[8]).getMedicalService().getQuarantine().addPassenger(null);
+        chosenPersonFromVehicle.operateStretcherUp(stretcher);
+        vehicle.getStretcherIn(stretcher);
+
+
+        // @todo fährt zurck zum Chain f responsibility entrance
+        vehicle.move("Hospital");
+        ((BSEmergencyDepartment)hospital.getFloor(0).getDepartments(0)).welcome(vehicle);
     }
 
     public static class Builder{

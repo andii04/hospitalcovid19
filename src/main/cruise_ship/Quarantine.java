@@ -12,7 +12,7 @@ public class Quarantine {
         this.cruiseShip = cruiseShip;
     }
     public void addPassenger(Human passenger) {
-        this.human = human;
+        this.human = passenger;
     }
 
     public Human getHuman() {

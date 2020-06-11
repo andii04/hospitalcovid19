@@ -79,4 +79,19 @@ public class MedicalStaff extends Human {
         System.out.println("MedicalStaff: helps Passenger from stretcher in bed");
         stretcher.transfer(hospitalBed);
     }
+
+    public Stretcher getStretcherOutOfVehicle(BioSafetyEmergencyVehicle vehicle) {
+        return vehicle.getStretcher();
+    }
+
+    public void operateStretcherDown(Stretcher stretcher) {
+        stretcher.down();
+    }
+    public void operateStretcherUp(Stretcher stretcher) {
+        stretcher.up();
+    }
+
+    public void helpPassengerOnStretcher(Stretcher stretcher, Human quarantineHuman) {
+        stretcher.position(quarantineHuman);
+    }
 }
