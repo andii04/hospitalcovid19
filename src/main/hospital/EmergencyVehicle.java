@@ -13,6 +13,7 @@ public class EmergencyVehicle implements IVistable {
     private String[][][] ambientAir = new String[50][50][50];
 
     public EmergencyVehicle(long serialNumber, String signature) {
+        medicalStaffs = new ArrayList<>();
         this.serialNumber = serialNumber;
         location = "CarPark";
         stretcher = new Stretcher();
@@ -28,6 +29,7 @@ public class EmergencyVehicle implements IVistable {
     }
 
     public void setFlashingLightOn() {
+        System.out.println("Vehicle: Flashlight on");
         isFlashingLightOn = true;
     }
 
@@ -66,18 +68,19 @@ public class EmergencyVehicle implements IVistable {
     public void open(String keySignature) {
         if (keySignature == registeredKeySignature) {
             isClosed = false;
-            System.out.println("Vehicle opened");
+            System.out.println("Vehicle: Vehicle opened");
         }
     }
 
     public void close(String keySignature) {
         if (keySignature == registeredKeySignature) {
             isClosed = true;
-            System.out.println("Vehicle closed");
+            System.out.println("Vehicle: Vehicle closed");
         }
     }
 
     public void move(String location) {
+        System.out.println("Vehicle: Vehicle moving to " + location);
         this.location = location;
 
     }
@@ -87,6 +90,7 @@ public class EmergencyVehicle implements IVistable {
     }
 
     public void setFlashingLightOff() {
+        System.out.println("Vehicle: Flashlight off");
         isFlashingLightOn = false;
     }
 }

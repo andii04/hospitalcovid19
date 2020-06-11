@@ -2,7 +2,7 @@ package hospital;
 
 import java.util.ArrayList;
 
-public class BioSafetyEmergencyVehicle extends EmergencyVehicle {
+public class BioSafetyEmergencyVehicle extends EmergencyVehicle implements IVistable {
     private ArrayList<IDCard> registeredIDCardList = new ArrayList<>();
 
     private IDCardReader idCardReader;

@@ -7,11 +7,12 @@ public class Stretcher implements IStretcher {
     private Human human;
 
     public void position(Human human) {
-
+        this.human = human;
     }
 
     public void transfer(HospitalBed hospitalBed) {
-        hospitalBed.humanInBed = (HospitalPatient) human;
+        hospitalBed.setPatient( human );
+        human = null;
     }
 
     @Override

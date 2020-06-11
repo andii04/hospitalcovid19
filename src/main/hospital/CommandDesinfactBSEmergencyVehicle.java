@@ -2,10 +2,10 @@ package hospital;
 
 public class CommandDesinfactBSEmergencyVehicle implements ICommand {
 
-    DesinfactionRobot robot;
+    DisinfectionRobot robot;
     BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle;
 
-    public CommandDesinfactBSEmergencyVehicle(DesinfactionRobot robot, BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle) {
+    public CommandDesinfactBSEmergencyVehicle(DisinfectionRobot robot, BioSafetyEmergencyVehicle bioSafetyEmergencyVehicle) {
         this.robot = robot;
         this.bioSafetyEmergencyVehicle = bioSafetyEmergencyVehicle;
     }

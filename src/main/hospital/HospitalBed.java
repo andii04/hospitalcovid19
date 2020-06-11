@@ -1,24 +1,20 @@
 package hospital;
 
 
+import shared.Human;
+
 public class HospitalBed {
-    HospitalPatient humanInBed;
-    String[] roomInfo;
+    Human human;
 
     public boolean isEmpty() {
-        return humanInBed == null;
+        return human == null;
     }
 
-    public void setInfo(String[] roomInfo) {
-        this.roomInfo = roomInfo;
+    public Human getHuman() {
+        return human;
     }
-
-    public String[] getRoomInfo() {
-        return roomInfo;
-    }
-
-    public HospitalPatient getHuman() {
-        return humanInBed;
+    public void setPatient(Human human){
+        human = human;
     }
 }
 

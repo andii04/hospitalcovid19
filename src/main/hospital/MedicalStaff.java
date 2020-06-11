@@ -23,16 +23,16 @@ public class MedicalStaff extends Human {
     }
 
     public void disinfect() {
-        System.out.println("Medical Staff ID " + id + " desinfect");
+        System.out.println("MedicalStaff: Medical Staff ID " + id + " desinfect");
         hasProtection = false;
     }
 
     public void disinfectVehicle(Object vehicle, RemoteControlRobot remoteControlRobot) {
         if (vehicle instanceof BioSafetyEmergencyVehicle) {
-            System.out.println("disinfect BioSafetyEmergencyVehicle now form MedicalStaff");
+            System.out.println("MedicalStaff: disinfect BioSafetyEmergencyVehicle now form MedicalStaff");
             remoteControlRobot.startRobotForBSEmergencyVehicle((BioSafetyEmergencyVehicle) vehicle);
         } else {
-            System.out.println("disinfect SafetyEmergencyVehicle now form MedicalStaff");
+            System.out.println("MedicalStaff: disinfect SafetyEmergencyVehicle now form MedicalStaff");
             remoteControlRobot.startRobotForNormalEmergencyVehicle((EmergencyVehicle) vehicle);
         }
     }
@@ -41,9 +41,6 @@ public class MedicalStaff extends Human {
         hasProtection = true;
     }
 
-    public void goWithPassengerToBed(HospitalBed bedForPassenger, Stretcher stretcher) {
-        stretcher.transfer(bedForPassenger);
-    }
 
     public void openBioSafetyVehicle(BioSafetyEmergencyVehicle vehicle) {
         vehicle.open(idCard, "pin");
@@ -60,5 +57,11 @@ public class MedicalStaff extends Human {
 
     public void closeEmergencyVehicle(BioSafetyEmergencyVehicle vehicle, Key key) {
         key.buttonCloseVehicle();
+    }
+
+
+    public void goWithPassengerToBed(Stretcher stretcher, HospitalBed hospitalBed) {
+        System.out.println("MedicalStaff: helps Passenger from stretcher in bed");
+        stretcher.transfer(hospitalBed);
     }
 }

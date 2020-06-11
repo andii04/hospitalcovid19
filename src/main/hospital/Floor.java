@@ -14,4 +14,43 @@ public class Floor {
     public Department getDepartments(int departmentOnFloor) {
         return departments.get(departmentOnFloor);
     }
+
+    public static int getFloorofDepartment(DepartmentsName departmentsName){
+        switch (departmentsName){
+            case Emergency_Department:
+                return 0;
+            case Critical_Care:
+                return 1;
+            case Pulmonology:
+                return 2;
+            case Radiology:
+                return 3;
+            case Cardiology:
+                return 4;
+            case General_Surgery:
+                return 5;
+            case Oncology:
+                return 6;
+        }
+        return 0;
+    }
+    public static DepartmentsName getNameDepartmentFloor(int floorID){
+        switch (floorID){
+            case 0:
+                return DepartmentsName.Emergency_Department;
+            case 1:
+                return DepartmentsName.Critical_Care;
+            case 2:
+                return DepartmentsName.Pulmonology;
+            case 3:
+                return DepartmentsName.Radiology;
+            case 4:
+                return DepartmentsName.Cardiology;
+            case 5:
+                return DepartmentsName.General_Surgery;
+            case 6:
+                return DepartmentsName.Oncology;
+        }
+        return null;
+    }
 }

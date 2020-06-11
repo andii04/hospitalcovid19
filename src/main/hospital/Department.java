@@ -30,4 +30,5 @@ public class Department {
     public ArrayList<Station> getStations() {
         return stations;
     }
+
 }

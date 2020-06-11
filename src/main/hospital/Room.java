@@ -7,7 +7,7 @@ public class Room {
     public Room(int id, int anzahlPlaetze, int anzahlBetten) {
         this.id = id;
         hospitalBedSpace = new HospitalBed[anzahlPlaetze];
-        for (int i = 0; i <= anzahlBetten; i++) {
+        for (int i = 0; i < anzahlBetten; i++) {
             hospitalBedSpace[i] = new HospitalBed();
         }
     }
@@ -26,5 +26,9 @@ public class Room {
 
     public Integer getRoomID() {
         return id;
+    }
+
+    public void setHospitalBed(int i, HospitalBed hospitalBed){
+        hospitalBedSpace[i] = hospitalBed;
     }
 }

@@ -9,8 +9,10 @@ public class CarPark {
     private ArrayList<EmergencyVehicle> emergencyVehicles = new ArrayList<>();
 
     public CarPark(int numberOfBSVehicles, int numberOfEmergencyVehicle, int numberOfMedicalStaff) {
+        keyStore = new KeyStore();
+
         for (int i = 0; i < numberOfMedicalStaff; i++) {
-            onCallStaffList.add(new MedicalStaff("MedicalStaff-" + Character.getNumericValue(i)));
+            onCallStaffList.add(new MedicalStaff("MedicalStaff-" + i));
         }
         for (int i = 0; i < numberOfBSVehicles; i++) {
             String signature = KeyStore.randomString(5);

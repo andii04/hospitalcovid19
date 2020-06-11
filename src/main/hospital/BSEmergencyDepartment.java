@@ -1,6 +1,5 @@
 package hospital;
 
-import java.text.SimpleDateFormat;
 import java.util.Random;
 
 public class BSEmergencyDepartment extends EmergencyDepartment {
@@ -8,35 +7,28 @@ public class BSEmergencyDepartment extends EmergencyDepartment {
     RemoteControlRobot remoteControlRobot;
 
     public BSEmergencyDepartment() {
-        remoteControlRobot = new RemoteControlRobot(new DesinfactionRobot());
+        remoteControlRobot = new RemoteControlRobot(new DisinfectionRobot());
+
     }
 
     public void welcome(BioSafetyEmergencyVehicle vehicle) {
+        System.out.println("BSEmergencyDepartment: BioSafetyEmergencyVehicle arrived");
         Random r = new Random();
+        super.welcome(vehicle);
 
-        MedicalStaff chosenMedicalStaff = vehicle.getMedicalStaffs(r.nextInt(3));
-        HospitalBed bedForPassenger = hospital.getFreePlace();
-        chosenMedicalStaff.goWithPassengerToBed(bedForPassenger, vehicle.getStretcher());
-        //@todo stretcher leeren
-
-
+        vehicle.setFlashingLightOff();
         vehicle.move("CarPark");
         //chose one of 3 persons
-        chosenMedicalStaff = vehicle.getMedicalStaffs(r.nextInt(3));
-        chosenMedicalStaff.disinfectVehicle(vehicle, remoteControlRobot);
+        MedicalStaff chosenMedicalStaffForRobot = vehicle.getMedicalStaffs(r.nextInt(3));
+        chosenMedicalStaffForRobot.disinfectVehicle(vehicle, remoteControlRobot);
 
-        chosenMedicalStaff = vehicle.getMedicalStaffs(r.nextInt(3));
-        //@todo abschließen
+        MedicalStaff chosenMedicalStaffforLock = vehicle.getMedicalStaffs(r.nextInt(3));
+        chosenMedicalStaffforLock.closeBioSafetyVehicle(vehicle);
+        carPark.park(vehicle);
 
         for (int i = 0; i < 3; i++) {
             vehicle.getMedicalStaffs(i).disinfect();
         }
-
-        vehicle.setFlashingLightOff();
-        carPark.park(vehicle);
-
-        String[] roomInfo = bedForPassenger.getRoomInfo();
-        Case newCase = new Case(Integer.parseInt(roomInfo[0]), roomInfo[1], roomInfo[2], Integer.parseInt(roomInfo[3]), new SimpleDateFormat().toString());
     }
 
 }
