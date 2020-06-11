@@ -49,6 +49,9 @@ public class Human{
 
     public void visitImmuneSysteme(){
         visit.active(this);
+        if(visit.check(this)){
+            isInfectedCOVID19 = true;
+        }
     }
 
 

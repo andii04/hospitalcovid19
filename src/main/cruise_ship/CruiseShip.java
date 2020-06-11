@@ -92,8 +92,8 @@ public class CruiseShip {
 
     public void startSimulation(){
         System.out.println("Simulation in Cruise Ship starts");
-        for(int day = 0; day < 1; day++){
-            //System.out.println("Tag "+ day+1 + " startet");
+        for(int day = 1; day <= 14; day++){
+            System.out.println("Tag "+ day + " startet");
             int seats = 250;
             int restaurants = 5;
             int phasenInRestaurant = humanList.size() / (seats*restaurants) + 1;
@@ -145,16 +145,16 @@ public class CruiseShip {
 
                 for(int group = 0; group < selectetHumanForGroup.size() ; group= group+2){
                     if(selectetHumanForGroup.get(group).isInfectedCOVID19()){
-                        System.out.println("Infectet");
+                        //System.out.println("Infectet");
                         if (Math.random() * 100 < 30) {
-                            System.out.println("Hustet");
+                            //System.out.println("Hustet");
                             selectetHumanForGroup.get(group+1).breathe(selectetHumanForGroup.get(group).dryCough());
                         }
                     }
                     if(selectetHumanForGroup.get(group+1).isInfectedCOVID19()){
-                        System.out.println("Infectet");
+                        //System.out.println("Infectet");
                         if (Math.random() * 100 < 90) {
-                            System.out.println("Hustet");
+                            //System.out.println("Hustet");
                             selectetHumanForGroup.get(group).breathe(selectetHumanForGroup.get(group+1).dryCough());
                         }
                     }
@@ -163,9 +163,12 @@ public class CruiseShip {
                 //System.out.println(restaurantPerPhase[j].size());
                 //System.out.println(selectetHumanForGroup.size());
             }
-
+            System.out.println("All infected Person on Day " + day);
             for (Human h:humanList) {
                 h.visitImmuneSysteme();
+                if(h.isInfectedCOVID19()){
+                    System.out.println("Passenger: "+h.getLastName());
+                }
             }
         }
     }

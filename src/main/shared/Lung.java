@@ -8,7 +8,7 @@ import java.util.List;
 public class Lung {
     int nochmalneumachen = 500;
     private Cell[][][] structure = new Cell[10][10][2];
-    private List<TCell> tCells = new ArrayList<>();
+
     private char[] liquidParticle = new char[nochmalneumachen];
 
     public Lung(){
@@ -22,16 +22,11 @@ public class Lung {
         }
     }
 
-    public List<TCell> gettCells() {
-        return tCells;
-    }
 
     public void createInfectedCell(char virus, int i, int x, int y){
-
-        structure[i][x][y].getStructure()[1][1][1] = virus;         // in the middle
         structure[i][x][y] = null;
         structure[i][x][y] = new InfectedCell();
-        tCells.add(new TCell());
+        structure[i][x][y].getStructure()[1][1][1] = virus;         // in the middle
 
     }
 

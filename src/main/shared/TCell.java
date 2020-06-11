@@ -17,7 +17,7 @@ public class TCell extends Cell {
         try {
             Date date = new SimpleDateFormat("dd.MM.yyyy").parse(human.getBirthDate());
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            age = Period.between(localDate, LocalDate.now()).getDays();
+            age = Period.between(localDate, LocalDate.now()).getYears();
         }
         catch (Exception e){
             System.out.println("Cannot Convert Date");
@@ -36,8 +36,8 @@ public class TCell extends Cell {
         }
 
         destroyPercent = 90 - year - smoke - asthma - hiv;
+        //System.out.println(destroyPercent+" "+ LocalDate.now()+ " "+  age);
         if (Math.random() * 100 < destroyPercent) {
-            System.out.println("Zelle zerstöret");
             return true;
         }
         return false;
