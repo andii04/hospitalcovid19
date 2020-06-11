@@ -58,7 +58,6 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
             }
         }
         hasInfection(human);
-
     }
 
     public void accept(Visitor visitor) {
