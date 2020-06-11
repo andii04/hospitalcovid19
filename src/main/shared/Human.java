@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Human {
+public class Human{
     private String firstName;
     private String lastName;
     private String birthDate;
@@ -22,6 +22,7 @@ public class Human {
     private Ticket ticket;
     private List<Lung> lungs = new ArrayList<>();
     private ImmuneSystem immuneSystem;
+    Visitor visit = new Visitor();
 
     public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
         this.firstName = firstName;
@@ -41,10 +42,19 @@ public class Human {
         ticket = new Ticket();
         lungs.add(new Lung());
         lungs.add(new Lung());
-        immuneSystem = new ImmuneSystem(this);
+        immuneSystem = new ImmuneSystem();
+        immuneSystem.accept(visit);
 
     }
 
+    public void visitImmuneSysteme(){
+        visit.active(this);
+    }
+
+
+    public ImmuneSystem getImmuneSystem() {
+        return immuneSystem;
+    }
 
     public List<Lung> getLungs() {
         return lungs;
@@ -70,7 +80,7 @@ public class Human {
         char[] airParticle = air.toCharArray();
 
         for (char p : airParticle) {
-            lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(25),random.nextInt(10),random.nextInt(2));
+            lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(10),random.nextInt(10),random.nextInt(2));
         }
     }
 

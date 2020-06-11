@@ -153,7 +153,7 @@ public class CruiseShip {
                     }
                     if(selectetHumanForGroup.get(group+1).isInfectedCOVID19()){
                         System.out.println("Infectet");
-                        if (Math.random() * 100 < 30) {
+                        if (Math.random() * 100 < 90) {
                             System.out.println("Hustet");
                             selectetHumanForGroup.get(group).breathe(selectetHumanForGroup.get(group+1).dryCough());
                         }
@@ -162,6 +162,10 @@ public class CruiseShip {
 
                 //System.out.println(restaurantPerPhase[j].size());
                 //System.out.println(selectetHumanForGroup.size());
+            }
+
+            for (Human h:humanList) {
+                h.visitImmuneSysteme();
             }
         }
     }

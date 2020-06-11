@@ -35,6 +35,7 @@ public class Application {
 
     private static void lambdaAnalysis() {
         //what the hack
+        /*
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .forEach(station -> station.getRooms().stream()
                 .forEach(room -> Arrays.stream(room.getHospitalBeds())
@@ -43,7 +44,7 @@ public class Application {
                 .forEach(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())
                                 .filter(hospitalBed -> hospitalBed.isEmpty()==false).count()));
-        /*
+
         hospital.getFloor(1).getDepartments(0).getStations().stream()
                 .map(station -> station.getRooms().stream()
                         .forEach(room -> Arrays.stream(room.getHospitalBeds())
@@ -108,7 +109,10 @@ public class Application {
             e.printStackTrace();
         }
 
+
         for( int i = 0; i < birthdate.length; i++){
+            int mensch = i+1;
+            System.out.println("Erstellt Mensch Nr." + mensch);
             Human passenger = new Passenger.Builder()
                     .setFirstName(firstname.get(i))
                     .setLastName(lastname.get(i))

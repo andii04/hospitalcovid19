@@ -21,6 +21,10 @@ public class Cell {
         }
     }
 
+    public char[][][] getStructure() {
+        return structure;
+    }
+
     public Cell() {
         charpool[0] = 'd';
         charpool[1] = 'n';
