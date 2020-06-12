@@ -37,7 +37,7 @@ public class Hospital {
         return floors.get(floorID);
     }
 
-    //get a bed form (1) the first department(floor=1) or (2) the second department(floor=2)
+    //get a RANDOM bed form (1) the first department(floor=1) or (2) the second department(floor=2)
     public HospitalBed getFreeBed() {
         Random r = new Random();
         ArrayList<HospitalBed> availableBeds;
@@ -79,7 +79,7 @@ public class Hospital {
         return null;
     }
 
-    //get a bed in the station where the last bed was moved
+    //get a RANDOM bed in the station where the last bed was moved
     public HospitalBed getBedByStation(String name, String station) {
         //same code as method above
         int floorID = 1;
@@ -123,7 +123,7 @@ public class Hospital {
         return getFreeBed();
     }
 
-    //get a free space where bed can be placed
+    //get a RANDOM free space where bed can be placed
     public String[] getFreeSpace() {
         Random r = new Random();
         ArrayList<String[]> freeSpace;
@@ -153,7 +153,7 @@ public class Hospital {
                 String[] freeSpaceInfo = freeSpace.get(randomNumber);
                 System.out.println("Hospital: Found free space where bed will be moved in Department " + freeSpaceInfo[1] +
                         " / Station " + freeSpaceInfo[2] +
-                        " / Room " + freeSpaceInfo[4] +
+                        " / Room " + freeSpaceInfo[3] +
                         " /Bed " + freeSpaceInfo[4]);
                 return freeSpaceInfo;
             }
