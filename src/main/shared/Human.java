@@ -58,7 +58,7 @@ public class Human {
         if (isInfectedCOVID19) {
             incubationPeriod++;
         }
-        if (incubationPeriod > 6) {
+        if (incubationPeriod >= 6) {
             hasFever = true;
             hasTaste = false;
         }

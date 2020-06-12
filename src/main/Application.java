@@ -18,18 +18,26 @@ public class Application {
     static Hospital hospital;
 
 
+    //Main starts
     public static void main(String... args) {
-
-
+        //Declare a List for all Humans
         List<Human> humanList = new ArrayList<Human>();
+
+        //Function to fill the List
         createHumans(humanList);
+
+        //Function to create and declare the Hospital
         createHospital();
+
+        //Create the Cruise Ship with Name "Symphony of the Seas"
         cruiseShip = new CruiseShip.Builder()
                 .setName("Symphony of the Seas")
                 .setEventBus(new EventBus())
                 .setHumanList(humanList)
                 .setHospital(hospital)
                 .build();
+        cruiseShip.createCruiseShip();
+
         System.out.println("Simulation finished");
 
     }
@@ -71,6 +79,8 @@ public class Application {
 
         String line = "";
 
+        //Read all the .csv and .txt Files and set the value to local Variables
+
         try {
             in = new BufferedReader(new FileReader("data/name.txt"));
             String zeile = null;
@@ -110,7 +120,7 @@ public class Application {
             e.printStackTrace();
         }
 
-
+        //Fill the local Variables of one Human to class Human
         System.out.println("Create Humans");
         for (int i = 0; i < birthdate.length; i++) {
             int mensch = i + 1;
@@ -128,6 +138,8 @@ public class Application {
                     .setHasMouthProtection(false)
                     .setClothing(null)
                     .build();
+
+            //Put the Human in the List
             humanList.add(passenger);
         }
 

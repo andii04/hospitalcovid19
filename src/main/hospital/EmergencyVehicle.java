@@ -95,6 +95,25 @@ public class EmergencyVehicle implements IVistable {
         this.ambientAir = ambientAir;
     }
 
+    public void changeAmbientAir(String air){
+        Random random = new Random();
+        char[] airParticle = air.toCharArray();
+
+        for (char p : airParticle) {
+            boolean free = false;
+            while (free == false){
+                int rand1= random.nextInt(ambientAir.length);
+                int rand2= random.nextInt(ambientAir[0].length);
+                int rand3 = random.nextInt(ambientAir[0][0].length);
+                if(ambientAir[rand1][rand2][rand3]!="v"){
+                    ambientAir[rand1][rand2][rand3] = String.valueOf(p);
+                    free =true;
+                }
+            }
+
+        }
+    }
+
     //open only with valid signature
     public void open(String keySignature) {
         if (keySignature == registeredKeySignature) {
