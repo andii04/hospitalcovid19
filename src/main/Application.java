@@ -1,6 +1,5 @@
 import com.google.common.eventbus.EventBus;
-import cruise_ship.CruiseShip;
-import cruise_ship.Passenger;
+import cruise_ship.*;
 import hospital.*;
 import shared.Human;
 import shared.Nationality;
@@ -8,9 +7,10 @@ import shared.Nationality;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Application {
 
@@ -39,10 +39,81 @@ public class Application {
         cruiseShip.createCruiseShip();
 
         System.out.println("Simulation finished");
+        lambdaAnalysis();
 
     }
 
     private static void lambdaAnalysis() {
+        System.out.println();
+        System.out.println("Analysis:");
+        AtomicInteger passengerOnBoard = new AtomicInteger();
+        AtomicInteger infectedPassenger = new AtomicInteger();
+        AtomicInteger smoker = new AtomicInteger();
+        AtomicInteger preIllness = new AtomicInteger();
+
+        cruiseShip.getHumanList().forEach(human -> {
+            passengerOnBoard.getAndIncrement();
+            if(human.isInfectedCOVID19()){
+                infectedPassenger.getAndIncrement();
+                if(human.isSmoking()){
+                    smoker.getAndIncrement();
+                }
+                if(human.isHasHIV() || human.isHasAsthma()){
+                    preIllness.getAndIncrement();
+                }
+            }
+        });
+
+
+
+        AtomicInteger passengerOnBoardNow = new AtomicInteger();
+        AtomicInteger infectedPassengerOnBoard = new AtomicInteger();
+        List<DeckID> decks = new ArrayList<>();
+        List<Nationality> nationality = new ArrayList<>();
+        List<CabinLocation> bookingLocation = new ArrayList<>();
+        cruiseShip.getCabinList().forEach(cabin -> {
+            cabin.getPassengers().forEach(human -> {
+                passengerOnBoardNow.getAndIncrement();
+                if(human.isInfectedCOVID19()){
+                    infectedPassengerOnBoard.getAndIncrement();
+                    decks.add(cabin.getDeckid());
+                    nationality.add(human.getNationality());
+                    bookingLocation.add(cabin.getLocation());
+                }
+            });
+        });
+        Map<DeckID, Long> resultAfterDeck =
+                decks.stream().collect(
+                        Collectors.groupingBy(
+                                Function.identity(), Collectors.counting()
+                        )
+                );
+        Map<Nationality, Long> resultAfterNationality =
+                nationality.stream().collect(
+                        Collectors.groupingBy(
+                                Function.identity(), Collectors.counting()
+                        )
+                );
+        Map<DeckID, Long> finalMapAfterDeck = new LinkedHashMap<>();
+        //Sort a map and add to finalMap
+        resultAfterDeck.entrySet().stream()
+                .sorted(Map.Entry.<DeckID, Long>comparingByValue()
+                        .reversed()).forEachOrdered(e -> finalMapAfterDeck.put(e.getKey(), e.getValue()));
+
+        Map<Nationality, Long> finalMapAfterNationality = new LinkedHashMap<>();
+        //Sort a map and add to finalMap
+        resultAfterNationality.entrySet().stream()
+                .sorted(Map.Entry.<Nationality, Long>comparingByValue()
+                        .reversed()).forEachOrdered(e -> finalMapAfterNationality.put(e.getKey(), e.getValue()));
+
+        System.out.println("After 14 Days there are " + infectedPassenger.get()+" Infected People and "+infectedPassengerOnBoard + " are actually on Board");
+        System.out.println(((double)infectedPassenger.get() / (double)passengerOnBoard.get())*100.0 + "% of the passengers on board are infected");
+        System.out.println("Infected Passenger After Deck: "+ finalMapAfterDeck);
+        System.out.println("Infected Passenger After Nationality: "+ finalMapAfterNationality);
+        System.out.println(((double)smoker.get() / (double) infectedPassenger.get())*100 + "% of the infected Passenger are smoking");
+        System.out.println(((double)preIllness.get() / (double) infectedPassenger.get())*100 + "% of the infected Passenger have a pre-illness");
+
+
         //what the hack
         /*
         hospital.getFloor(1).getDepartments(0).getStations().stream()

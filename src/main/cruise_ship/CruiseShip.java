@@ -483,7 +483,7 @@ public class CruiseShip {
 
 
         // @todo fährt zurck zum Chain f responsibility entrance
-        //@todo air vv
+        //Spread virus in Car
         //Cought up to 10times
         for(int i = 0; i<10; i++){
             //With a probability of 60 percent
@@ -491,13 +491,19 @@ public class CruiseShip {
                 vehicle.changeAmbientAir(quarantineHuman.dryCough());
             }
         }
-
-
         //move back
         vehicle.move("Hospital");
 
 
         ((BSEmergencyDepartment) hospital.getFloor(0).getDepartments(0)).welcome(vehicle);
+    }
+
+    public List<Cabin> getCabinList() {
+        return cabinList;
+    }
+
+    public List<Human> getHumanList() {
+        return humanList;
     }
 
     public static class Builder {

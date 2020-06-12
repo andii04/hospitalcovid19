@@ -8,9 +8,9 @@ public class CabinDeck extends Deck {
     public CabinDeck(DeckID id, CruiseShip cruiseShip) {
         super(id);
         for (int i = 0; i < 150; i++) {
-            cabins[i] = new Cabin(CabinLocation.OuterLeft, id.name() + "-OL-" + i + 1, cruiseShip);
-            cabins[i + 150] = new Cabin(CabinLocation.InnerCenter, id.name() + "-IC-" + i + 1, cruiseShip);
-            cabins[i + 300] = new Cabin(CabinLocation.OuterRight, id.name() + "-OR-" + i + 1, cruiseShip);
+            cabins[i] = new Cabin(CabinLocation.OuterLeft, id.name() + "-OL-" + i + 1,id,  cruiseShip);
+            cabins[i + 150] = new Cabin(CabinLocation.InnerCenter, id.name() + "-IC-" + i + 1,id, cruiseShip);
+            cabins[i + 300] = new Cabin(CabinLocation.OuterRight, id.name() + "-OR-" + i + 1,id, cruiseShip);
         }
     }
 
