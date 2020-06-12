@@ -1,7 +1,6 @@
 package hospital;
 
 import cruise_ship.CruiseShip;
-import shared.Human;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +14,8 @@ public class EmergencyDepartment extends Department {
     private HospitalPatient currentHospitalPatient;
     private LinkedList<HospitalBed> emptyHospitalBedList;
 
-    public EmergencyDepartment() {
+    public EmergencyDepartment(DepartmentsName departmentsName) {
+        super(departmentsName, null);
         emptyHospitalBedList = new LinkedList<>();
         for (int i = 0; i < 10; i++) {
             emptyHospitalBedList.add(new HospitalBed());
@@ -29,7 +29,8 @@ public class EmergencyDepartment extends Department {
     public void setEmptyHospitalBedList(LinkedList<HospitalBed> emptyHospitalBedList) {
         this.emptyHospitalBedList = emptyHospitalBedList;
     }
-    public void addBed(HospitalBed hospitalBed){
+
+    public void addBed(HospitalBed hospitalBed) {
         emptyHospitalBedList.add(hospitalBed);
     }
 
@@ -55,20 +56,20 @@ public class EmergencyDepartment extends Department {
 
 
     private void register(HospitalPatient hospitalPatient) {
-        System.out.println("EmergencyDepartment: Registering patient with ID " + hospitalPatient.getId() + " now");
+        System.out.println(this.getName() + " : Registering patient with ID " + hospitalPatient.getId() + " now");
         String[] spaceInfo = hospital.getFreeSpace();
         Case newCase = new Case(Integer.parseInt(spaceInfo[0]), spaceInfo[1], spaceInfo[2], Integer.parseInt(spaceInfo[3]), Integer.parseInt(spaceInfo[4]), new SimpleDateFormat().toString());
         newCase.printCase();
         //@todo datenschutz
         move(emptyHospitalBedList.get(emptyHospitalBedList.size() - 1), newCase);
-        addBed(hospital.getBedByStation(spaceInfo[1],spaceInfo[2]));
+        addBed(hospital.getBedByStation(spaceInfo[1], spaceInfo[2]));
     }
 
     public void move(HospitalBed hospitalBed, Case thecase) {
-        System.out.println("EmergencyDepartment: Patient with ID " + currentHospitalPatient.getId() + " will now be moved to his room now");
+        System.out.println(this.getName() + " : Patient with ID " + currentHospitalPatient.getId() + " will now be moved to his room now");
         hospital.getFloor(thecase.getFloorID()).getDepartments(0)
                 .getStation(Station.getStationNumberFromNameID(thecase.getStationID()))
-                .getRoom(thecase.getRoomID()-1).setHospitalBed(thecase.getBedIDinRoom()-1, hospitalBed);
+                .getRoom(thecase.getRoomID() - 1).setHospitalBed(thecase.getBedIDinRoom() - 1, hospitalBed);
         emptyHospitalBedList.remove(hospitalBed);
     }
 
@@ -78,7 +79,7 @@ public class EmergencyDepartment extends Department {
 
 
     public void receiveCoronaEmergency(CruiseShip cruiseShip) {
-        System.out.println("EmergencyDepartment: Received Emergency from cruiseship");
+        System.out.println(this.getName() + " : Received Emergency from cruiseShip");
         ArrayList<MedicalStaff> crew = carPark.getCrewforBSEmergencyVehicle(3);
         BioSafetyEmergencyVehicle vehicle = carPark.getFreeBSEmergencyVehicle();
         Random r = new Random();

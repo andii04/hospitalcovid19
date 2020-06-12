@@ -1,5 +1,5 @@
 package shared;
 
-public class ProtectiveSuit extends Clothing{
+public class ProtectiveSuit extends Clothing {
 
 }

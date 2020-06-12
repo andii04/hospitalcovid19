@@ -5,20 +5,19 @@ public class Ticket {
     private DeckID deckID;
     private String cabinID;
 
+    public DeckID getDeckID() {
+        return deckID;
+    }
 
     public void setDeckID(DeckID deckID) {
         this.deckID = deckID;
     }
 
-    public void setCabinID(String cabinID) {
-        this.cabinID = cabinID;
-    }
-
-    public DeckID getDeckID() {
-        return deckID;
-    }
-
     public String getCabinID() {
         return cabinID;
+    }
+
+    public void setCabinID(String cabinID) {
+        this.cabinID = cabinID;
     }
 }

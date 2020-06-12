@@ -8,7 +8,7 @@ public class DESAlgorithm implements IEnryptionStrategy {
 
     @Override
     public String decrypt(String s, String key) {
-        try{
+        try {
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
             SecretKey myDesKey = keygenerator.generateKey();
 
@@ -25,15 +25,15 @@ public class DESAlgorithm implements IEnryptionStrategy {
 
             return textDecrypted.toString();
 
-        }catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }catch(NoSuchPaddingException e){
+        } catch (NoSuchPaddingException e) {
             e.printStackTrace();
-        }catch(InvalidKeyException e){
+        } catch (InvalidKeyException e) {
             e.printStackTrace();
-        }catch(IllegalBlockSizeException e){
+        } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
-        }catch(BadPaddingException e){
+        } catch (BadPaddingException e) {
             e.printStackTrace();
         }
         return null;
@@ -42,7 +42,7 @@ public class DESAlgorithm implements IEnryptionStrategy {
 
     @Override
     public String encrypt(String s, String key) {
-        try{
+        try {
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
             SecretKey myDesKey = keygenerator.generateKey();
 
@@ -62,15 +62,15 @@ public class DESAlgorithm implements IEnryptionStrategy {
 
             return textEncrypted.toString();
 
-        }catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }catch(NoSuchPaddingException e){
+        } catch (NoSuchPaddingException e) {
             e.printStackTrace();
-        }catch(InvalidKeyException e){
+        } catch (InvalidKeyException e) {
             e.printStackTrace();
-        }catch(IllegalBlockSizeException e){
+        } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
-        }catch(BadPaddingException e){
+        } catch (BadPaddingException e) {
             e.printStackTrace();
         }
         return null;

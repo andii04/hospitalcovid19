@@ -6,7 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Human{
+public class Human {
+    Visitor visit = new Visitor();
     private String firstName;
     private String lastName;
     private String birthDate;
@@ -18,23 +19,16 @@ public class Human{
     private boolean hasFever;
     private boolean hasTaste;
     private boolean hasMouthProtection;
-
-    public void setClothing(Clothing clothing) {
-        this.clothing = clothing;
-    }
-
     private Clothing clothing;
     private Ticket ticket;
     private List<Lung> lungs = new ArrayList<>();
     private ImmuneSystem immuneSystem;
-    Visitor visit = new Visitor();
     private int incubationPeriod = 0;
-
-    public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing){
+    public Human(String firstName, String lastName, String birthDate, Nationality nationality, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, boolean hasMouthProtection, Clothing clothing) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
-        this.nationality =  nationality;
+        this.nationality = nationality;
         this.isSmoking = isSmoking;
         this.hasAsthma = hasAsthma;
         this.hasHIV = hasHIV;
@@ -53,24 +47,22 @@ public class Human{
 
     }
 
-    public void setHasMouthProtection(boolean hasMouthProtection) {
-        this.hasMouthProtection = hasMouthProtection;
+    public Human() {
     }
 
-    public void visitImmuneSysteme(){
+    public void visitImmuneSysteme() {
         visit.active(this);
-        if(visit.check(this)){
+        if (visit.check(this)) {
             isInfectedCOVID19 = true;
         }
-        if(isInfectedCOVID19){
+        if (isInfectedCOVID19) {
             incubationPeriod++;
         }
-        if(incubationPeriod>6){
-            hasFever=true;
+        if (incubationPeriod > 6) {
+            hasFever = true;
             hasTaste = false;
         }
     }
-
 
     public ImmuneSystem getImmuneSystem() {
         return immuneSystem;
@@ -80,37 +72,35 @@ public class Human{
         return lungs;
     }
 
-    public Human(){
-    }
-
     public Ticket getTicket() {
         return ticket;
     }
 
-    public void dress (Clothing clothing){
+    public void dress(Clothing clothing) {
 
     }
 
-    public void undress(){
+    public void undress() {
 
     }
 
-    public void breathe(String air){
+    public void breathe(String air) {
         Random random = new Random();
         char[] airParticle = air.toCharArray();
 
         for (char p : airParticle) {
-            lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(10),random.nextInt(10),random.nextInt(2));
+            lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(10), random.nextInt(10), random.nextInt(2));
         }
     }
 
-    public String dryCough(){
+    public String dryCough() {
         return "vvvvvvvvvv";
     }
 
-    public void viralInfectionProcess(){
+    public void viralInfectionProcess() {
 
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -155,8 +145,16 @@ public class Human{
         return hasMouthProtection;
     }
 
+    public void setHasMouthProtection(boolean hasMouthProtection) {
+        this.hasMouthProtection = hasMouthProtection;
+    }
+
     public Clothing getClothing() {
         return clothing;
+    }
+
+    public void setClothing(Clothing clothing) {
+        this.clothing = clothing;
     }
 
     public static class Builder {

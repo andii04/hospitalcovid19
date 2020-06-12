@@ -4,6 +4,7 @@ public class CommandDesinfactNormalEmergencyVehicle implements ICommand {
     DisinfectionRobot robot;
     EmergencyVehicle emergencyVehicle;
 
+    //Command to desinfact normal vehicle
     public CommandDesinfactNormalEmergencyVehicle(DisinfectionRobot robot, EmergencyVehicle emergencyVehicle) {
         this.robot = robot;
         this.emergencyVehicle = emergencyVehicle;

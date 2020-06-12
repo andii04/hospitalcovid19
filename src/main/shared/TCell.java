@@ -7,7 +7,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class TCell extends Cell {
-    public boolean tryToDestroy(Human human){
+    public boolean tryToDestroy(Human human) {
         int age = 0;
         double year = 0;
         int smoke = 0;
@@ -18,29 +18,25 @@ public class TCell extends Cell {
             Date date = new SimpleDateFormat("dd.MM.yyyy").parse(human.getBirthDate());
             LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             age = Period.between(localDate, LocalDate.now()).getYears();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Cannot Convert Date");
         }
-        if(human.isSmoking()){
-            smoke=10;
+        if (human.isSmoking()) {
+            smoke = 10;
         }
-        if(human.isHasAsthma()){
-            asthma=15;
+        if (human.isHasAsthma()) {
+            asthma = 15;
         }
-        if(human.isHasHIV()){
+        if (human.isHasHIV()) {
             hiv = 30;
         }
-        if(age>40){
-            year = (age-40)*0.75;
+        if (age > 40) {
+            year = (age - 40) * 0.75;
         }
 
         destroyPercent = 90 - year - smoke - asthma - hiv;
         //System.out.println(destroyPercent+" "+ LocalDate.now()+ " "+  age);
-        if (Math.random() * 100 < destroyPercent) {
-            return true;
-        }
-        return false;
+        return Math.random() * 100 < destroyPercent;
 
     }
 }

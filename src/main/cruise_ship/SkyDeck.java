@@ -4,7 +4,7 @@ public class SkyDeck extends Deck {
     private MedicalServices medicalService;
     private CruiseShip cruiseShip;
 
-    public SkyDeck(DeckID id, CruiseShip cruiseShip){
+    public SkyDeck(DeckID id, CruiseShip cruiseShip) {
         super(id);
         this.cruiseShip = cruiseShip;
         SkyDeckLocation[] skyDeckLocations = new SkyDeckLocation[12];

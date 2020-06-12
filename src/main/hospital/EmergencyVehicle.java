@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class EmergencyVehicle implements IVistable {
     boolean isClosed = true;
+    String[] cleanAIRPool = new String[]{"a", "i", "r"};
     private String registeredKeySignature;
     private long serialNumber;
     private boolean isFlashingLightOn;
@@ -13,7 +14,6 @@ public class EmergencyVehicle implements IVistable {
     private ArrayList<MedicalStaff> medicalStaffs;
     private Random r = new Random();
     private String[][][] ambientAir = new String[50][50][50];
-    String[] cleanAIRPool = new String[]{"A", "I", "R"};
 
     public EmergencyVehicle(long serialNumber, String signature) {
         medicalStaffs = new ArrayList<>();
@@ -25,10 +25,11 @@ public class EmergencyVehicle implements IVistable {
     }
 
     private void initializeAmbientAir() {
-        String[][][] ambientAir =getAmbientAir();
-        for (int i = 0; i < ambientAir.length; i++){
-            for (int a = 0; a < ambientAir[i].length; a++){
-                for (int b = 0; b < ambientAir[i][a].length; b++){ {
+        String[][][] ambientAir = getAmbientAir();
+        for (int i = 0; i < ambientAir.length; i++) {
+            for (int a = 0; a < ambientAir[i].length; a++) {
+                for (int b = 0; b < ambientAir[i][a].length; b++) {
+                    {
                         ambientAir[i][a][b] = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
                     }
                 }
@@ -53,13 +54,17 @@ public class EmergencyVehicle implements IVistable {
     public Stretcher getStretcher() {
         return stretcher;
     }
+
+    //get stretcher out of vehicle
     public Stretcher getStretcherOut() {
         Stretcher stretcherOut = stretcher;
         this.stretcher = null;
         return stretcherOut;
     }
+
+    //get stretcher back in vehicle
     public void getStretcherIn(Stretcher stretcher) {
-        this.stretcher =stretcher;
+        this.stretcher = stretcher;
     }
 
     public MedicalStaff getMedicalStaffs(int id) {
@@ -90,6 +95,7 @@ public class EmergencyVehicle implements IVistable {
         this.ambientAir = ambientAir;
     }
 
+    //open only with valid signature
     public void open(String keySignature) {
         if (keySignature == registeredKeySignature) {
             isClosed = false;
@@ -97,6 +103,7 @@ public class EmergencyVehicle implements IVistable {
         }
     }
 
+    //close only with valid signature
     public void close(String keySignature) {
         if (keySignature == registeredKeySignature) {
             isClosed = true;
@@ -104,15 +111,18 @@ public class EmergencyVehicle implements IVistable {
         }
     }
 
+    //move vehicle to location
     public void move(String location) {
         System.out.println("Vehicle: Vehicle moving to " + location);
         this.location = location;
 
     }
 
+    //let visitor accept vehicle for disinfect
     public void accept(IVisitorRobot visitor) {
         visitor.visit(this);
     }
+
 
     public void setFlashingLightOff() {
         System.out.println("Vehicle: Flashlight off");

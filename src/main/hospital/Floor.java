@@ -11,6 +11,7 @@ public class Floor {
         this.departments = departments;
     }
 
+    //get on which floor the department is
     public static int getFloorofDepartment(DepartmentsName departmentsName) {
         switch (departmentsName) {
             case Emergency_Department:
@@ -31,6 +32,7 @@ public class Floor {
         return 0;
     }
 
+    //get the department on a certain floor
     public static DepartmentsName getNameDepartmentFloor(int floorID) {
         switch (floorID) {
             case 0:

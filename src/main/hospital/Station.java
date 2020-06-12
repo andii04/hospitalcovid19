@@ -11,6 +11,7 @@ public class Station {
         this.rooms = rooms;
     }
 
+    //get the intern stationID for the IDName
     public static int getStationNumberFromNameID(String s) {
         switch (s) {
             case "A":

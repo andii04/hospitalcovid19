@@ -11,10 +11,6 @@ public class Department {
         this.name = name;
     }
 
-    public Department() {
-
-    }
-
     public Station getStation(int i) {
         return stations.get(i);
     }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class DisinfectionRobot implements IVisitorRobot {
     Random r = new Random();
-    String[] cleanAIRPool = new String[]{"A", "I", "R"};
+    String[] cleanAIRPool = new String[]{"a", "i", "r"};
 
     @Override
     public void visit(EmergencyVehicle emergencyVehicle) {
@@ -18,13 +18,15 @@ public class DisinfectionRobot implements IVisitorRobot {
         bioSafetyEmergencyVehicle.setAmbientAir(cleanAir(bioSafetyEmergencyVehicle.getAmbientAir()));
     }
 
+    //regenerate air --> change "v" -> to pool
     private String[][][] cleanAir(String[][][] ambientAir) {
-        for (int i = 0; i < ambientAir.length; i++){
-            for (int a = 0; a < ambientAir[i].length; a++){
-                for (int b = 0; b < ambientAir[i][a].length; b++){ {
-                    if (ambientAir[i][a][b] == "v") {
-                        ambientAir[i][a][b] = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
-                    }
+        for (int i = 0; i < ambientAir.length; i++) {
+            for (int a = 0; a < ambientAir[i].length; a++) {
+                for (int b = 0; b < ambientAir[i][a].length; b++) {
+                    {
+                        if (ambientAir[i][a][b] == "v") {
+                            ambientAir[i][a][b] = cleanAIRPool[r.nextInt(cleanAIRPool.length)];
+                        }
                     }
                 }
             }

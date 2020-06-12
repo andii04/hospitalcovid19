@@ -12,14 +12,15 @@ public class Cabin {
     private List<Human> passengers = new ArrayList<>();
     private CruiseShip cruiseShip;
 
-    public void releaseEmergencyCall(int cabinID, int passengerID){
-        cruiseShip.getEventBus().post("Emergency-"+cabinID+"-"+passengerID);
-
-    }
-    public Cabin(CabinLocation location, String id, CruiseShip cruiseShip){
+    public Cabin(CabinLocation location, String id, CruiseShip cruiseShip) {
         this.location = location;
         this.id = id;
         this.cruiseShip = cruiseShip;
+    }
+
+    public void releaseEmergencyCall(int cabinID, int passengerID) {
+        cruiseShip.getEventBus().post("Emergency-" + cabinID + "-" + passengerID);
+
     }
 
     public void addPassenger(Human passenger) {

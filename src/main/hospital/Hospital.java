@@ -1,6 +1,9 @@
 package hospital;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Stack;
 
 public class Hospital {
     CarPark carPark;
@@ -23,30 +26,27 @@ public class Hospital {
         ((BSEmergencyDepartment) getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
     }
 
+    //general IDs for new patients
     public int getNewHospitalPatientID() {
         countHospitalGuest++;
         return countHospitalGuest;
     }
 
+    //get the floors, departments etc..
     public Floor getFloor(int floorID) {
         return floors.get(floorID);
     }
 
-    public Department getDepartment(int floorID, int departmentOnFloor) {
-        return floors.get(floorID).getDepartments(departmentOnFloor);
-    }
-
-    public CarPark getCarPark() {
-        return carPark;
-    }
-
+    //get a bed form (1) the first department(floor=1) or (2) the second department(floor=2)
     public HospitalBed getFreeBed() {
         Random r = new Random();
         ArrayList<HospitalBed> availableBeds;
         ArrayList<int[]> bedInfo;
+        //two possible floors for beds
         for (int i = 1; i <= 2; i++) {
             availableBeds = new ArrayList<>();
             bedInfo = new ArrayList<>();
+            //-->interate over the rooms, departments
             for (int j = 0; j < floors.get(i).getDepartments(0).getNumberOfStations(); j++) {
                 for (int k = 0; k < floors.get(i).getDepartments(0).getStation(j).getNumberOfRooms(); k++) {
                     for (int l = 0; l < floors.get(i).getDepartments(0).getStation(j).getRoom(k).getNumberOfBeds(); l++) {
@@ -58,75 +58,82 @@ public class Hospital {
                                     " /Bed " + l+1);*/
                             HospitalBed freeBed = floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l);
                             availableBeds.add(freeBed);
-                            bedInfo.add(new int[]{i,j,k,l});
+                            bedInfo.add(new int[]{i, j, k, l});
                         }
                     }
                 }
             }
-            if(availableBeds.size() != 0){
+            //if a collection of free beds >0 --> select random --> print
+            if (availableBeds.size() != 0) {
                 int randomNumber = r.nextInt(availableBeds.size());
                 int[] bedInfoChosenBed = bedInfo.get(randomNumber);
                 HospitalBed chosenBed = availableBeds.get(randomNumber);
-                floors.get(i).getDepartments(0).stations.get(bedInfoChosenBed[1]).rooms.get(bedInfoChosenBed[2]).setHospitalBed(bedInfoChosenBed[3],null);
+                floors.get(i).getDepartments(0).stations.get(bedInfoChosenBed[1]).rooms.get(bedInfoChosenBed[2]).setHospitalBed(bedInfoChosenBed[3], null);
                 System.out.println("Hospital: Found free bed in Department " + floors.get(i).getDepartments(0).getName() +
                         " / Station " + floors.get(i).getDepartments(0).getStation(bedInfoChosenBed[1]).getName() +
                         " / Room " + bedInfoChosenBed[2] + 1 +
-                        " /Bed " + bedInfoChosenBed[3]+1);
+                        " /Bed " + bedInfoChosenBed[3] + 1);
                 return chosenBed;
             }
         }
         return null;
     }
 
-    public HospitalBed getBedByStation(String name,String station){
-        int floorID =1;
+    //get a bed in the station where the last bed was moved
+    public HospitalBed getBedByStation(String name, String station) {
+        //same code as method above
+        int floorID = 1;
         int stationID = Station.getStationNumberFromNameID(station);
-        if(name.equals(DepartmentsName.Pulmonology)) {
+        if (name.equals(DepartmentsName.Pulmonology)) {
             floorID = 2;
         }
         Random r = new Random();
         ArrayList<HospitalBed> availableBeds = new ArrayList<>();
         ArrayList<int[]> bedInfo = new ArrayList<>();
-                for (int k = 0; k < floors.get(floorID).getDepartments(0).getStation(stationID).getNumberOfRooms(); k++) {
-                    for (int l = 0; l < floors.get(floorID).getDepartments(0).getStation(stationID).getRoom(k).getNumberOfBeds(); l++) {
-                        if (floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l) != null &&
-                                floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l).isEmpty()) {
+        for (int k = 0; k < floors.get(floorID).getDepartments(0).getStation(stationID).getNumberOfRooms(); k++) {
+            for (int l = 0; l < floors.get(floorID).getDepartments(0).getStation(stationID).getRoom(k).getNumberOfBeds(); l++) {
+                if (floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l) != null &&
+                        floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l).isEmpty()) {
                              /* System.out.println("Hospital: Found free bed in Department " + Floor.getNameDepartmentFloor(stationID) +
                                     " / Station " + floors.get(floorID).getDepartments(0).getStation(stationID).getName()+
                                     " / Room " + k + 1 +
                                     " /Bed " + l+1);*/
-                            HospitalBed freeBed = floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l);
-                            availableBeds.add(freeBed);
-                            bedInfo.add(new int[]{floorID,stationID,k,l});
+                    HospitalBed freeBed = floors.get(floorID).getDepartments(0).stations.get(stationID).rooms.get(k).getHospitalBed(l);
+                    availableBeds.add(freeBed);
+                    bedInfo.add(new int[]{floorID, stationID, k, l});
 
-                    }
                 }
             }
-            if(availableBeds.size() != 0){
-                int randomNumber = r.nextInt(availableBeds.size());
-                int[] bedInfoChosenBed = bedInfo.get(randomNumber);
-                HospitalBed chosenBed = availableBeds.get(randomNumber);
-                floors.get(floorID).getDepartments(0).stations.get(bedInfoChosenBed[1]).rooms.get(bedInfoChosenBed[2]).setHospitalBed(bedInfoChosenBed[3],null);
-                System.out.println("Hospital: Found free bed in Department " + floors.get(floorID).getDepartments(0).getName() +
-                        " / Station " + floors.get(floorID).getDepartments(0).getStation(bedInfoChosenBed[1]).getName() +
-                        " / Room " + (bedInfoChosenBed[2] + 1) +
-                        " /Bed " + (bedInfoChosenBed[3]+1));
-                return chosenBed;
-            }
-            //nothing free in station --> go somewhere else
-            //return getFreeBed();
+        }
+        //if a collection of free beds >0 --> select random --> print
+        if (availableBeds.size() != 0) {
+            int randomNumber = r.nextInt(availableBeds.size());
+            int[] bedInfoChosenBed = bedInfo.get(randomNumber);
+            HospitalBed chosenBed = availableBeds.get(randomNumber);
+            floors.get(floorID).getDepartments(0).stations.get(bedInfoChosenBed[1]).rooms.get(bedInfoChosenBed[2]).setHospitalBed(bedInfoChosenBed[3], null);
+            System.out.println("Hospital: Found free bed in Department " + floors.get(floorID).getDepartments(0).getName() +
+                    " / Station " + floors.get(floorID).getDepartments(0).getStation(bedInfoChosenBed[1]).getName() +
+                    " / Room " + (bedInfoChosenBed[2] + 1) +
+                    " /Bed " + (bedInfoChosenBed[3] + 1) +
+                    "--> will be moved to BSEmergencyDepartment");
+            return chosenBed;
+        }
+        //nothing free in station --> go somewhere else
+        //return getFreeBed();
         return getFreeBed();
     }
 
+    //get a free space where bed can be placed
     public String[] getFreeSpace() {
         Random r = new Random();
         ArrayList<String[]> freeSpace;
+        //two possible floors
         for (int i = 1; i <= 2; i++) {
             freeSpace = new ArrayList<>();
             for (int j = 0; j < floors.get(i).getDepartments(0).getNumberOfStations(); j++) {
                 for (int k = 0; k < floors.get(i).getDepartments(0).getStation(j).getNumberOfRooms(); k++) {
                     for (int l = 0; l < floors.get(i).getDepartments(0).getStation(j).getRoom(k).getNumberOfBeds(); l++) {
-                        if (floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l) ==null){
+                        if (floors.get(i).getDepartments(0).stations.get(j).rooms.get(k).getHospitalBed(l) == null) {
                             /*  System.out.println("Hospital: Found free bed in Department " + Floor.getNameDepartmentFloor(i) +
                                     " / Station " + floors.get(i).getDepartments(0).getStation(j).getName()+
                                     " / Room " + k + 1 +
@@ -135,17 +142,17 @@ public class Hospital {
                                     Integer.toString(i), //Floor
                                     Floor.getNameDepartmentFloor(i).toString(), //departmentName
                                     floors.get(i).getDepartments(0).getStation(j).getName(), //stationName
-                                    Integer.toString(k+1), //RoomID
-                                    Integer.toString(l+1)}); //BedID
+                                    Integer.toString(k + 1), //RoomID
+                                    Integer.toString(l + 1)}); //BedID
                         }
                     }
                 }
             }
-            if(freeSpace.size() != 0){
+            if (freeSpace.size() != 0) {
                 int randomNumber = r.nextInt(freeSpace.size());
                 String[] freeSpaceInfo = freeSpace.get(randomNumber);
-                System.out.println("Hospital: Found free space where bed will be moved in Department " +freeSpaceInfo[1]+
-                        " / Station " + freeSpaceInfo[2]+
+                System.out.println("Hospital: Found free space where bed will be moved in Department " + freeSpaceInfo[1] +
+                        " / Station " + freeSpaceInfo[2] +
                         " / Room " + freeSpaceInfo[4] +
                         " /Bed " + freeSpaceInfo[4]);
                 return freeSpaceInfo;
@@ -155,6 +162,7 @@ public class Hospital {
         return null;
     }
 
+    //Builder
     public static class Builder {
 
         Stack<Floor> floors;

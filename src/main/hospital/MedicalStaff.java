@@ -35,7 +35,7 @@ public class MedicalStaff extends Human {
         takeProtectionOff();
     }
 
-    private void takeProtectionOff(){
+    private void takeProtectionOff() {
         setClothing(myNormalClothes);
         System.out.println("MedicalStaff: Medical Staff ID " + id + " protection off");
         hasProtection = false;
@@ -87,11 +87,16 @@ public class MedicalStaff extends Human {
     public void operateStretcherDown(Stretcher stretcher) {
         stretcher.down();
     }
+
     public void operateStretcherUp(Stretcher stretcher) {
         stretcher.up();
     }
 
     public void helpPassengerOnStretcher(Stretcher stretcher, Human quarantineHuman) {
         stretcher.position(quarantineHuman);
+    }
+
+    public void getStretcherInVehicle(Stretcher stretcher, BioSafetyEmergencyVehicle vehicle) {
+        vehicle.getStretcherIn(stretcher);
     }
 }

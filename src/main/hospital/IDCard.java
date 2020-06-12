@@ -7,6 +7,7 @@ public class IDCard {
     String encryptionKey = "dh$bw20!20";
     String magneticStripe;
 
+    //IDCard set magnetStripe with the suitable pin
     public IDCard(Configuration chosenAlgo, String myPinforCard) {
         if (chosenAlgo == Configuration.AES) {
             strategyAlgorithm = new AESAlgorithm();

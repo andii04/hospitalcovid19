@@ -31,7 +31,7 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
                             int replicatCount = random.nextInt(4) + 2;
                             for (int j = 0; j < replicatCount; j++) {
                                 boolean infectedCell = true;
-                                int count =0;
+                                int count = 0;
                                 while (infectedCell == true) {
 
                                     int randomLung = random.nextInt(2);
@@ -42,7 +42,7 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
                                         human.getLungs().get(randomLung).createInfectedCell('v', randomCellI, randomCellX, randomCellY);
                                         infectedCell = false;
                                     } else {
-                                        if(count>200){
+                                        if (count > 200) {
                                             infectedCell = false;
                                             //System.out.println("All Cells are infected");
                                         }
@@ -70,7 +70,7 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
             for (int i = 0; i < human.getLungs().get(lung).getStructure().length; i++) {
                 for (int x = 0; x < human.getLungs().get(lung).getStructure()[0].length; x++) {
                     for (int y = 0; y < human.getLungs().get(0).getStructure()[0][0].length; y++) {
-                        if (human.getLungs().get(lung).getStructure()[i][x][y].getStructure()[1][1][1]=='v') {
+                        if (human.getLungs().get(lung).getStructure()[i][x][y].getStructure()[1][1][1] == 'v') {
                             countInfectedCells++;
                         }
                     }
@@ -78,9 +78,6 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
             }
         }
 
-        if(countInfectedCells >0){
-            return true;
-        }
-        return false;
+        return countInfectedCells > 0;
     }
 }

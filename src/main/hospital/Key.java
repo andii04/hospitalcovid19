@@ -6,6 +6,7 @@ public class Key {
     ArrayList<ICommand> commands;
     private String signature;
 
+    //crate a key with open/close button
     public Key(EmergencyVehicle emergencyVehicle, String signature) {
         this.signature = signature;
         commands = new ArrayList<>();

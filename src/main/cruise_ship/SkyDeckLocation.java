@@ -7,8 +7,8 @@ public class SkyDeckLocation {
     private ArrayList<Passenger> passengerList = new ArrayList<>();
     private int capacity;
 
-    public SkyDeckLocation(SkyDeskLocationType type, int capacity){
-        this.type= type;
+    public SkyDeckLocation(SkyDeskLocationType type, int capacity) {
+        this.type = type;
         this.capacity = capacity;
     }
 }

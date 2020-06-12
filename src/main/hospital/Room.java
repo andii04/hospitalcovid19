@@ -4,10 +4,11 @@ public class Room {
     private int id;
     private HospitalBed[] hospitalBedSpace;
 
-    public Room(int id, int anzahlPlaetze, int anzahlBetten) {
+    //generate free beds or empty spaces
+    public Room(int id, int numberPlaces, int numberBedsAlready) {
         this.id = id;
-        hospitalBedSpace = new HospitalBed[anzahlPlaetze];
-        for (int i = 0; i < anzahlBetten; i++) {
+        hospitalBedSpace = new HospitalBed[numberPlaces];
+        for (int i = 0; i < numberBedsAlready; i++) {
             hospitalBedSpace[i] = new HospitalBed();
         }
     }

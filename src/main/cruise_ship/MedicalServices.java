@@ -8,7 +8,7 @@ public class MedicalServices {
     private Quarantine quarantine;
     private CruiseShip cruiseShip;
 
-    public MedicalServices(CruiseShip cruiseShip){
+    public MedicalServices(CruiseShip cruiseShip) {
         this.cruiseShip = cruiseShip;
         quarantine = new Quarantine(cruiseShip);
     }
@@ -16,7 +16,7 @@ public class MedicalServices {
     @Subscribe
     public void listen(String event) {
         String[] test = event.split("-");
-        if(test[0].equals("Emergency")){
+        if (test[0].equals("Emergency")) {
             System.out.println(event);
             Human medicalAssistant = new MedicalAssistant();
             int cabinID = Integer.parseInt(event.split("-")[1]);
@@ -36,7 +36,7 @@ public class MedicalServices {
         return quarantine;
     }
 
-    private void releaseEmergencyCall(String message){
+    private void releaseEmergencyCall(String message) {
         cruiseShip.getEventBus().post(message);
     }
 

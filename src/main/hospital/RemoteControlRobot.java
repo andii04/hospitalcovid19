@@ -4,6 +4,7 @@ package hospital;
 public class RemoteControlRobot {
     DisinfectionRobot robot;
 
+    //Robot control with different commands
     public RemoteControlRobot(DisinfectionRobot robot) {
         this.robot = robot;
     }
