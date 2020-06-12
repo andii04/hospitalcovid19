@@ -25,7 +25,6 @@ public class MedicalAssistant extends Human {
     }
 
 
-
     //take the protection off
     public void takeProtectionOn() {
         setClothing(myProtectiveSuit);
@@ -33,9 +32,16 @@ public class MedicalAssistant extends Human {
     }
 
     public void takeIntoQuarantine(Human passenger) {
+        //change Clothing to Protective Suit
         takeProtectionOn();
+
+        //take a Mask to the Infected Passenger
         passenger.setHasMouthProtection(true);
+
+        //Put him to Quarantine Room
         quarantine.addPassenger(passenger);
+
+        //Press Button "QuarantineOccupied" and trigger a event
         medicalServices.releaseEmergencyCall("QuarantineOccupied");
     }
 

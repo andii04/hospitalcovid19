@@ -256,10 +256,12 @@ public class CruiseShip {
 
                 //Infection in the 4passenger group
                 for (int group = 0; group < passengerGroup.size(); group = group + 4) {
+                    //Check if the Passenger of the group has Covid19 and can infect the other
                     if (passengerGroup.get(group).isInfectedCOVID19()) {
                         //coughs with a probability of 50 percent
                         if (Math.random() * 100 < 50) {
                             int infectcount = 0;
+                            //Infect the others if they don't have
                             if(!passengerGroup.get(group + 1).isInfectedCOVID19()){
                                 passengerGroup.get(group + 1).breathe(passengerGroup.get(group).dryCough());
                                 infectcount++;
@@ -279,6 +281,7 @@ public class CruiseShip {
                         //coughs with a probability of 50 percent
                         if (Math.random() * 100 < 50) {
                             int infectcount = 0;
+                            //Infect the others if they don't have
                             if(!passengerGroup.get(group).isInfectedCOVID19()){
                                 passengerGroup.get(group).breathe(passengerGroup.get(group+1).dryCough());
                                 infectcount++;
@@ -297,6 +300,7 @@ public class CruiseShip {
                     if (passengerGroup.get(group + 2).isInfectedCOVID19()) {
                         //coughs with a probability of 50 percent
                         if (Math.random() * 100 < 50) {
+                            //Infect the others if they don't have
                             int infectcount = 0;
                             if(!passengerGroup.get(group).isInfectedCOVID19()){
                                 passengerGroup.get(group).breathe(passengerGroup.get(group+2).dryCough());
@@ -316,6 +320,7 @@ public class CruiseShip {
                     if (passengerGroup.get(group + 3).isInfectedCOVID19()) {
                         //coughs with a probability of 50 percent
                         if (Math.random() * 100 < 50) {
+                            //Infect the others if they don't have
                             int infectcount = 0;
                             if(!passengerGroup.get(group).isInfectedCOVID19()){
                                 passengerGroup.get(group).breathe(passengerGroup.get(group+3).dryCough());
@@ -367,6 +372,7 @@ public class CruiseShip {
                     if (passengerInCinema[j].get(i).isInfectedCOVID19()) {
                         //coughs with a probability of 50 percent
                         if (Math.random() * 100 < 50) {
+                            //Infect the others if they don't have
                             int infectetcount = 0;
                             if (i != 0) {
                                 if(!passengerInCinema[j].get(i -1).isInfectedCOVID19()){
@@ -419,15 +425,16 @@ public class CruiseShip {
                     int randomPassager2 = rand.nextInt(passengerInMall[j].size());
                     if (passengerInMall[j].get(randomPassager1).isInfectedCOVID19()) {
                         if (Math.random() * 100 < 30) {
+                            //Infect the others if they don't have
                             if(!passengerInMall[j].get(i +1).isInfectedCOVID19()) {
-
-                            }
                                 System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
-                            passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager1).dryCough());
+                                passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager1).dryCough());
+                            }
                         }
                     }
                     if (passengerInMall[j].get(randomPassager2).isInfectedCOVID19()) {
                         if (Math.random() * 100 < 30) {
+                            //Infect the others if they don't have
                             System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
                             passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager2).dryCough());
                         }
@@ -436,27 +443,22 @@ public class CruiseShip {
             }
 
             System.out.println();
-            System.out.println("All infected Person on Day " + day);
             for (Human h : humanList) {
+                //Activate the immuneSystem fpr every Passenger
                 h.visitImmuneSysteme();
             }
 
             for (int i = 0; i < cabinList.size(); i++) {
                 for (int h = 0; h < cabinList.get(i).getPassengers().size(); h++) {
+                    //Check every if a person has Fever
                     if (cabinList.get(i).getPassengers().get(h).isHasFever()) {
+                        //If they has Fever a Event "Emergeny" is triggerd
                         cabinList.get(i).releaseEmergencyCall(i, h);
                     }
                 }
             }
 
         }
-        for (Human h : humanList) {
-            if (h.isInfectedCOVID19()) {
-                count++;
-            }
-        }
-        System.out.println("Infizierte nach 14 Tagen: " + count);
-
     }
 
     public EventBus getEventBus() {

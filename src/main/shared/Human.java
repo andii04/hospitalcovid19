@@ -51,13 +51,21 @@ public class Human {
     }
 
     public void visitImmuneSysteme() {
+        //Visitor for ImmuneSystem
+        //Execute the replikation of the virus in the Lung
         visit.active(this);
+
+        //Check if there is a virus Particle in the Lung
         if (visit.check(this)) {
+            //If there is a Virus Particle The Passenger is Infected COVID19
             isInfectedCOVID19 = true;
         }
+        //If infected increase incubationPeriod
         if (isInfectedCOVID19) {
             incubationPeriod++;
         }
+
+        // After a incubationPeriod of 6 days get Fever and lose Taste
         if (incubationPeriod >= 6) {
             hasFever = true;
             hasTaste = false;
@@ -76,23 +84,18 @@ public class Human {
         return ticket;
     }
 
-    public void dress(Clothing clothing) {
-
-    }
-
-    public void undress() {
-
-    }
-
     public void breathe(String air) {
+        //get the Air from another person
         Random random = new Random();
         char[] airParticle = air.toCharArray();
 
+        //For every Particle search a Random cell and place the particle
         for (char p : airParticle) {
             lungs.get(random.nextInt(2)).createInfectedCell(p, random.nextInt(10), random.nextInt(10), random.nextInt(2));
         }
     }
 
+    //function spread 10 virus particle
     public String dryCough() {
         return "vvvvvvvvvv";
     }
@@ -156,6 +159,8 @@ public class Human {
     public void setClothing(Clothing clothing) {
         this.clothing = clothing;
     }
+
+    //Human Builder
 
     public static class Builder {
         private String firstName;
@@ -233,6 +238,7 @@ public class Human {
         }
 
 
+        //build function
         public Human build() {
             return new Human(firstName, lastName, birthDate, nationality, isSmoking, hasAsthma, hasHIV, isInfectedCOVID19, hasFever, hasTaste, hasMouthProtection, clothing);
         }

@@ -12,28 +12,33 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
 
     public void work(Human human) {
         Random random = new Random();
+        //Select every Cell in Lung
         for (int lung = 0; lung < 2; lung++) {
             for (int i = 0; i < human.getLungs().get(lung).getStructure().length; i++) {
                 for (int x = 0; x < human.getLungs().get(lung).getStructure()[0].length; x++) {
                     for (int y = 0; y < human.getLungs().get(0).getStructure()[0][0].length; y++) {
                         //Check if Cell is infected
                         if (human.getLungs().get(lung).getStructure()[i][x][y].getClass() == InfectedCell.class) {
+                            //if there is a infected cell create a TCell to try to destroy
                             tCells.add(new TCell());
                             int randomNr = random.nextInt(tCells.size());
                             TCell randTCell = tCells.get(randomNr);
+                            //Try to Destroy the infected cell
                             if (randTCell.tryToDestroy(human)) {
+                                //if destroy remove the virus particle and change to LungCell
                                 human.getLungs().get(lung).getStructure()[i][x][y] = new LungCell();
+                                //Remove the TCell
                                 tCells.remove(randomNr);
                             }
                         }
                         if (human.getLungs().get(lung).getStructure()[i][x][y].getClass() == InfectedCell.class) {
-                            //Replikation
+                            //Replication with faktor 2-5
                             int replicatCount = random.nextInt(4) + 2;
                             for (int j = 0; j < replicatCount; j++) {
                                 boolean infectedCell = true;
                                 int count = 0;
                                 while (infectedCell == true) {
-
+                                    //look for not infected cells
                                     int randomLung = random.nextInt(2);
                                     int randomCellI = random.nextInt(10);
                                     int randomCellX = random.nextInt(10);
@@ -44,10 +49,10 @@ public class ImmuneSystem implements IVisitableImmuneSystem {
                                     } else {
                                         if (count > 200) {
                                             infectedCell = false;
-                                            //System.out.println("All Cells are infected");
+                                            //All Cells are infected
                                         }
                                         count++;
-                                        //System.out.println("Cell already infected");
+                                        //Cell already infected
                                     }
                                 }
 

@@ -7,6 +7,7 @@ public class SkyDeck extends Deck {
     public SkyDeck(DeckID id, CruiseShip cruiseShip) {
         super(id);
         this.cruiseShip = cruiseShip;
+        //Assign SkyDeckLocations
         SkyDeckLocation[] skyDeckLocations = new SkyDeckLocation[12];
         skyDeckLocations[0] = new SkyDeckLocation(SkyDeskLocationType.FitnessArea, 50);
         skyDeckLocations[1] = new SkyDeckLocation(SkyDeskLocationType.FitnessArea, 50);

@@ -21,6 +21,7 @@ public class Cabin {
     }
 
     public void releaseEmergencyCall(int cabinID, int passengerID) {
+        //Press Button with Event "Emergency"
         cruiseShip.getEventBus().post("Emergency-" + cabinID + "-" + passengerID);
 
     }

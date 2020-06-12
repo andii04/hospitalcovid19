@@ -7,6 +7,7 @@ public class CabinDeck extends Deck {
 
     public CabinDeck(DeckID id, CruiseShip cruiseShip) {
         super(id);
+        //Assign Cabins
         for (int i = 0; i < 150; i++) {
             cabins[i] = new Cabin(CabinLocation.OuterLeft, id.name() + "-OL-" + i + 1,id,  cruiseShip);
             cabins[i + 150] = new Cabin(CabinLocation.InnerCenter, id.name() + "-IC-" + i + 1,id, cruiseShip);

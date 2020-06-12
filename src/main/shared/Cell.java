@@ -14,6 +14,7 @@ public class Cell {
     }
 
     public void initialiseLungCell() {
+        //initialise random chars
         Random r = new Random();
         for (int i = 0; i < structure.length; i++) {
             for (int a = 0; a < structure[i].length; a++) {

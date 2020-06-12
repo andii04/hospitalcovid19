@@ -8,6 +8,7 @@ public class Lung {
 
     public Lung() {
 
+        //initialisie
         for (int i = 0; i < structure.length; i++) {
             for (int x = 0; x < structure[0].length; x++) {
                 for (int y = 0; y < structure[0][0].length; y++) {
@@ -19,7 +20,10 @@ public class Lung {
 
 
     public void createInfectedCell(char virus, int i, int x, int y) {
+        //Gets the random cell and place the virus in the middle
         structure[i][x][y] = null;
+
+        //Cast a LungCell to a Infectet Cell
         structure[i][x][y] = new InfectedCell();
         structure[i][x][y].getStructure()[1][1][1] = virus;         // in the middle
 
