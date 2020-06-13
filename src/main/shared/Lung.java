@@ -1,10 +1,10 @@
 package shared;
 
 public class Lung {
-    int nochmalneumachen = 500;
+    int anInt = 500;
     private Cell[][][] structure = new Cell[10][10][2];
 
-    private char[] liquidParticle = new char[nochmalneumachen];
+    private char[] liquidParticle = new char[anInt];
 
     public Lung() {
 

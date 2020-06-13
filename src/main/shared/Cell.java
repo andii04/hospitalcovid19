@@ -19,7 +19,6 @@ public class Cell {
         for (int i = 0; i < structure.length; i++) {
             for (int a = 0; a < structure[i].length; a++) {
                 for (int b = 0; b < structure[i][a].length; b++) {
-                    //sollte gehen
                     structure[i][a][b] = charpool[r.nextInt(charpool.length)];
                 }
             }

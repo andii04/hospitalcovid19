@@ -9,7 +9,7 @@ public class CaseReadOnly implements ICase {
     private int roomID;
     private String lastUpdate;
 
-    //Setter leer lassen ->
+    //Setter leer lassen
 
     public CaseReadOnly(int bedIDinRoom, int floorID, String department, String stationID, int roomID, String lastUpdate) {
         this.bedIDinRoom = bedIDinRoom;
