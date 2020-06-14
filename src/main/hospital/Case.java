@@ -7,14 +7,34 @@ public class Case implements ICase {
     private String stationID;
     private int roomID;
     private String lastUpdate;
+    private String firstName;
+    private String lastName;
+    private String birthDate;
+    private boolean isSmoking;
+    private boolean hasAsthma;
+    private boolean hasHIV;
+    private boolean isInfectedCOVID19;
+    private boolean hasFever;
+    private boolean hasTaste;
+    private int patientID;
 
-    public Case(int floorID, String department, String stationID, int roomID, int bedIDinRoom, String lastUpdate) {
+    public Case(int patientID, String firstName, String lastName, String birthDate, boolean isSmoking, boolean hasAsthma, boolean hasHIV, boolean isInfectedCOVID19, boolean hasFever, boolean hasTaste, int floorID, String department, String stationID, int roomID, int bedIDinRoom, String lastUpdate) {
         this.floorID = floorID;
         this.department = department;
         this.stationID = stationID;
         this.roomID = roomID;
         this.bedIDinRoom = bedIDinRoom;
         this.lastUpdate = lastUpdate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.isSmoking = isSmoking;
+        this.hasAsthma = hasAsthma;
+        this.hasHIV = hasHIV;
+        this.isInfectedCOVID19 = isInfectedCOVID19;
+        this.hasFever = hasFever;
+        this.hasTaste = hasTaste;
+        this.patientID = patientID;
     }
 
     @Override
