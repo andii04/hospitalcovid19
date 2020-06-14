@@ -48,6 +48,7 @@ public class Application {
     }
 
     private static void lambdaAnalysisHospital() {
+        System.out.println("Hospital:");
         Map<String, Character> mapNametoStation = new HashMap<>();
         //1)
         hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
@@ -96,6 +97,7 @@ public class Application {
     }
 
     private static void lambdaAnalysisShip() {
+        System.out.println("CruiseShip:");
         AtomicInteger passengerOnBoard = new AtomicInteger();
         AtomicInteger infectedPassenger = new AtomicInteger();
         AtomicInteger smoker = new AtomicInteger();
