@@ -17,10 +17,6 @@ public class Case implements ICase {
         this.lastUpdate = lastUpdate;
     }
 
-    public void printCase() {
-        //@todo rint data of case
-    }
-
     @Override
     public int getBedIDinRoom() {
         return bedIDinRoom;

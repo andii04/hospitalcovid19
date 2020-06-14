@@ -59,8 +59,7 @@ public class EmergencyDepartment extends Department {
         System.out.println(this.getName() + " : Registering patient with ID " + hospitalPatient.getId() + " now");
         String[] spaceInfo = hospital.getFreeSpace();
         Case newCase = new Case(Integer.parseInt(spaceInfo[0]), spaceInfo[1], spaceInfo[2], Integer.parseInt(spaceInfo[3]), Integer.parseInt(spaceInfo[4]), new SimpleDateFormat().toString());
-        newCase.printCase();
-        //@todo datenschutz
+        hospital.addCaseInDP(newCase);
         move(emptyHospitalBedList.get(emptyHospitalBedList.size() - 1), newCase);
         addBed(hospital.getBedByStation(spaceInfo[1], spaceInfo[2]));
     }

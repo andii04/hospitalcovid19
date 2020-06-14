@@ -10,6 +10,10 @@ public class Hospital {
     Stack<Floor> floors;
     private String name;
     private int countHospitalGuest = 0;
+    private String encryptionKeyforCases= "vRMbp7kiSX";
+    private String encryptedKey;
+
+    ArrayList<Case> allCases = new ArrayList<>();
 
     public Hospital(String name, Stack<Floor> floors, CarPark carPark) {
         this.name = name;
@@ -24,6 +28,8 @@ public class Hospital {
         LinkedList<HospitalBed> oneFreeBed = new LinkedList<>();
         oneFreeBed.add(getFreeBed());
         ((BSEmergencyDepartment) getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
+        AESAlgorithm aesAlgorithm = new AESAlgorithm();
+        encryptedKey = aesAlgorithm.encrypt("2X2Lf42uUK", encryptedKey);
     }
 
     //general IDs for new patients
@@ -162,6 +168,10 @@ public class Hospital {
         return null;
     }
 
+    public void addCaseInDP(Case newCase) {
+        allCases.add(newCase);
+    }
+
     //Builder
     public static class Builder {
 
@@ -187,5 +197,12 @@ public class Hospital {
         public Hospital build() {
             return new Hospital(name, floors, carPark);
         }
+    }
+
+    public boolean verify(String masterKeyforCases) {
+        AESAlgorithm aesAlgorithm = new AESAlgorithm();
+        if (encryptedKey.equals(aesAlgorithm.decrypt(masterKeyforCases, encryptionKeyforCases))) {
+            return true;
+        } else return false;
     }
 }
