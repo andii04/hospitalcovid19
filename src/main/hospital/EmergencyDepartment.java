@@ -93,7 +93,6 @@ public class EmergencyDepartment extends Department {
         vehicle.move("CruiseShip");
 
         cruiseShip.vehicleArrive(vehicle);
-        //@todo just for testing
-        //((BSEmergencyDepartment) hospital.getFloor(0).getDepartments(0)).welcome(vehicle);
+
     }
 }

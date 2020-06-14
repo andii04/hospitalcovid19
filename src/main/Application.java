@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Application {
 
@@ -39,13 +41,61 @@ public class Application {
         cruiseShip.createCruiseShip();
 
         System.out.println("Simulation finished");
-        lambdaAnalysis();
-
-    }
-
-    private static void lambdaAnalysis() {
         System.out.println();
         System.out.println("Analysis:");
+        lambdaAnalysisShip();
+        lambdaAnalysisHospital();
+    }
+
+    private static void lambdaAnalysisHospital() {
+        Map<String, Character> mapNametoStation = new HashMap<>();
+        //1)
+        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        mapNametoStation.put(room.getHospitalBed(i).getHuman().getLastName(),station.getName().charAt(0));
+                    }
+                }
+            });
+        });
+        System.out.println("List of patients in stations sorted");
+        mapNametoStation.entrySet().stream()
+            .sorted(Map.Entry.comparingByValue())
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(stringStringEntry -> System.out.println("On Station " + stringStringEntry.getValue()+ " is Patient " + stringStringEntry.getKey()));
+
+
+        //2)
+        AtomicInteger counterPatients = new AtomicInteger();
+        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        counterPatients.getAndIncrement();
+                    }
+                }
+            });
+        });
+        System.out.println("Total patients in hospital: " + counterPatients);
+
+        //3)
+        HashMap<Character, Integer> counterStation = new HashMap<>();
+        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            AtomicInteger counterPatientsStation = new AtomicInteger();
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        counterPatientsStation.getAndIncrement();
+                    }
+                }
+                counterStation.put(station.getName().charAt(0),counterPatientsStation.intValue());
+            });
+        });
+        counterStation.entrySet().stream().forEach(entry -> System.out.println("On Station " + entry.getKey() + " are " + entry.getValue() + " patients."));
+    }
+
+    private static void lambdaAnalysisShip() {
         AtomicInteger passengerOnBoard = new AtomicInteger();
         AtomicInteger infectedPassenger = new AtomicInteger();
         AtomicInteger smoker = new AtomicInteger();
@@ -63,8 +113,6 @@ public class Application {
                 }
             }
         });
-
-
 
         AtomicInteger passengerOnBoardNow = new AtomicInteger();
         AtomicInteger infectedPassengerOnBoard = new AtomicInteger();
