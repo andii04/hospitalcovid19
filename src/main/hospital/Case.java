@@ -96,4 +96,24 @@ public class Case implements ICase {
     public void setLastUpdate(String lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
+    public int getID() {
+        return patientID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
+    }
+
+    public boolean hasCovid19() {
+        return  isInfectedCOVID19;
+    }
 }

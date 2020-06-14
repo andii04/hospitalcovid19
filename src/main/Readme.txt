@@ -1,0 +1,1 @@
+    Master password for medical assistants to access private informations from patients: HospitalPass1234

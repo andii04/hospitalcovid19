@@ -7,6 +7,7 @@ import shared.Nationality;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
@@ -44,57 +45,27 @@ public class Application {
         System.out.println();
         System.out.println("Analysis:");
         lambdaAnalysisShip();
-        lambdaAnalysisHospital();
+        AnalyticsHospital();
     }
 
-    private static void lambdaAnalysisHospital() {
-        System.out.println("Hospital:");
-        Map<String, Character> mapNametoStation = new HashMap<>();
-        //1)
-        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
-            station.getRooms().forEach(room -> {
-                for(int i=0;i<room.getNumberOfBeds();i++){
-                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
-                        mapNametoStation.put(room.getHospitalBed(i).getHuman().getLastName(),station.getName().charAt(0));
-                    }
-                }
-            });
-        });
-        System.out.println("List of patients in stations sorted");
-        mapNametoStation.entrySet().stream()
-            .sorted(Map.Entry.comparingByValue())
-                .sorted(Map.Entry.comparingByKey())
-                .forEach(stringStringEntry -> System.out.println("On Station " + stringStringEntry.getValue()+ " is Patient " + stringStringEntry.getKey()));
+    private static void AnalyticsHospital() {
+        System.out.println();
+        System.out.println("Enter Master Password for medical assistant to view analytics with personal data (look in readme.txt for password) : ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try{
+            String masterPassword = reader.readLine();
+             hospital.getAnalytics(masterPassword);
+            System.out.println("Enter Master Password for medical assistant to view analytics with personal data (look in readme.txt for password) : ");
+            int id = Integer.parseInt(reader.readLine());
+            Case casePatient = hospital.getCaseFromPatient(masterPassword,id);
+            System.out.println("ID "+ casePatient.getID() + " First/Lastnname " +casePatient.getFirstName() + " "+ casePatient.getLastName()  + " has Covid19 " + casePatient.hasCovid19());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
-
-        //2)
-        AtomicInteger counterPatients = new AtomicInteger();
-        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
-            station.getRooms().forEach(room -> {
-                for(int i=0;i<room.getNumberOfBeds();i++){
-                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
-                        counterPatients.getAndIncrement();
-                    }
-                }
-            });
-        });
-        System.out.println("Total patients in hospital: " + counterPatients);
-
-        //3)
-        HashMap<Character, Integer> counterStation = new HashMap<>();
-        hospital.getFloor(1).getDepartments(0).getStations().forEach(station -> {
-            AtomicInteger counterPatientsStation = new AtomicInteger();
-            station.getRooms().forEach(room -> {
-                for(int i=0;i<room.getNumberOfBeds();i++){
-                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
-                        counterPatientsStation.getAndIncrement();
-                    }
-                }
-                counterStation.put(station.getName().charAt(0),counterPatientsStation.intValue());
-            });
-        });
-        counterStation.entrySet().stream().forEach(entry -> System.out.println("On Station " + entry.getKey() + " are " + entry.getValue() + " patients."));
     }
+
 
     private static void lambdaAnalysisShip() {
         System.out.println("CruiseShip:");
@@ -265,14 +236,6 @@ public class Application {
         }
 
         return true;
-    }
-
-    public static void simulationStart() {
-
-    }
-
-    public static void hospitlSimulation() {
-        createHospital();
     }
 
     public static void createHospital() {

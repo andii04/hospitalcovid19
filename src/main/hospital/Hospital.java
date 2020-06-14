@@ -1,16 +1,17 @@
 package hospital;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Stack;
+import shared.Human;
+
+import java.io.Reader;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Hospital {
     CarPark carPark;
     Stack<Floor> floors;
     private String name;
     private int countHospitalGuest = 0;
-    private String encryptionKeyforCases= "vRMbp7kiSX";
+    private String encryptionKeyforCases= "vRMbp7kiSXAVA59X";
     private String encryptedKey;
 
     ArrayList<Case> allCases = new ArrayList<>();
@@ -29,7 +30,7 @@ public class Hospital {
         oneFreeBed.add(getFreeBed());
         ((BSEmergencyDepartment) getFloor(0).getDepartments(0)).setEmptyHospitalBedList(oneFreeBed);
         AESAlgorithm aesAlgorithm = new AESAlgorithm();
-        encryptedKey = aesAlgorithm.encrypt("2X2Lf42uUK", encryptedKey);
+        encryptedKey = aesAlgorithm.encrypt("HospitalPass1234", encryptionKeyforCases);
     }
 
     //general IDs for new patients
@@ -199,10 +200,93 @@ public class Hospital {
         }
     }
 
-    public boolean verify(String masterKeyforCases) {
+
+
+    //getting Data --> security mechanismus
+    public Case getMyCase(Human human){
+        for (Case casePatient: allCases) {
+            if(casePatient.getFirstName().equals(human.getFirstName()) && casePatient.getLastName().equals(human.getLastName()) && casePatient.getBirthDate().equals(human.getFirstName())){
+                return casePatient;
+            };
+        }
+        return null;
+    }
+
+    //verify the password
+    private boolean verify(String masterKeyforCases) {
         AESAlgorithm aesAlgorithm = new AESAlgorithm();
-        if (encryptedKey.equals(aesAlgorithm.decrypt(masterKeyforCases, encryptionKeyforCases))) {
+        if (encryptedKey.equals(aesAlgorithm.encrypt(masterKeyforCases, encryptionKeyforCases))) {
             return true;
         } else return false;
+    }
+
+    //get case from a specific patient id --> verify with a password
+    public Case getCaseFromPatient(String password, int id){
+        if(verify(password)){
+            for (Case casePatient :allCases) {
+                if(casePatient.getID() == id){
+                    return casePatient;
+                }
+            }
+        }
+        System.out.println("Wrong password or id unknown");
+        return null;
+    }
+    //
+    public void getAnalytics(String password){
+        if (verify(password)){
+        System.out.println("Hospital:");
+        Map<String, Character> mapNametoStation = new HashMap<>();
+        //1)
+        getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        mapNametoStation.put(room.getHospitalBed(i).getHuman().getLastName(),station.getName().charAt(0));
+                    }
+                }
+            });
+        });
+        System.out.println("List of patients in stations sorted");
+        mapNametoStation.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(stringStringEntry -> System.out.println("On Station " + stringStringEntry.getValue()+ " is Patient " + stringStringEntry.getKey()));
+
+        System.out.println();
+
+        //2)
+        AtomicInteger counterPatients = new AtomicInteger();
+        getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        counterPatients.getAndIncrement();
+                    }
+                }
+            });
+        });
+        System.out.println("Total patients in hospital: " + counterPatients);
+        System.out.println();
+
+        //3)
+        HashMap<Character, Integer> counterStation = new HashMap<>();
+        getFloor(1).getDepartments(0).getStations().forEach(station -> {
+            AtomicInteger counterPatientsStation = new AtomicInteger();
+            station.getRooms().forEach(room -> {
+                for(int i=0;i<room.getNumberOfBeds();i++){
+                    if(room.getHospitalBed(i)!=null && room.getHospitalBed(i).getHuman()!=null){
+                        counterPatientsStation.getAndIncrement();
+                    }
+                }
+                counterStation.put(station.getName().charAt(0),counterPatientsStation.intValue());
+            });
+        });
+        counterStation.entrySet().stream().forEach(entry -> System.out.println("On Station " + entry.getKey() + " are " + entry.getValue() + " patients."));
+        System.out.println();
+        }
+        else{
+            System.out.println("Wrong password");
+        }
     }
 }

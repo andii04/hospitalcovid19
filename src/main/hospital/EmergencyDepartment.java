@@ -58,7 +58,9 @@ public class EmergencyDepartment extends Department {
     private void register(HospitalPatient hospitalPatient) {
         System.out.println(this.getName() + " : Registering patient with ID " + hospitalPatient.getId() + " now");
         String[] spaceInfo = hospital.getFreeSpace();
-        Case newCase = new Case(Integer.parseInt(spaceInfo[0]), spaceInfo[1], spaceInfo[2], Integer.parseInt(spaceInfo[3]), Integer.parseInt(spaceInfo[4]), new SimpleDateFormat().toString());
+        Case newCase = new Case(hospitalPatient.getId(), hospitalPatient.getFirstName(), hospitalPatient.getLastName(), hospitalPatient.getBirthDate(), hospitalPatient.isSmoking(),
+                hospitalPatient.isHasAsthma(), hospitalPatient.isHasHIV(), hospitalPatient.isInfectedCOVID19(), hospitalPatient.isHasFever(), hospitalPatient.isHasTaste(),
+                Integer.parseInt(spaceInfo[0]), spaceInfo[1], spaceInfo[2], Integer.parseInt(spaceInfo[3]), Integer.parseInt(spaceInfo[4]), new SimpleDateFormat().toString());
         hospital.addCaseInDP(newCase);
         move(emptyHospitalBedList.get(emptyHospitalBedList.size() - 1), newCase);
         addBed(hospital.getBedByStation(spaceInfo[1], spaceInfo[2]));

@@ -484,7 +484,6 @@ public class CruiseShip {
         chosenPersonFromVehicle.getStretcherInVehicle(stretcher, vehicle);
 
 
-        // @todo fährt zurck zum Chain f responsibility entrance
         //Spread virus in Car
         //Cought up to 10times
         for(int i = 0; i<10; i++){

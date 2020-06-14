@@ -1,14 +1,10 @@
 package hospital;
 
-import shared.TwoPinConnector;
-
 import java.util.ArrayList;
 
 public class BioSafetyEmergencyVehicle extends EmergencyVehicle implements IVistable {
     private ArrayList<IDCard> registeredIDCardList = new ArrayList<>();
     private IDCardReader idCardReader;
-
-    private TwoPinConnector twoPinConnector;
 
     public BioSafetyEmergencyVehicle(long serialNumber, String signature) {
         super(serialNumber, signature);
