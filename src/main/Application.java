@@ -156,7 +156,7 @@ public class Application {
                 .sorted(Map.Entry.<Nationality, Long>comparingByValue()
                         .reversed()).forEachOrdered(e -> finalMapAfterNationality.put(e.getKey(), e.getValue()));
 
-        System.out.println("After 14 Days there are " + infectedPassenger.get()+" Infected People and "+infectedPassengerOnBoard + " are actually on Board");
+        System.out.println("After 14 Days there are " + infectedPassenger.get()+" Infected People and "+infectedPassengerOnBoard + " are actually still on Board");
         System.out.println(((double)infectedPassenger.get() / (double)passengerOnBoard.get())*100.0 + "% of the passengers on board are infected");
         System.out.println("Infected Passenger After Deck: "+ finalMapAfterDeck);
         System.out.println("Infected Passenger After Nationality: "+ finalMapAfterNationality);

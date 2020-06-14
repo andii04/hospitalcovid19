@@ -427,7 +427,7 @@ public class CruiseShip {
                         if (Math.random() * 100 < 30) {
                             //Infect the others if they don't have
                             if(!passengerInMall[j].get(i +1).isInfectedCOVID19()) {
-                                System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
+                                System.out.println("Infected Person Cought and infected a other Persons in the ShoppingMall");
                                 passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager1).dryCough());
                             }
                         }
@@ -435,7 +435,7 @@ public class CruiseShip {
                     if (passengerInMall[j].get(randomPassager2).isInfectedCOVID19()) {
                         if (Math.random() * 100 < 30) {
                             //Infect the others if they don't have
-                            System.out.println("Infected Person Cought and infected two other Persons in the ShoppingMall");
+                            System.out.println("Infected Person Cought and infected a other Persons in the ShoppingMall");
                             passengerInMall[j].get(randomPassager2).breathe(passengerInMall[j].get(randomPassager2).dryCough());
                         }
                     }
